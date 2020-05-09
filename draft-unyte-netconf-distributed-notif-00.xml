@@ -168,13 +168,13 @@
       </address>
     </author>
 
-    <date day="3" month="May" year="2020"/>
+    <date day="9" month="May" year="2020"/>
 
     <workgroup>NETCONF</workgroup>
 
     <abstract>
       <t>This documents describes extensions to the YANG notifications
-      subscription to allow metrics being published directly from forwarding
+      subscription to allow metrics being published directly from network
       processors on line cards to target receivers, while subscription is
       still maintained at the route processor in a distributed forwarding
       system.</t>
@@ -201,7 +201,7 @@
       In a distributed forwarding system, the packet forwarding is delegated
       to multiple network processors. To not to overhelm the route processor
       resources, it is not uncomon that data records are published directly
-      from forwarding processors on line cards to target Receivers to further
+      from network processors on line cards to target Receivers to further
       increase efficency on the routing system.</t>
 
       <t>This documents complement the general subscription requirements
@@ -259,7 +259,7 @@
         </list></t>
 
       <t>For one subscription, there are one or more Receivers. And the
-      Subscriber does not necessarily share the same address as the
+      Subscriber does not necessarily share the same IP address as the
       Receivers.</t>
 
       <t>In this framework, the Publisher pushes data to the Receiver
@@ -270,11 +270,11 @@
       disassembles the Global Subscription to multiple Component
       Subscriptions, depending from which source data is needed. The Component
       Subscriptions are then distributed to the corresponding Publisher Agents
-      on route and forwarding processors.</t>
+      on route and network processors.</t>
 
       <t>Publisher Agents collects metrics according to the Component
       Subscription, add its metadata, encapsulate and pushes data to the
-      Receiver where packets can be reassembled and decapsulated.</t>
+      Receiver where packets are reassembled and decapsulated.</t>
 
       <t><figure title="Fig. 2 The Distributed Data Export Framework">
           <artwork align="center"><![CDATA[
@@ -284,13 +284,13 @@
 |      +------------+    || Receiver  | | |
 |      | Subscriber |    |--------------+ |
 |      +-----^-+----+    +-----^------^   |
-|            | |               |      |   |
+|            | |                      |   |
 +-----------------------------------------+
-   Global    | | Global        |      |
-   Capability| | Subscription  |      |
+   Global    | | Global               |
+   Capability| | Subscription         |
 +-----------------------------------------+
-|            | |          Push |      |   |
-|   +--------+-v---------------+---+  |   |
+|            | |                      |   |
+|   +--------+-v-------------------+  |   |
 |   |       Publisher(Master)      |  |   |
 |   +--------^-+-------------------+  |   |
 |            | |                      |   |
@@ -312,7 +312,7 @@
           <t>Agents need to register at the Master at the beginning of their
           process life-cycle</t>
 
-          <t>Contracts are needed between the Master and each Agent on the
+          <t>Contracts are created between the Master and each Agent on the
           Component Capability, and the format for streaming data
           structure.</t>
 
@@ -322,7 +322,7 @@
           to the Master. The status of the overall subscription is maintained
           by the Master. The Master is responsible for notifying the
           subscriber in case of problems with the Component Subscriptions.</t>
-        </list>Any technical mechanisms or protocols used for the coordination
+        </list>The technical mechanisms or protocols used for the coordination
       of operational information between Master and Agent is out-of-scope of
       this document.</t>
     </section>
@@ -359,13 +359,13 @@
       <t>The Publisher Agent collects data and encapsulates the packets per
       Component Subscription. The format and structure of the data records are
       defined by the YANG schema, so that the decomposition at the Receiver
-      can benefit from the structured and hierarchical data instance.</t>
+      can benefit from the structured and hierarchical data records.</t>
 
       <t>The Receiver is able to associate the YANG data records with <xref
       target="RFC8639">Subscription ID</xref> to the subscribed subscription
       and with <xref target="I-D.ietf-netconf-notification-messages">Message
-      Generator ID</xref> to one of the Publisher Agents software processes
-      for message integrity.</t>
+      Generator ID</xref> to one of the Publisher Agents software processes to
+      enable message integrity.</t>
 
       <t>For the dynamic subscription, the output of the
       "establish-subscription" RPC defined in <xref target="RFC8639"/> MUST
@@ -392,20 +392,21 @@
 
     <section title="Publisher Configurations">
       <t>This document assumes that all Publisher Agents are preconfigured to
-      push data. The actual working Publisher Agents are selected dynamically
-      based on the subscription decomposition result.</t>
+      push data. The actual working Publisher Agents are selected based on the
+      subscription decomposition result.</t>
 
       <t>All Publisher Agents share the same source IP address for data
       export. For connectionless data transport such as <xref
-      target="I-D.unyte-netconf-udp-pub-channel">UDP-DTLS based
-      transport</xref> the same Layer 4 source port for data export can be
-      used. For connection based data transport such as <xref
-      target="I-D.ietf-netconf-https-notif">HTTPS based transport</xref>, each
-      Publisher Agent MUST be able to acknowledge packet retrieval from
-      Receivers, and therefore requires a dedicated Layer 4 source port.</t>
+      target="I-D.unyte-netconf-udp-pub-channel">UDP based transport</xref>
+      the same Layer 4 source port for data export can be used. For connection
+      based data transport such as <xref
+      target="I-D.ietf-netconf-https-notif"> HTTPS based transport</xref>,
+      each Publisher Agent MUST be able to acknowledge packet retrieval from
+      Receivers, and therefore requires a dedicated Layer 4 source port per
+      software process.</t>
 
       <t>The specific configuration on transports is described in the
-      resposible document.</t>
+      resposible documents.</t>
     </section>
 
     <section title="YANG Tree">
@@ -413,7 +414,7 @@
 
       <t><figure>
           <artwork><![CDATA[
-module: ietf-multiple-stream-originators
+module: ietf-distributed-notifications
   augment /sn:subscriptions/sn:subscription:
     +--ro message-generator-id*   string
   augment /sn:subscription-started:
@@ -431,11 +432,11 @@ module: ietf-multiple-stream-originators
 
       <t><figure>
           <artwork><![CDATA[
-<CODE BEGINS> file "ietf-multiple-stream-originators@2020-02-26.yang"
-module ietf-multiple-stream-originators {
+<CODE BEGINS> file "ietf-distributed-notifications@2020-05-09.yang"
+module ietf-distributed-notif {
   yang-version 1.1;
   namespace 
-    "urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators";
+    "urn:ietf:params:xml:ns:yang:ietf-distributed-notifications";
   prefix mso;
   import ietf-subscribed-notifications {
     prefix sn;
@@ -454,27 +455,27 @@ module ietf-multiple-stream-originators {
 
 
   description
-    "Defines augmentation for ietf-subscribed-notifications to enable 
-     the distributed publication with single subscription.
+    "Defines augmentation for ietf-subscribed-notifications to 
+    enable the distributed publication with single subscription.
 
-    Copyright (c) 2018 IETF Trust and the persons identified as authors
-    of the code.  All rights reserved.
+    Copyright (c) 2018 IETF Trust and the persons identified as 
+    authors of the code. All rights reserved.
 
-    Redistribution and use in source and binary forms, with or without
-    modification, is permitted pursuant to, and subject to the license
-    terms contained in, the Simplified BSD License set forth in Section
-    4.c of the IETF Trust's Legal Provisions Relating to IETF Documents
+    Redistribution and use in source and binary forms, with or 
+    without modification, is permitted pursuant to, and subject to 
+    the license terms contained in, the Simplified BSD License set 
+    forth in Section 4.c of the IETF Trust's Legal Provisions 
+    Relating to IETF Documents 
     (https://trustee.ietf.org/license-info).
 
-    This version of this YANG module is part of RFC XXXX; see the RFC
+    This version of this YANG module is part of RFC XXXX; see the 
+    RFC itself for full legal notices.";
 
-    itself for full legal notices.";
-
-  revision 2020-02-26 {
+  revision 2020-05-09 {
     description
       "Initial version";
     reference
-      "RFC XXXX: Subscription to Multiple Stream Originators";
+      "RFC XXXX: Subscription to Distributed Notifications";
   }
 
   grouping message-generator-ids {
@@ -486,16 +487,16 @@ module ietf-multiple-stream-originators {
       config false;
       ordered-by user;
       description
-        "Software entity which created the message (e.g.,
-         linecard 1). This field is used to notify the 
-         collector the working originator.";
+        "Software process which created the message (e.g.,
+         network processor 1 on linecard 1). This field is
+         used to  notify the collector the working originator.";
     }
   }
 
   augment "/sn:subscriptions/sn:subscription" {
     description
-      "This augmentation allows the message generators to be exposed
-       for a subscription.";
+      "This augmentation allows the message generators to be 
+      exposed for a subscription.";
 
     uses message-generator-ids;
   }
@@ -535,7 +536,7 @@ module ietf-multiple-stream-originators {
 
       <t><list style="empty">
           <t>URI:
-          urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators</t>
+          urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications</t>
 
           <t>Registrant Contact: The IESG.</t>
 
@@ -544,10 +545,10 @@ module ietf-multiple-stream-originators {
       target="RFC3688">YANG Module Names registry</xref>:</t>
 
       <t><list style="empty">
-          <t>Name: ietf-multiple-stream-originators</t>
+          <t>Name: ietf-subscribed-notifications</t>
 
           <t>Namespace:
-          urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators</t>
+          urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications</t>
 
           <t>Prefix: mso</t>
 
@@ -712,11 +713,11 @@ module ietf-multiple-stream-originators {
       22
    </id>
    <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
       1
    </message-generator-id>
    <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
       2
    </message-generator-id>
 </rpc-reply>]]></artwork>
@@ -778,7 +779,7 @@ module ietf-multiple-stream-originators {
         <yp:period>250</yp:period>
     </yp:periodic>
     <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notificationss>
        1
     </message-generator-id>    
   </subscription-modified>
@@ -846,11 +847,11 @@ module ietf-multiple-stream-originators {
         <yp:period>250</yp:period>
     </yp:periodic>
     <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
        1
     </message-generator-id>
     <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
        2
     </message-generator-id>
   </subscription-started>
