@@ -5,7 +5,7 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: November 4, 2020                                        E. Voit
+Expires: November 10, 2020                                       E. Voit
                                                            Cisco Systems
                                                                 A. Clemm
                                                                Futurewai
@@ -13,7 +13,7 @@ Expires: November 4, 2020                                        E. Voit
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                             May 3, 2020
+                                                             May 9, 2020
 
 
                Subscription to Distributed Notifications
@@ -22,10 +22,10 @@ Expires: November 4, 2020                                        E. Voit
 Abstract
 
    This documents describes extensions to the YANG notifications
-   subscription to allow metrics being published directly from
-   forwarding processors on line cards to target receivers, while
-   subscription is still maintained at the route processor in a
-   distributed forwarding system.
+   subscription to allow metrics being published directly from network
+   processors on line cards to target receivers, while subscription is
+   still maintained at the route processor in a distributed forwarding
+   system.
 
 Requirements Language
 
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 4, 2020.
+   This Internet-Draft will expire on November 10, 2020.
 
 
 
 
-Zhou, et al.            Expires November 4, 2020                [Page 1]
+Zhou, et al.            Expires November 10, 2020               [Page 1]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -109,13 +109,13 @@ Table of Contents
 
 
 
-Zhou, et al.            Expires November 4, 2020                [Page 2]
+Zhou, et al.            Expires November 10, 2020               [Page 2]
 
 Internet-Draft          Distributed Notifications               May 2020
 
 
    route processor resources, it is not uncomon that data records are
-   published directly from forwarding processors on line cards to target
+   published directly from network processors on line cards to target
    Receivers to further increase efficency on the routing system.
 
    This documents complement the general subscription requirements
@@ -165,7 +165,7 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020                [Page 3]
+Zhou, et al.            Expires November 10, 2020               [Page 3]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -182,7 +182,7 @@ Internet-Draft          Distributed Notifications               May 2020
    o  the Receiver is the target for the data publication.
 
    For one subscription, there are one or more Receivers.  And the
-   Subscriber does not necessarily share the same address as the
+   Subscriber does not necessarily share the same IP address as the
    Receivers.
 
    In this framework, the Publisher pushes data to the Receiver
@@ -193,11 +193,11 @@ Internet-Draft          Distributed Notifications               May 2020
    Master and disassembles the Global Subscription to multiple Component
    Subscriptions, depending from which source data is needed.  The
    Component Subscriptions are then distributed to the corresponding
-   Publisher Agents on route and forwarding processors.
+   Publisher Agents on route and network processors.
 
    Publisher Agents collects metrics according to the Component
    Subscription, add its metadata, encapsulate and pushes data to the
-   Receiver where packets can be reassembled and decapsulated.
+   Receiver where packets are reassembled and decapsulated.
 
 
 
@@ -221,7 +221,7 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020                [Page 4]
+Zhou, et al.            Expires November 10, 2020               [Page 4]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -232,13 +232,13 @@ Internet-Draft          Distributed Notifications               May 2020
                 |      +------------+    || Receiver  | | |
                 |      | Subscriber |    |--------------+ |
                 |      +-----^-+----+    +-----^------^   |
-                |            | |               |      |   |
+                |            | |                      |   |
                 +-----------------------------------------+
-                   Global    | | Global        |      |
-                   Capability| | Subscription  |      |
+                   Global    | | Global               |
+                   Capability| | Subscription         |
                 +-----------------------------------------+
-                |            | |          Push |      |   |
-                |   +--------+-v---------------+---+  |   |
+                |            | |                      |   |
+                |   +--------+-v-------------------+  |   |
                 |   |       Publisher(Master)      |  |   |
                 |   +--------^-+-------------------+  |   |
                 |            | |                      |   |
@@ -260,7 +260,7 @@ Internet-Draft          Distributed Notifications               May 2020
    o  Agents need to register at the Master at the beginning of their
       process life-cycle
 
-   o  Contracts are needed between the Master and each Agent on the
+   o  Contracts are created between the Master and each Agent on the
       Component Capability, and the format for streaming data structure.
 
    o  The Master relays the component subscriptions to the Agents.
@@ -270,14 +270,14 @@ Internet-Draft          Distributed Notifications               May 2020
       by the Master.  The Master is responsible for notifying the
       subscriber in case of problems with the Component Subscriptions.
 
-   Any technical mechanisms or protocols used for the coordination of
+   The technical mechanisms or protocols used for the coordination of
    operational information between Master and Agent is out-of-scope of
    this document.
 
 
 
 
-Zhou, et al.            Expires November 4, 2020                [Page 5]
+Zhou, et al.            Expires November 10, 2020               [Page 5]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -312,12 +312,13 @@ Internet-Draft          Distributed Notifications               May 2020
    Component Subscription.  The format and structure of the data records
    are defined by the YANG schema, so that the decomposition at the
    Receiver can benefit from the structured and hierarchical data
-   instance.
+   records.
 
    The Receiver is able to associate the YANG data records with
    Subscription ID [RFC8639] to the subscribed subscription and with
    Message Generator ID [I-D.ietf-netconf-notification-messages] to one
-   of the Publisher Agents software processes for message integrity.
+   of the Publisher Agents software processes to enable message
+   integrity.
 
    For the dynamic subscription, the output of the "establish-
    subscription" RPC defined in [RFC8639] MUST include a list of Message
@@ -332,8 +333,7 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-
-Zhou, et al.            Expires November 4, 2020                [Page 6]
+Zhou, et al.            Expires November 10, 2020               [Page 6]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -353,24 +353,24 @@ Internet-Draft          Distributed Notifications               May 2020
 7.  Publisher Configurations
 
    This document assumes that all Publisher Agents are preconfigured to
-   push data.  The actual working Publisher Agents are selected
-   dynamically based on the subscription decomposition result.
+   push data.  The actual working Publisher Agents are selected based on
+   the subscription decomposition result.
 
    All Publisher Agents share the same source IP address for data
-   export.  For connectionless data transport such as UDP-DTLS based
+   export.  For connectionless data transport such as UDP based
    transport [I-D.unyte-netconf-udp-pub-channel] the same Layer 4 source
    port for data export can be used.  For connection based data
    transport such as HTTPS based transport
    [I-D.ietf-netconf-https-notif], each Publisher Agent MUST be able to
    acknowledge packet retrieval from Receivers, and therefore requires a
-   dedicated Layer 4 source port.
+   dedicated Layer 4 source port per software process.
 
    The specific configuration on transports is described in the
-   resposible document.
+   resposible documents.
 
 8.  YANG Tree
 
-   module: ietf-multiple-stream-originators
+   module: ietf-distributed-notifications
      augment /sn:subscriptions/sn:subscription:
        +--ro message-generator-id*   string
      augment /sn:subscription-started:
@@ -382,116 +382,116 @@ Internet-Draft          Distributed Notifications               May 2020
 
 9.  YANG Module
 
- <CODE BEGINS> file "ietf-multiple-stream-originators@2020-02-26.yang"
- module ietf-multiple-stream-originators {
-   yang-version 1.1;
-   namespace
+   <CODE BEGINS> file "ietf-distributed-notifications@2020-05-09.yang"
+   module ietf-distributed-notif {
+     yang-version 1.1;
+     namespace
 
 
 
-Zhou, et al.            Expires November 4, 2020                [Page 7]
+Zhou, et al.            Expires November 10, 2020               [Page 7]
 
 Internet-Draft          Distributed Notifications               May 2020
 
 
-     "urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators";
-   prefix mso;
-   import ietf-subscribed-notifications {
-     prefix sn;
-   }
+       "urn:ietf:params:xml:ns:yang:ietf-distributed-notifications";
+     prefix mso;
+     import ietf-subscribed-notifications {
+       prefix sn;
+     }
 
-   organization "IETF NETCONF (Network Configuration) Working Group";
-   contact
-     "WG Web:   <http:/tools.ietf.org/wg/netconf/>
-      WG List:  <mailto:netconf@ietf.org>
+     organization "IETF NETCONF (Network Configuration) Working Group";
+     contact
+       "WG Web:   <http:/tools.ietf.org/wg/netconf/>
+        WG List:  <mailto:netconf@ietf.org>
 
-      Editor:   Tianran Zhou
-                <mailto:zhoutianran@huawei.com>
+        Editor:   Tianran Zhou
+                  <mailto:zhoutianran@huawei.com>
 
-      Editor:   Guangying Zheng
-                <mailto:zhengguangying@huawei.com>";
+        Editor:   Guangying Zheng
+                  <mailto:zhengguangying@huawei.com>";
 
 
-   description
-     "Defines augmentation for ietf-subscribed-notifications to enable
-      the distributed publication with single subscription.
-
-     Copyright (c) 2018 IETF Trust and the persons identified as authors
-     of the code.  All rights reserved.
-
-     Redistribution and use in source and binary forms, with or without
-     modification, is permitted pursuant to, and subject to the license
-     terms contained in, the Simplified BSD License set forth in Section
-     4.c of the IETF Trust's Legal Provisions Relating to IETF Documents
-     (https://trustee.ietf.org/license-info).
-
-     This version of this YANG module is part of RFC XXXX; see the RFC
-
-     itself for full legal notices.";
-
-   revision 2020-02-26 {
      description
-       "Initial version";
-     reference
-       "RFC XXXX: Subscription to Multiple Stream Originators";
-   }
+       "Defines augmentation for ietf-subscribed-notifications to
+       enable the distributed publication with single subscription.
 
-   grouping message-generator-ids {
-     description
-       "Provides a reusable list of message-generator-ids.";
+       Copyright (c) 2018 IETF Trust and the persons identified as
+       authors of the code. All rights reserved.
 
-     leaf-list message-generator-id {
-       type string;
+       Redistribution and use in source and binary forms, with or
+       without modification, is permitted pursuant to, and subject to
+       the license terms contained in, the Simplified BSD License set
+       forth in Section 4.c of the IETF Trust's Legal Provisions
+       Relating to IETF Documents
+       (https://trustee.ietf.org/license-info).
 
+       This version of this YANG module is part of RFC XXXX; see the
+       RFC itself for full legal notices.";
 
-
-Zhou, et al.            Expires November 4, 2020                [Page 8]
-
-Internet-Draft          Distributed Notifications               May 2020
-
-
-       config false;
-       ordered-by user;
+     revision 2020-05-09 {
        description
-         "Software entity which created the message (e.g.,
-          linecard 1). This field is used to notify the
-          collector the working originator.";
+         "Initial version";
+       reference
+         "RFC XXXX: Subscription to Distributed Notifications";
+     }
+
+     grouping message-generator-ids {
+       description
+         "Provides a reusable list of message-generator-ids.";
+
+       leaf-list message-generator-id {
+         type string;
+
+
+
+Zhou, et al.            Expires November 10, 2020               [Page 8]
+
+Internet-Draft          Distributed Notifications               May 2020
+
+
+         config false;
+         ordered-by user;
+         description
+           "Software process which created the message (e.g.,
+            network processor 1 on linecard 1). This field is
+            used to  notify the collector the working originator.";
+       }
+     }
+
+     augment "/sn:subscriptions/sn:subscription" {
+       description
+         "This augmentation allows the message generators to be
+         exposed for a subscription.";
+
+       uses message-generator-ids;
+     }
+
+     augment "/sn:subscription-started" {
+       description
+         "This augmentation allows MSO specific parameters to be
+          exposed for a subscription.";
+
+       uses message-generator-ids;
+     }
+
+     augment "/sn:subscription-modified" {
+       description
+         "This augmentation allows MSO specific parameters to be
+          exposed for a subscription.";
+
+       uses message-generator-ids;
+     }
+
+     augment "/sn:establish-subscription/sn:output" {
+       description
+         "This augmentation allows MSO specific parameters to be
+          exposed for a subscription.";
+
+       uses message-generator-ids;
      }
    }
-
-   augment "/sn:subscriptions/sn:subscription" {
-     description
-       "This augmentation allows the message generators to be exposed
-        for a subscription.";
-
-     uses message-generator-ids;
-   }
-
-   augment "/sn:subscription-started" {
-     description
-       "This augmentation allows MSO specific parameters to be
-        exposed for a subscription.";
-
-     uses message-generator-ids;
-   }
-
-   augment "/sn:subscription-modified" {
-     description
-       "This augmentation allows MSO specific parameters to be
-        exposed for a subscription.";
-
-     uses message-generator-ids;
-   }
-
-   augment "/sn:establish-subscription/sn:output" {
-     description
-       "This augmentation allows MSO specific parameters to be
-        exposed for a subscription.";
-
-     uses message-generator-ids;
-   }
- }
- <CODE ENDS>
+   <CODE ENDS>
 
 10.  IANA Considerations
 
@@ -501,12 +501,12 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020                [Page 9]
+Zhou, et al.            Expires November 10, 2020               [Page 9]
 
 Internet-Draft          Distributed Notifications               May 2020
 
 
-      URI: urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators
+      URI: urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications
 
       Registrant Contact: The IESG.
 
@@ -515,10 +515,10 @@ Internet-Draft          Distributed Notifications               May 2020
    This document registers the following YANG module in the YANG Module
    Names registry [RFC3688]:
 
-      Name: ietf-multiple-stream-originators
+      Name: ietf-subscribed-notifications
 
-      Namespace: urn:ietf:params:xml:ns:yang:ietf-multiple-stream-
-      originators
+      Namespace: urn:ietf:params:xml:ns:yang:ietf-subscribed-
+      notifications
 
       Prefix: mso
 
@@ -557,7 +557,7 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 10]
+Zhou, et al.            Expires November 10, 2020              [Page 10]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -613,7 +613,7 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 11]
+Zhou, et al.            Expires November 10, 2020              [Page 11]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -669,7 +669,7 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 12]
+Zhou, et al.            Expires November 10, 2020              [Page 12]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -725,7 +725,7 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 13]
+Zhou, et al.            Expires November 10, 2020              [Page 13]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -756,21 +756,21 @@ Internet-Draft          Distributed Notifications               May 2020
    that the subscription is decomposed into two component subscriptions
    which will be published by two message generators: #1 and #2.
 
-<rpc-reply message-id="101"
-   xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-   <id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
-      22
-   </id>
-   <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
-      1
-   </message-generator-id>
-   <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
-      2
-   </message-generator-id>
-</rpc-reply>
+  <rpc-reply message-id="101"
+     xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+     <id
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
+        22
+     </id>
+     <message-generator-id
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+        1
+     </message-generator-id>
+     <message-generator-id
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+        2
+     </message-generator-id>
+  </rpc-reply>
 
            Fig. 5 "establish-subscription" Positive RPC Response
 
@@ -781,7 +781,7 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 14]
+Zhou, et al.            Expires November 10, 2020              [Page 14]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -837,34 +837,34 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 15]
+Zhou, et al.            Expires November 10, 2020              [Page 15]
 
 Internet-Draft          Distributed Notifications               May 2020
 
 
-<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
-  <eventTime>2007-09-01T10:00:00Z</eventTime>
-  <subscription-modified
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
-      xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-    <id>22</id>
-    <yp:datastore
-        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-      ds:operational
-    </yp:datastore>
-    <yp:datastore-xpath-filter
-        xmlns:ex="https://example.com/sample-data/1.0">
-      /ex:bar
-    </yp:datastore-xpath-filter>
-    <yp:periodic>
-        <yp:period>250</yp:period>
-    </yp:periodic>
-    <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
-       1
-    </message-generator-id>
-  </subscription-modified>
-</notification>
+ <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+   <eventTime>2007-09-01T10:00:00Z</eventTime>
+   <subscription-modified
+       xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+       xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+     <id>22</id>
+     <yp:datastore
+         xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+       ds:operational
+     </yp:datastore>
+     <yp:datastore-xpath-filter
+         xmlns:ex="https://example.com/sample-data/1.0">
+       /ex:bar
+     </yp:datastore-xpath-filter>
+     <yp:periodic>
+         <yp:period>250</yp:period>
+     </yp:periodic>
+     <message-generator-id
+     xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notificationss>
+        1
+     </message-generator-id>
+   </subscription-modified>
+ </notification>
 
       Fig. 7 "subscription-modified" Subscription State Notification
 
@@ -893,7 +893,7 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 16]
+Zhou, et al.            Expires November 10, 2020              [Page 16]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -949,43 +949,43 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 17]
+Zhou, et al.            Expires November 10, 2020              [Page 17]
 
 Internet-Draft          Distributed Notifications               May 2020
 
 
-<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
-  <eventTime>2007-09-01T10:00:00Z</eventTime>
-  <subscription-started
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
-      xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-    <identifier>39</identifier>
-    <yp:datastore
-        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-      ds:operational
-    </yp:datastore>
-    <yp:datastore-xpath-filter
-        xmlns:ex="https://example.com/sample-data/1.0">
-      /ex:foo
-    </yp:datastore-xpath-filter>
-    <yp:periodic>
-        <yp:period>250</yp:period>
-    </yp:periodic>
-    <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
-       1
-    </message-generator-id>
-    <message-generator-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-multiple-stream-originators>
-       2
-    </message-generator-id>
-  </subscription-started>
-</notification>
+ <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+   <eventTime>2007-09-01T10:00:00Z</eventTime>
+   <subscription-started
+       xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+       xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+     <identifier>39</identifier>
+     <yp:datastore
+         xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+       ds:operational
+     </yp:datastore>
+     <yp:datastore-xpath-filter
+         xmlns:ex="https://example.com/sample-data/1.0">
+       /ex:foo
+     </yp:datastore-xpath-filter>
+     <yp:periodic>
+         <yp:period>250</yp:period>
+     </yp:periodic>
+     <message-generator-id
+     xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+        1
+     </message-generator-id>
+     <message-generator-id
+     xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+        2
+     </message-generator-id>
+   </subscription-started>
+ </notification>
 
        Fig. 9 "subscription-started" Subscription State Notification
 
-   Then, both Publishers send notifications with the corresponding piece
-   of data to the Receiver.
+   Then, both Publishers send notifications with the corresponding data
+   record to the Receiver.
 
 Authors' Addresses
 
@@ -1005,7 +1005,7 @@ Authors' Addresses
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 18]
+Zhou, et al.            Expires November 10, 2020              [Page 18]
 
 Internet-Draft          Distributed Notifications               May 2020
 
@@ -1061,4 +1061,4 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 4, 2020               [Page 19]
+Zhou, et al.            Expires November 10, 2020              [Page 19]
