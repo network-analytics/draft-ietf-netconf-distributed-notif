@@ -859,7 +859,7 @@ module ietf-distributed-notif {
           </figure></t>
 
         <t>Then, both Publishers send notifications with the corresponding
-        piece of data to the Receiver.</t>
+        data record to the Receiver.</t>
       </section>
     </section>
   </back>
