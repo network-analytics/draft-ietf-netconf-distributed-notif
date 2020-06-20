@@ -90,32 +90,6 @@
       </address>
     </author>
 
-    <author fullname="Alexander Clemm" initials="A." surname="Clemm">
-      <organization>Futurewai</organization>
-
-      <address>
-        <postal>
-          <street>2330 Central Expressway</street>
-
-          <city>Santa Clara</city>
-
-          <region>California</region>
-
-          <code/>
-
-          <country>United States of America</country>
-        </postal>
-
-        <phone/>
-
-        <facsimile/>
-
-        <email>ludwig@clemm.org</email>
-
-        <uri/>
-      </address>
-    </author>
-
     <author fullname="Thomas Graf" initials="T." surname="Graf">
       <organization>Swisscom</organization>
 
@@ -168,15 +142,15 @@
       </address>
     </author>
 
-    <date day="9" month="May" year="2020"/>
+    <date day="20" month="June" year="2020"/>
 
     <workgroup>NETCONF</workgroup>
 
     <abstract>
       <t>This documents describes extensions to the YANG notifications
-      subscription to allow metrics being published directly from network
-      processors on line cards to target receivers, while subscription is
-      still maintained at the route processor in a distributed forwarding
+      subscription to allow metrics being published directly from processors
+      on line cards to target receivers, while subscription is still
+      maintained at the route processor in a distributed forwarding
       system.</t>
     </abstract>
 
@@ -199,9 +173,9 @@
       <t>By streaming data from publishers to receivers, much better
       performance and fine-grained sampling can be achieved than with polling.
       In a distributed forwarding system, the packet forwarding is delegated
-      to multiple network processors. To not to overhelm the route processor
-      resources, it is not uncomon that data records are published directly
-      from network processors on line cards to target Receivers to further
+      to multiple processors on line cards. To not to overhelm the route
+      processor resources, it is not uncomon that data records are published
+      directly from processors on line cards to target Receivers to further
       increase efficency on the routing system.</t>
 
       <t>This documents complement the general subscription requirements
@@ -270,7 +244,7 @@
       disassembles the Global Subscription to multiple Component
       Subscriptions, depending from which source data is needed. The Component
       Subscriptions are then distributed to the corresponding Publisher Agents
-      on route and network processors.</t>
+      on route and processors on line cards.</t>
 
       <t>Publisher Agents collects metrics according to the Component
       Subscription, add its metadata, encapsulate and pushes data to the
@@ -283,7 +257,7 @@
 |                        +------------+ | |
 |      +------------+    || Receiver  | | |
 |      | Subscriber |    |--------------+ |
-|      +-----^-+----+    +-----^------^   |
+|      +-----^-+----+    +------------^   |
 |            | |                      |   |
 +-----------------------------------------+
    Global    | | Global               |
@@ -488,7 +462,7 @@ module ietf-distributed-notif {
       ordered-by user;
       description
         "Software process which created the message (e.g.,
-         network processor 1 on linecard 1). This field is
+         processor 1 on linecard 1). This field is
          used to  notify the collector the working originator.";
     }
   }
@@ -586,6 +560,11 @@ module ietf-distributed-notif {
 
       <t>Other Security Considerations is the same as those discussed in <xref
       target="RFC8641">YANG-Push</xref>.</t>
+    </section>
+
+    <section anchor="Contributions" title="Contributions">
+      <t>We thank Alexander Clemm for revision and contribution to this
+      document.</t>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
