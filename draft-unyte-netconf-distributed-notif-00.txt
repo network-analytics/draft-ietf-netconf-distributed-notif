@@ -5,15 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: November 10, 2020                                       E. Voit
+Expires: December 22, 2020                                       E. Voit
                                                            Cisco Systems
-                                                                A. Clemm
-                                                               Futurewai
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                             May 9, 2020
+                                                           June 20, 2020
 
 
                Subscription to Distributed Notifications
@@ -22,7 +20,7 @@ Expires: November 10, 2020                                       E. Voit
 Abstract
 
    This documents describes extensions to the YANG notifications
-   subscription to allow metrics being published directly from network
+   subscription to allow metrics being published directly from
    processors on line cards to target receivers, while subscription is
    still maintained at the route processor in a distributed forwarding
    system.
@@ -48,14 +46,16 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 10, 2020.
+   This Internet-Draft will expire on December 22, 2020.
 
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 1]
+
+
+Zhou, et al.            Expires December 22, 2020               [Page 1]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
 Copyright Notice
@@ -86,10 +86,11 @@ Table of Contents
    9.  YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   7
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
    11. Security Considerations . . . . . . . . . . . . . . . . . . .  10
-   12. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  11
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  11
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  12
+   12. Contributions . . . . . . . . . . . . . . . . . . . . . . . .  11
+   13. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  11
+   14. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
+     14.1.  Normative References . . . . . . . . . . . . . . . . . .  11
+     14.2.  Informative References . . . . . . . . . . . . . . . . .  12
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  12
      A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  12
      A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  16
@@ -105,18 +106,18 @@ Table of Contents
    By streaming data from publishers to receivers, much better
    performance and fine-grained sampling can be achieved than with
    polling.  In a distributed forwarding system, the packet forwarding
-   is delegated to multiple network processors.  To not to overhelm the
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 2]
+Zhou, et al.            Expires December 22, 2020               [Page 2]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
-   route processor resources, it is not uncomon that data records are
-   published directly from network processors on line cards to target
-   Receivers to further increase efficency on the routing system.
+   is delegated to multiple processors on line cards.  To not to
+   overhelm the route processor resources, it is not uncomon that data
+   records are published directly from processors on line cards to
+   target Receivers to further increase efficency on the routing system.
 
    This documents complement the general subscription requirements
    defined in section 4.2.1 of [RFC7923] by the paragraph: A
@@ -164,10 +165,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-
-Zhou, et al.            Expires November 10, 2020               [Page 3]
+Zhou, et al.            Expires December 22, 2020               [Page 3]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
 3.  Solution Overview
@@ -193,7 +193,7 @@ Internet-Draft          Distributed Notifications               May 2020
    Master and disassembles the Global Subscription to multiple Component
    Subscriptions, depending from which source data is needed.  The
    Component Subscriptions are then distributed to the corresponding
-   Publisher Agents on route and network processors.
+   Publisher Agents on route and processors on line cards.
 
    Publisher Agents collects metrics according to the Component
    Subscription, add its metadata, encapsulate and pushes data to the
@@ -221,9 +221,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 4]
+Zhou, et al.            Expires December 22, 2020               [Page 4]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
                 +-----------------------------------------+
@@ -231,7 +231,7 @@ Internet-Draft          Distributed Notifications               May 2020
                 |                        +------------+ | |
                 |      +------------+    || Receiver  | | |
                 |      | Subscriber |    |--------------+ |
-                |      +-----^-+----+    +-----^------^   |
+                |      +-----^-+----+    +------------^   |
                 |            | |                      |   |
                 +-----------------------------------------+
                    Global    | | Global               |
@@ -277,9 +277,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 5]
+Zhou, et al.            Expires December 22, 2020               [Page 5]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
 4.  Subscription Decomposition
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 6]
+Zhou, et al.            Expires December 22, 2020               [Page 6]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
 6.  Subscription State Change Notifications
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 7]
+Zhou, et al.            Expires December 22, 2020               [Page 7]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
        "urn:ietf:params:xml:ns:yang:ietf-distributed-notifications";
@@ -445,16 +445,16 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 8]
+Zhou, et al.            Expires December 22, 2020               [Page 8]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
          config false;
          ordered-by user;
          description
            "Software process which created the message (e.g.,
-            network processor 1 on linecard 1). This field is
+            processor 1 on linecard 1). This field is
             used to  notify the collector the working originator.";
        }
      }
@@ -501,9 +501,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020               [Page 9]
+Zhou, et al.            Expires December 22, 2020               [Page 9]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
       URI: urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications
@@ -557,20 +557,25 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 10]
+Zhou, et al.            Expires December 22, 2020              [Page 10]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
-12.  Acknowledgements
+12.  Contributions
+
+   We thank Alexander Clemm for revision and contribution to this
+   document.
+
+13.  Acknowledgements
 
    We thank Kent Watsen, Mahesh Jethanandani, Martin Bjorklund, Tim
    Carey and Qin Wu for their constructive suggestions for improving
    this document.
 
-13.  References
+14.  References
 
-13.1.  Normative References
+14.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -605,18 +610,17 @@ Internet-Draft          Distributed Notifications               May 2020
               DOI 10.17487/RFC7923, June 2016,
               <https://www.rfc-editor.org/info/rfc7923>.
 
+
+
+
+Zhou, et al.            Expires December 22, 2020              [Page 11]
+
+Internet-Draft          Distributed Notifications              June 2020
+
+
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/info/rfc8040>.
-
-
-
-
-
-Zhou, et al.            Expires November 10, 2020              [Page 11]
-
-Internet-Draft          Distributed Notifications               May 2020
-
 
    [RFC8639]  Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
               E., and A. Tripathy, "Subscription to YANG Notifications",
@@ -627,7 +631,7 @@ Internet-Draft          Distributed Notifications               May 2020
               for Datastore Updates", RFC 8641, DOI 10.17487/RFC8641,
               September 2019, <https://www.rfc-editor.org/info/rfc8641>.
 
-13.2.  Informative References
+14.2.  Informative References
 
    [I-D.ietf-netconf-https-notif]
               Jethanandani, M. and K. Watsen, "An HTTPS-based Transport
@@ -665,13 +669,9 @@ A.1.  Dynamic Subscription
 
 
 
-
-
-
-
-Zhou, et al.            Expires November 10, 2020              [Page 12]
+Zhou, et al.            Expires December 22, 2020              [Page 12]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
    +-------------+                 +-------------+ +-------------+
@@ -725,9 +725,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 13]
+Zhou, et al.            Expires December 22, 2020              [Page 13]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
 <netconf:rpc message-id="101"
@@ -781,9 +781,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 14]
+Zhou, et al.            Expires December 22, 2020              [Page 14]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
    The subscriber may invoke the "modify-subscription" RPC for a
@@ -837,9 +837,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 15]
+Zhou, et al.            Expires December 22, 2020              [Page 15]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -893,9 +893,9 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 16]
+Zhou, et al.            Expires December 22, 2020              [Page 16]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
    +-------------+                 +-------------+ +-------------+
@@ -949,9 +949,9 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 17]
+Zhou, et al.            Expires December 22, 2020              [Page 17]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1005,9 +1005,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 18]
+Zhou, et al.            Expires December 22, 2020              [Page 18]
 
-Internet-Draft          Distributed Notifications               May 2020
+Internet-Draft          Distributed Notifications              June 2020
 
 
    Guangying Zheng
@@ -1024,15 +1024,6 @@ Internet-Draft          Distributed Notifications               May 2020
    United States of America
 
    Email: evoit@cisco.com
-
-
-   Alexander Clemm
-   Futurewai
-   2330 Central Expressway
-   Santa Clara, California
-   United States of America
-
-   Email: ludwig@clemm.org
 
 
    Thomas Graf
@@ -1061,4 +1052,13 @@ Internet-Draft          Distributed Notifications               May 2020
 
 
 
-Zhou, et al.            Expires November 10, 2020              [Page 19]
+
+
+
+
+
+
+
+
+
+Zhou, et al.            Expires December 22, 2020              [Page 19]
