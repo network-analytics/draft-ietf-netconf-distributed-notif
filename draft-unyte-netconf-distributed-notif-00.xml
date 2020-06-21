@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="20" month="June" year="2020"/>
+    <date day="21" month="June" year="2020"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -562,9 +562,16 @@ module ietf-distributed-notif {
       target="RFC8641">YANG-Push</xref>.</t>
     </section>
 
-    <section anchor="Contributions" title="Contributions">
-      <t>We thank Alexander Clemm for revision and contribution to this
-      document.</t>
+    <section title="Contributors">
+      <figure>
+        <artwork><![CDATA[   Alexander Clemm
+   Futurewai
+   2330 Central Expressway
+   Santa Clara
+   California
+   United States of America
+   Email: ludwig@clemm.org]]></artwork>
+      </figure>
     </section>
 
     <section anchor="Acknowledgements" title="Acknowledgements">
