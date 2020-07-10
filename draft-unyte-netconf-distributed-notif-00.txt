@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: December 23, 2020                                       E. Voit
+Expires: January 11, 2021                                        E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                           June 21, 2020
+                                                           July 10, 2020
 
 
                Subscription to Distributed Notifications
@@ -46,16 +46,16 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 23, 2020.
+   This Internet-Draft will expire on January 11, 2021.
 
 
 
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 1]
+Zhou, et al.            Expires January 11, 2021                [Page 1]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 2]
+Zhou, et al.            Expires January 11, 2021                [Page 2]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
    is delegated to multiple processors on line cards.  To not to
@@ -165,9 +165,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 3]
+Zhou, et al.            Expires January 11, 2021                [Page 3]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
 3.  Solution Overview
@@ -221,9 +221,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 4]
+Zhou, et al.            Expires January 11, 2021                [Page 4]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
                 +-----------------------------------------+
@@ -277,9 +277,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 5]
+Zhou, et al.            Expires January 11, 2021                [Page 5]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
 4.  Subscription Decomposition
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 6]
+Zhou, et al.            Expires January 11, 2021                [Page 6]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
 6.  Subscription State Change Notifications
@@ -358,12 +358,12 @@ Internet-Draft          Distributed Notifications              June 2020
 
    All Publisher Agents share the same source IP address for data
    export.  For connectionless data transport such as UDP based
-   transport [I-D.unyte-netconf-udp-pub-channel] the same Layer 4 source
-   port for data export can be used.  For connection based data
-   transport such as HTTPS based transport
-   [I-D.ietf-netconf-https-notif], each Publisher Agent MUST be able to
-   acknowledge packet retrieval from Receivers, and therefore requires a
-   dedicated Layer 4 source port per software process.
+   transport [I-D.unyte-netconf-udp-notif] the same Layer 4 source port
+   for data export can be used.  For connection based data transport
+   such as HTTPS based transport [I-D.ietf-netconf-https-notif], each
+   Publisher Agent MUST be able to acknowledge packet retrieval from
+   Receivers, and therefore requires a dedicated Layer 4 source port per
+   software process.
 
    The specific configuration on transports is described in the
    resposible documents.
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 7]
+Zhou, et al.            Expires January 11, 2021                [Page 7]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
        "urn:ietf:params:xml:ns:yang:ietf-distributed-notifications";
@@ -445,9 +445,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 8]
+Zhou, et al.            Expires January 11, 2021                [Page 8]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
          config false;
@@ -501,9 +501,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020               [Page 9]
+Zhou, et al.            Expires January 11, 2021                [Page 9]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
       URI: urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications
@@ -557,9 +557,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 10]
+Zhou, et al.            Expires January 11, 2021               [Page 10]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
 12.  Contributors
@@ -613,9 +613,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 11]
+Zhou, et al.            Expires January 11, 2021               [Page 11]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
    [RFC7923]  Voit, E., Clemm, A., and A. Gonzalez Prieto, "Requirements
@@ -649,11 +649,11 @@ Internet-Draft          Distributed Notifications              June 2020
               ietf-netconf-notification-messages-08 (work in progress),
               November 2019.
 
-   [I-D.unyte-netconf-udp-pub-channel]
-              Zheng, G., Zhou, T., Clemm, A., Graf, T., Francois, P.,
-              and P. Lucente, "UDP based Publication Channel for
-              Streaming Telemetry", draft-unyte-netconf-udp-pub-
-              channel-01 (work in progress), March 2020.
+   [I-D.unyte-netconf-udp-notif]
+              Zhou, T., Zheng, G., Lucente, P., Graf, T., and P.
+              Francois, "UDP-based Transport for Configured
+              Subscriptions", draft-unyte-netconf-udp-notif-00 (work in
+              progress), July 2020.
 
 Appendix A.  Examples
 
@@ -669,9 +669,9 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 12]
+Zhou, et al.            Expires January 11, 2021               [Page 12]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
    +-------------+                 +-------------+ +-------------+
@@ -725,9 +725,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 13]
+Zhou, et al.            Expires January 11, 2021               [Page 13]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
 <netconf:rpc message-id="101"
@@ -781,9 +781,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 14]
+Zhou, et al.            Expires January 11, 2021               [Page 14]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
    The subscriber may invoke the "modify-subscription" RPC for a
@@ -837,9 +837,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 15]
+Zhou, et al.            Expires January 11, 2021               [Page 15]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -893,9 +893,9 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 16]
+Zhou, et al.            Expires January 11, 2021               [Page 16]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
    +-------------+                 +-------------+ +-------------+
@@ -949,9 +949,9 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 17]
+Zhou, et al.            Expires January 11, 2021               [Page 17]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1005,9 +1005,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 18]
+Zhou, et al.            Expires January 11, 2021               [Page 18]
 
-Internet-Draft          Distributed Notifications              June 2020
+Internet-Draft          Distributed Notifications              July 2020
 
 
    Guangying Zheng
@@ -1061,4 +1061,4 @@ Internet-Draft          Distributed Notifications              June 2020
 
 
 
-Zhou, et al.            Expires December 23, 2020              [Page 19]
+Zhou, et al.            Expires January 11, 2021               [Page 19]

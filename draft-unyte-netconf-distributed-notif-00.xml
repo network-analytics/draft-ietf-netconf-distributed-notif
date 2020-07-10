@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="21" month="June" year="2020"/>
+    <date day="10" month="July" year="2020"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -371,13 +371,12 @@
 
       <t>All Publisher Agents share the same source IP address for data
       export. For connectionless data transport such as <xref
-      target="I-D.unyte-netconf-udp-pub-channel">UDP based transport</xref>
-      the same Layer 4 source port for data export can be used. For connection
-      based data transport such as <xref
-      target="I-D.ietf-netconf-https-notif"> HTTPS based transport</xref>,
-      each Publisher Agent MUST be able to acknowledge packet retrieval from
-      Receivers, and therefore requires a dedicated Layer 4 source port per
-      software process.</t>
+      target="I-D.unyte-netconf-udp-notif">UDP based transport</xref> the same
+      Layer 4 source port for data export can be used. For connection based
+      data transport such as <xref target="I-D.ietf-netconf-https-notif">
+      HTTPS based transport</xref>, each Publisher Agent MUST be able to
+      acknowledge packet retrieval from Receivers, and therefore requires a
+      dedicated Layer 4 source port per software process.</t>
 
       <t>The specific configuration on transports is described in the
       resposible documents.</t>
@@ -607,7 +606,36 @@ module ietf-distributed-notif {
     <references title="Informative References">
       <?rfc include="reference.I-D.ietf-netconf-notification-messages"?>
 
-      <?rfc include='reference.I-D.unyte-netconf-udp-pub-channel'?>
+      <reference anchor="I-D.unyte-netconf-udp-notif" target="">
+        <front>
+          <title>UDP-based Transport for Configured Subscriptions</title>
+
+          <author fullname="Tianran Zhou" initials="T." surname="Zhou">
+            <organization>Huawei</organization>
+          </author>
+
+          <author fullname="Guangying Zheng" initials="G." surname="Zheng">
+            <organization>Huawei</organization>
+          </author>
+
+          <author fullname="Paolo Lucente" initials="P." surname="Lucente">
+            <organization>NTT</organization>
+          </author>
+
+          <author fullname="Thomas Graf" initials="T." surname="Graf">
+            <organization>Swisscom</organization>
+          </author>
+
+          <author fullname="Pierre Francois" initials="P." surname="Francois">
+            <organization>INSA-Lyon</organization>
+          </author>
+
+          <date month="July" year="2020"/>
+        </front>
+
+        <seriesInfo name="Internet-Draft"
+                    value="draft-unyte-netconf-udp-notif-00"/>
+      </reference>
 
       <?rfc include='reference.I-D.ietf-netconf-https-notif'?>
     </references>
