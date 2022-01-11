@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: November 8, 2021                                        E. Voit
+Expires: July 15, 2022                                           E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                            May 07, 2021
+                                                        January 11, 2022
 
 
                Subscription to Distributed Notifications
@@ -46,21 +46,21 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 8, 2021.
+   This Internet-Draft will expire on July 15, 2022.
 
 
 
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 1]
+Zhou, et al.              Expires July 15, 2022                 [Page 1]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
 Copyright Notice
 
-   Copyright (c) 2021 IETF Trust and the persons identified as the
+   Copyright (c) 2022 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 2]
+Zhou, et al.              Expires July 15, 2022                 [Page 2]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    polling.  In a distributed forwarding system, the packet forwarding
@@ -165,9 +165,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 3]
+Zhou, et al.              Expires July 15, 2022                 [Page 3]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    Observation Domain: An Observation Domain is the largest set of
@@ -221,9 +221,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 4]
+Zhou, et al.              Expires July 15, 2022                 [Page 4]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    or Agent role.  The Master knows all the capabilities that his Agents
@@ -277,9 +277,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 5]
+Zhou, et al.              Expires July 15, 2022                 [Page 5]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    o  The Master relays the component subscriptions to the Agents.
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 6]
+Zhou, et al.              Expires July 15, 2022                 [Page 6]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    For the dynamic subscription, the output of the "establish-
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 7]
+Zhou, et al.              Expires July 15, 2022                 [Page 7]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    module: ietf-distributed-notif
@@ -445,9 +445,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 8]
+Zhou, et al.              Expires July 15, 2022                 [Page 8]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
        This version of this YANG module is part of RFC XXXX; see the
@@ -501,9 +501,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021                [Page 9]
+Zhou, et al.              Expires July 15, 2022                 [Page 9]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
      augment "/sn:establish-subscription/sn:output" {
@@ -557,9 +557,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 10]
+Zhou, et al.              Expires July 15, 2022                [Page 10]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    The new data nodes introduced in this YANG module may be considered
@@ -613,9 +613,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 11]
+Zhou, et al.              Expires July 15, 2022                [Page 11]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
@@ -659,8 +659,8 @@ Internet-Draft          Distributed Notifications               May 2021
 
    [I-D.ietf-netconf-https-notif]
               Jethanandani, M. and K. Watsen, "An HTTPS-based Transport
-              for YANG Notifications", draft-ietf-netconf-https-notif-08
-              (work in progress), February 2021.
+              for YANG Notifications", draft-ietf-netconf-https-notif-09
+              (work in progress), October 2021.
 
 
 
@@ -669,9 +669,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 12]
+Zhou, et al.              Expires July 15, 2022                [Page 12]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    [I-D.ietf-netconf-notification-messages]
@@ -725,9 +725,9 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 13]
+Zhou, et al.              Expires July 15, 2022                [Page 13]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    +-------------+                 +-------------+ +-------------+
@@ -781,9 +781,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 14]
+Zhou, et al.              Expires July 15, 2022                [Page 14]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
 <netconf:rpc message-id="101"
@@ -837,9 +837,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 15]
+Zhou, et al.              Expires July 15, 2022                [Page 15]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    The subscriber may invoke the "modify-subscription" RPC for a
@@ -893,9 +893,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 16]
+Zhou, et al.              Expires July 15, 2022                [Page 16]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -949,9 +949,9 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 17]
+Zhou, et al.              Expires July 15, 2022                [Page 17]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    +-------------+                 +-------------+ +-------------+
@@ -1005,9 +1005,9 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 18]
+Zhou, et al.              Expires July 15, 2022                [Page 18]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1061,9 +1061,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 19]
+Zhou, et al.              Expires July 15, 2022                [Page 19]
 
-Internet-Draft          Distributed Notifications               May 2021
+Internet-Draft          Distributed Notifications           January 2022
 
 
    Guangying Zheng
@@ -1117,4 +1117,4 @@ Internet-Draft          Distributed Notifications               May 2021
 
 
 
-Zhou, et al.            Expires November 8, 2021               [Page 20]
+Zhou, et al.              Expires July 15, 2022                [Page 20]

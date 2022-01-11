@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="07" month="May" year="2021"/>
+    <date day="11" month="January" year="2022"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -540,8 +540,7 @@ module ietf-distributed-notif {
       target="RFC3688">IETF XML Registry</xref>:</t>
 
       <t><list style="empty">
-          <t>URI:
-          urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
+          <t>URI: urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
 
           <t>Registrant Contact: The IESG.</t>
 
@@ -552,8 +551,7 @@ module ietf-distributed-notif {
       <t><list style="empty">
           <t>Name: ietf-distributed-notif</t>
 
-          <t>Namespace:
-          urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
+          <t>Namespace: urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
 
           <t>Prefix: dn</t>
 
