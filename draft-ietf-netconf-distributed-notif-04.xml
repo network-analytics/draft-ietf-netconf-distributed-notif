@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="4" month="July" year="2022"/>
+    <date day="8" month="July" year="2022"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -806,8 +806,7 @@ module ietf-distributed-notif {
 
         <t><figure
             title="Fig. 7 &quot;subscription-modified&quot; Subscription State Notification">
-            <artwork><![CDATA[
-<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+            <artwork><![CDATA[<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
 <eventTime>2007-09-01T10:00:00Z</eventTime>
 <subscription-modified
       xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"

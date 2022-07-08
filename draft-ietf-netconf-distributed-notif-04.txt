@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: January 5, 2023                                         E. Voit
+Expires: January 9, 2023                                         E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                            July 4, 2022
+                                                            July 8, 2022
 
 
                Subscription to Distributed Notifications
