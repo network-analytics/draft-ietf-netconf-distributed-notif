@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="US-ASCII"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<?rfc toc="yes"?>
+<?rfc tocompact="yes"?>
+<?rfc tocdepth="3"?>
+<?rfc tocindent="yes"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes"?>
+<?rfc comments="yes"?>
+<?rfc inline="yes"?>
+<?rfc compact="yes"?>
+<?rfc subcompact="no"?>
+<rfc category="std" docName="draft-ietf-netconf-distributed-notif-05"
+     ipr="trust200902">
+  <front>
+    <title abbrev="Distributed Notifications">Subscription to Distributed
+    Notifications</title>
+
+    <author fullname="Tianran Zhou" initials="T." surname="Zhou">
+      <organization>Huawei</organization>
+
+      <address>
+        <postal>
+          <street>156 Beiqing Rd., Haidian District</street>
+
+          <city>Beijing</city>
+
+          <region/>
+
+          <code/>
+
+          <country>China</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>zhoutianran@huawei.com</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <author fullname="Guangying Zheng" initials="G." surname="Zheng">
+      <organization>Huawei</organization>
+
+      <address>
+        <postal>
+          <street>101 Yu-Hua-Tai Software Road</street>
+
+          <city>Nanjing</city>
+
+          <code/>
+
+          <region>Jiangsu</region>
+
+          <country>China</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>zhengguangying@huawei.com</email>
+      </address>
+    </author>
+
+    <author fullname="Eric Voit" initials="E." surname="Voit">
+      <organization>Cisco Systems</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city/>
+
+          <code/>
+
+          <region/>
+
+          <country>United States of America</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>evoit@cisco.com</email>
+      </address>
+    </author>
+
+    <author fullname="Thomas Graf" initials="T." surname="Graf">
+      <organization>Swisscom</organization>
+
+      <address>
+        <postal>
+          <street>Binzring 17</street>
+
+          <city>Zuerich 8045</city>
+
+          <region/>
+
+          <code/>
+
+          <country>Switzerland</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>thomas.graf@swisscom.com</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <author fullname="Pierre Francois" initials="P." surname="Francois">
+      <organization>INSA-Lyon</organization>
+
+      <address>
+        <postal>
+          <street/>
+
+          <city>Lyon</city>
+
+          <region/>
+
+          <code/>
+
+          <country>France</country>
+        </postal>
+
+        <phone/>
+
+        <facsimile/>
+
+        <email>pierre.francois@insa-lyon.fr</email>
+
+        <uri/>
+      </address>
+    </author>
+
+    <date day="6" month="January" year="2023"/>
+
+    <workgroup>NETCONF</workgroup>
+
+    <abstract>
+      <t>This document describes extensions to the YANG notifications
+      subscription to allow metrics being published directly from processors
+      on line cards to target receivers, while subscription is still
+      maintained at the route processor in a distributed forwarding
+      system.</t>
+    </abstract>
+
+    <note title="Requirements Language">
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+      document are to be interpreted as described in <xref
+      target="RFC2119">RFC 2119</xref>.</t>
+    </note>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>The mechanism to support a subscription of a continuous and
+      customized stream of updates from a YANG datastore is defined in <xref
+      target="RFC8639"/> and <xref target="RFC8641"/>. Requirements for
+      Subscription to YANG Datastores are defined in <xref
+      target="RFC7923"/></t>
+
+      <t>By streaming data from publishers to receivers, much better
+      performance and fine-grained sampling can be achieved than with polling.
+      In a distributed forwarding system, the packet forwarding is delegated
+      to multiple processors on line cards. To not to overwhelm the route
+      processor resources, it is not uncommon that data records are published
+      directly from processors on line cards to target Receivers to further
+      increase efficiency on the routing system.</t>
+
+      <t>This document complement the general subscription requirements
+      defined in section 4.2.1 of <xref target="RFC7923"/> by the paragraph: A
+      Subscription Service MAY support the ability to export from multiple
+      software processes on a single routing system and expose the information
+      which software process produced which message to maintain data
+      integrity.</t>
+    </section>
+
+    <section title="Terminologies">
+      <t>The following terms are defined in <xref target="RFC8639"/> and are
+      not redefined here:</t>
+
+      <t>Subscriber</t>
+
+      <t>Publisher</t>
+
+      <t>Receiver</t>
+
+      <t>Subscription</t>
+
+      <t>In addition, this document defines the following terms:</t>
+
+      <t>Global Subscription: is the Subscription requested by the subscriber.
+      It may be decomposed into multiple Component Subscriptions.</t>
+
+      <t>Component Subscription: is the Subscription that defines a data
+      source which is managed and controlled by a single Publisher.</t>
+
+      <t>Global Capability: is the overall subscription capability that the
+      group of Publishers can expose to the Subscriber.</t>
+
+      <t>Component Capability: is the subscription capability that each
+      Publisher can expose to the Subscriber.</t>
+
+      <t>Master: is the Publisher that interacts with the Subscriber to deal
+      with the Global Subscription. It decomposes the Global Subscription to
+      multiple Component Subscriptions and interacts with the Agents.</t>
+
+      <t>Agent: is the Publisher that interacts with the Master to deal with
+      the Component Subscription and pushing the data to the Receiver.</t>
+
+      <t>Observation Domain: An Observation Domain is the largest set of
+      Observation Points for which metrics can be collected by a metering
+      process. For example, a router line card may be an Observation Domain if
+      it is composed of several interfaces, each of which is an Observation
+      Point. In the YANG notification messages it generates, the Observation
+      Domain includes its Observation Domain ID, which is unique per publisher
+      process. That way, the collecting process can identify the specific
+      Observation Domain from the publisher that sends the YANG notification
+      messages. Every Observation Point is associated with an Observation
+      Domain.</t>
+
+      <t>Observation Domain ID: A 32-bit identifier of the Observation Domain
+      that is locally unique to the publisher process. The publisher processes
+      use the Observation Domain ID to uniquely identify the collecting
+      process of the Observation Domain that meters the metrics. Receivers
+      SHOULD use the transport session and the Observation Domain ID field to
+      separate different publisher streams originating from the same
+      publisher.</t>
+    </section>
+
+    <section title="Motivation">
+      <t>Lost and corrupt YANG notification messages need to be recognized at
+      the receiver to ensure data integrity even when multiple publisher
+      processes publishing from the same transport session.</t>
+
+      <t>To preserve data integrity down to the publisher process, the
+      Observation Domain ID in the transport message header of the YANG
+      notification message is introduced. In case of UDP transport, this is
+      described in Section 3.2 of <xref target="I-D.ietf-netconf-udp-notif">
+      UDP based transport</xref>.</t>
+    </section>
+
+    <section title="Solution Overview">
+      <t>Figure 2 below shows the distributed data export framework.</t>
+
+      <t>A collector usually includes two components,</t>
+
+      <t><list style="symbols">
+          <t>the Subscriber generates the subscription instructions to express
+          what and how the Receiver want to receive the data;</t>
+
+          <t>the Receiver is the target for the data publication.</t>
+        </list></t>
+
+      <t>For one subscription, there can be one or more Receivers. And the
+      Subscriber does not necessarily share the same IP address as the
+      Receivers.</t>
+
+      <t>In this framework, the Publisher pushes data to the Receiver
+      according to the subscription. The Publisher is either in the Master or
+      Agent role. The Master knows all the capabilities that his Agents can
+      provide and exposes the Global Capability to the collector. The
+      Subscriber maintains the Global Subscription at the Master and
+      disassembles the Global Subscription to multiple Component
+      Subscriptions, depending which source data is needed. The Component
+      Subscriptions are then distributed to the corresponding Publisher Agents
+      on route and processors on line cards.</t>
+
+      <t>Publisher Agents collects metrics according to the Component
+      Subscription, add its metadata, encapsulates and pushes data to the
+      Receiver where packets are reassembled and decapsulated.</t>
+
+      <t><figure title="Fig. 2 The Distributed Data Export Framework">
+          <artwork align="center"><![CDATA[
++-----------------------------------------+
+|        Collector        |-------------+ |
+|                        +------------+ | |
+|      +------------+    || Receiver  | | |
+|      | Subscriber |    |--------------+ |
+|      +-----^-+----+    +------------^   |
+|            | |                      |   |
++-----------------------------------------+
+   Global    | | Global               |
+   Capability| | Subscription         |
++-----------------------------------------+
+|            | |                      |   |
+|   +--------+-v-------------------+  |   |
+|   |       Publisher(Master)      |  |   |
+|   +--------^-+-------------------+  |   |
+|            | |                      |   |
+|            | |                      |   |
+|  Component | | Component       Push |   |
+|  Capability| | Subscription         |   |
+|   +--------+-v-------------------+  |   |
+|   |       Publisher(Agent)       +--+   |
+|   +------------------------------+      |
+|                                         |
+|                Device                   |
++-----------------------------------------+
+
+]]></artwork>
+        </figure></t>
+
+      <t>Master and Agents interact with each other in several ways: <list
+          style="symbols">
+          <t>Agents need to register at the Master at the beginning of their
+          process life-cycle</t>
+
+          <t>Contracts are created between the Master and each Agent on the
+          Component Capability, and the format for streaming data
+          structure.</t>
+
+          <t>The Master relays the component subscriptions to the Agents.</t>
+
+          <t>The Agents announce the status of their Component Subscriptions
+          to the Master. The status of the overall subscription is maintained
+          by the Master. The Master is responsible for notifying the
+          subscriber in case of problems with the Component Subscriptions.</t>
+        </list>The technical mechanisms or protocols used for the coordination
+      of operational information between Master and Agent is out-of-scope of
+      this document.</t>
+    </section>
+
+    <section title="Subscription Decomposition">
+      <t>The Collector can only subscribe to the Master. This requires the
+      Master to:</t>
+
+      <t><list style="numbers">
+          <t>expose the Global Capability that can be served by multiple
+          Publisher Agents;</t>
+
+          <t>disassemble the Global Subscription to multiple Component
+          Subscriptions, and distribute them to the Publisher Agents of the
+          corresponding metric sources so that they not overlap;</t>
+
+          <t>notify on changes when portions of a subscription moving between
+          different Publisher Agents over time.</t>
+        </list></t>
+
+      <t>And the Agent to:</t>
+
+      <t><list style="symbols">
+          <t>Inherit the Global Subscription properties from Publisher Master
+          for its Component Subscription;</t>
+
+          <t>share the same life-cycle as the Global Subscription;</t>
+
+          <t>share the same Subscription ID as the Global Subscription.</t>
+        </list></t>
+    </section>
+
+    <section title="Publication Composition">
+      <t>The Publisher Agent collects data and encapsulates the packets per
+      Component Subscription. The format and structure of the data records are
+      defined by the YANG schema, so that the decomposition at the Receiver
+      can benefit from the structured and hierarchical data records.</t>
+
+      <t>The Receiver is able to associate the YANG data records with <xref
+      target="RFC8639">Subscription ID</xref> to the subscribed subscription
+      and with <xref target="I-D.ietf-netconf-notification-messages">Message
+      Observation Domain ID</xref> to one of the Publisher Agents software
+      processes to enable message integrity.</t>
+
+      <t>For the dynamic subscription, the output of the
+      "establish-subscription" RPC defined in <xref target="RFC8639"/> MUST
+      include a list of Message Observation Domain IDs to indicate how the
+      Global Subscription is decomposed into several Component
+      Subscriptions.</t>
+
+      <t>The "subscription-started" and "subscription-modified" notification
+      defined in <xref target="RFC8639"/> MUST also include a list of Message
+      Observation Domain IDs to notify the current Publishers for the
+      corresponding Global Subscription.</t>
+    </section>
+
+    <section title="Subscription State Change Notifications">
+      <t>In addition to sending event records to Receivers, the Master MUST
+      also send <xref target="RFC8639">subscription state change
+      notifications</xref> when events related to subscription management have
+      occurred. All the subscription state change notifications MUST be
+      delivered by the Master.</t>
+
+      <t>When the subscription decomposition result changed, the
+      "subscription-modified" notification MUST be sent to indicate the new
+      list of Publishers.</t>
+    </section>
+
+    <section title="Publisher Configurations">
+      <t>This document assumes that all Publisher Agents are preconfigured to
+      push data. The actual working Publisher Agents are selected based on the
+      subscription decomposition result.</t>
+
+      <t>All Publisher Agents share the same source IP address for data
+      export. For connectionless data transport such as <xref
+      target="I-D.ietf-netconf-udp-notif">UDP based transport</xref> the same
+      Layer 4 source port for data export can be used. For connection based
+      data transport such as <xref target="I-D.ietf-netconf-https-notif">
+      HTTPS based transport</xref>, each Publisher Agent MUST be able to
+      acknowledge packet retrieval from Receivers, and therefore requires a
+      dedicated Layer 4 source port per software process.</t>
+
+      <t>The specific configuration on transports is described in the
+      responsible documents.</t>
+    </section>
+
+    <section title="YANG Tree">
+      <t/>
+
+      <t><figure>
+          <artwork><![CDATA[
+module: ietf-distributed-notif
+
+  augment /sn:subscriptions/sn:subscription:
+    +--ro message-observation-domain-id*   uint32
+  augment /sn:subscription-started:
+    +--ro message-observation-domain-id*   uint32
+  augment /sn:subscription-modified:
+    +--ro message-observation-domain-id*   uint32
+  augment /sn:establish-subscription/sn:output:
+    +--ro message-observation-domain-id*   uint32
+]]></artwork>
+        </figure></t>
+    </section>
+
+    <section title="YANG Module">
+      <t/>
+
+      <t><figure>
+          <artwork><![CDATA[
+<CODE BEGINS> file "ietf-distributed-notif@2023-03-06.yang"
+module ietf-distributed-notif {
+  yang-version 1.1;
+  namespace 
+    "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
+  prefix dn;
+  import ietf-subscribed-notifications {
+    prefix sn;
+  }
+
+  organization "IETF NETCONF (Network Configuration) Working Group";
+  contact
+    "WG Web:   <http:/tools.ietf.org/wg/netconf/>
+     WG List:  <mailto:netconf@ietf.org>
+
+     Editor:   Tianran Zhou
+               <mailto:zhoutianran@huawei.com>
+     
+     Editor:   Guangying Zheng
+               <mailto:zhengguangying@huawei.com>";
+
+
+  description
+    "Defines augmentation for ietf-subscribed-notifications to 
+    enable the distributed publication with single subscription.
+
+    Copyright (c) 2018 IETF Trust and the persons identified as 
+    authors of the code. All rights reserved.
+
+    Redistribution and use in source and binary forms, with or 
+    without modification, is permitted pursuant to, and subject to 
+    the license terms contained in, the Simplified BSD License set 
+    forth in Section 4.c of the IETF Trust's Legal Provisions 
+    Relating to IETF Documents 
+    (https://trustee.ietf.org/license-info).
+
+    This version of this YANG module is part of RFC XXXX; see the 
+    RFC itself for full legal notices.";
+
+  revision 2023-03-06 {
+    description
+      "Initial version";
+    reference
+      "RFC XXXX: Subscription to Distributed Notifications";
+  }
+
+  grouping message-observation-domain-ids {
+    description
+      "Provides a reusable list of message-observation-domain-ids.";
+    
+    leaf-list message-observation-domain-id {
+      type uint32;
+      config false;
+      ordered-by user;
+      description
+        "Software process which created the message (e.g.,
+         processor 1 on line card 1). This field is
+         used to  notify the collector the working originator.";
+    }
+  }
+
+  augment "/sn:subscriptions/sn:subscription" {
+    description
+      "This augmentation allows the message 
+      Observation Domain ID to be exposed for a subscription.";
+
+    uses message-observation-domain-ids;
+  }
+ 
+  augment "/sn:subscription-started" {
+    description
+      "This augmentation allows MSO specific parameters to be
+       exposed for a subscription.";
+
+    uses message-observation-domain-ids;
+  }
+
+  augment "/sn:subscription-modified" {
+    description
+      "This augmentation allows MSO specific parameters to be
+       exposed for a subscription.";
+
+    uses message-observation-domain-ids;
+  }
+
+  augment "/sn:establish-subscription/sn:output" {
+    description
+      "This augmentation allows MSO specific parameters to be
+       exposed for a subscription.";
+    
+    uses message-observation-domain-ids;
+  }
+}
+<CODE ENDS>
+]]></artwork>
+        </figure></t>
+    </section>
+
+    <section anchor="IANA" title="IANA Considerations">
+      <t>This document registers the following namespace URI in the <xref
+      target="RFC3688">IETF XML Registry</xref>:</t>
+
+      <t><list style="empty">
+          <t>URI: urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
+
+          <t>Registrant Contact: The IESG.</t>
+
+          <t>XML: N/A; the requested URI is an XML namespace.</t>
+        </list>This document registers the following YANG module in the <xref
+      target="RFC3688">YANG Module Names registry</xref>:</t>
+
+      <t><list style="empty">
+          <t>Name: ietf-distributed-notif</t>
+
+          <t>Namespace: urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
+
+          <t>Prefix: dn</t>
+
+          <t>Reference: RFC XXXX</t>
+        </list></t>
+    </section>
+
+    <section anchor="Security" title="Security Considerations">
+      <t>The YANG module specified in this document defines a schema for data
+      that is designed to be accessed via network management protocols such as
+      <xref target="RFC6241">NETCONF</xref> or <xref
+      target="RFC8040">RESTCONF</xref>. The lowest NETCONF layer is the secure
+      transport layer, and the mandatory-to-implement secure transport is
+      <xref target="RFC6242">Secure Shell (SSH)</xref>. The lowest RESTCONF
+      layer is HTTPS, and the mandatory-to-implement secure transport is <xref
+      target="RFC5246">TLS</xref>.</t>
+
+      <t>The NETCONF <xref target="RFC6536">Access Control Model (NACM)</xref>
+      provides the means to restrict access for particular NETCONF or RESTCONF
+      users to a preconfigured subset of all available NETCONF or RESTCONF
+      protocol operations and content.</t>
+
+      <t>The new data nodes introduced in this YANG module may be considered
+      sensitive or vulnerable in some network environments. It is thus
+      important to control read access (e.g., via get-config or notification)
+      to this data nodes. These are the subtrees and data nodes and their
+      sensitivity/vulnerability:</t>
+
+      <t><list style="symbols">
+          <t>/subscriptions/subscription/message-observation-domain-ids</t>
+        </list>The entries in the two lists above will show where subscribed
+      resources might be located on the publishers. Access control MUST be set
+      so that only someone with proper access permissions has the ability to
+      access this resource.</t>
+
+      <t>Other Security Considerations is the same as those discussed in <xref
+      target="RFC8639"/>.</t>
+    </section>
+
+    <section title="Contributors">
+      <figure>
+        <artwork><![CDATA[   Alexander Clemm
+   Futurewai
+   2330 Central Expressway
+   Santa Clara
+   California
+   United States of America
+   Email: ludwig@clemm.org]]></artwork>
+      </figure>
+    </section>
+
+    <section anchor="Acknowledgements" title="Acknowledgements">
+      <t>We thank Kent Watsen, Mahesh Jethanandani, Martin Bjorklund, Tim
+      Carey and Qin Wu for their constructive suggestions for improving this
+      document.</t>
+    </section>
+  </middle>
+
+  <back>
+    <references title="Normative References">
+      <?rfc include="reference.RFC.2119"?>
+
+      <?rfc include='reference.RFC.5246'?>
+
+      <?rfc include='reference.RFC.3688'?>
+
+      <?rfc include='reference.RFC.6241'?>
+
+      <?rfc include='reference.RFC.8040'?>
+
+      <?rfc include='reference.RFC.8639'?>
+
+      <?rfc include='reference.RFC.8641'?>
+
+      <?rfc include='reference.RFC.6536'?>
+
+      <?rfc include='reference.RFC.6242'?>
+
+      <?rfc include='reference.RFC.7923'?>
+    </references>
+
+    <references title="Informative References">
+      <?rfc include="reference.I-D.ietf-netconf-notification-messages"?>
+
+      <reference anchor="I-D.ietf-netconf-udp-notif" target="">
+        <front>
+          <title>UDP-based Transport for Configured Subscriptions</title>
+
+          <author fullname="Tianran Zhou" initials="T." surname="Zhou">
+            <organization>Huawei</organization>
+          </author>
+
+          <author fullname="Guangying Zheng" initials="G." surname="Zheng">
+            <organization>Huawei</organization>
+          </author>
+
+          <author fullname="Paolo Lucente" initials="P." surname="Lucente">
+            <organization>NTT</organization>
+          </author>
+
+          <author fullname="Thomas Graf" initials="T." surname="Graf">
+            <organization>Swisscom</organization>
+          </author>
+
+          <author fullname="Pierre Francois" initials="P." surname="Francois">
+            <organization>INSA-Lyon</organization>
+          </author>
+
+          <date month="July" year="2020"/>
+        </front>
+
+        <seriesInfo name="Internet-Draft"
+                    value="draft-ietf-netconf-udp-notif-01"/>
+      </reference>
+
+      <?rfc include='reference.I-D.ietf-netconf-https-notif'?>
+    </references>
+
+    <section title="Examples">
+      <t>This appendix is non-normative.</t>
+
+      <section title="Dynamic Subscription">
+        <t>Figure 3 shows a typical dynamic subscription to the device with
+        distributed data export capability.</t>
+
+        <t><figure title="Fig. 3 Call Flow for Dynamic Subscription">
+            <artwork><![CDATA[
++-------------+                 +-------------+ +-------------+
+| Subscriber/ |                 |  Publisher  | |  Publisher  |
+| Receiver    |                 |  (Master)   | |  (Agent)    |
++-------------+                 +------+------+ +------+------+
+       |                               |               |
+       | establish-subscription        |               |
+       +------------------------------>+ component     |
+       |                               | subscription  |
+       | RPC Reply: OK, id #22         +-------------->+
+       | Observation Domain ID [#1,#2] |               |
+       +<------------------------------+               |
+       |                               |               |
+       | notif-mesg, id #22            |               |
+       | Observation Domain ID #1      |               |
+       +<------------------------------+               |
+       |                               |               |
+       | notif-mesg, id#22             |               |
+       | Observation Domain ID #2      |               |
+       +<----------------------------------------------+
+       |                               |               |
+       | modify-subscription (id#22)   |               |
+       +------------------------------>+ component     |
+       |                               | subscription  |
+       | RPC Reply: OK, id #22         +-------------->+
+       +<------------------------------+               |
+       |                               |               |
+       | subscription-modified, id#22  |               |
+       | Observation Domain ID [#1]    |               |
+       +<------------------------------+               |
+       |                               |               |
+       | notif-mesg, id #22            |               |
+       | Observation Domain ID #1      |               |
+       +<------------------------------+               |
+       |                               |               |
+       |                               |               |
+       +                               +               +
+]]></artwork>
+          </figure></t>
+
+        <t>A "establish-subscription" RPC request as per <xref
+        target="RFC8641"/> is sent to the Master with a successful response.
+        An example of using NETCONF:</t>
+
+        <t><figure title="Fig. 4 &quot;establish-subscription&quot; Request">
+            <artwork><![CDATA[
+<netconf:rpc message-id="101"
+   xmlns:netconf="urn:ietf:params:xml:ns:netconf:base:1.0">
+ <establish-subscription
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+    xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+   <yp:datastore
+        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+     ds:operational
+   </yp:datastore>
+   <yp:datastore-xpath-filter
+       xmlns:ex="https://example.com/sample-data/1.0">
+     /ex:foo
+   </yp:datastore-xpath-filter>
+   <yp:periodic>
+     <yp:period>500</yp:period>
+   </yp:periodic>
+  </establish-subscription>
+ </netconf:rpc>]]></artwork>
+          </figure>As the device is able to fully satisfy the request, the
+        request is given a subscription ID of 22. The response as in Figure 5
+        indicates that the subscription is decomposed into two component
+        subscriptions which will be published by two message Observation
+        Domain ID: #1 and #2.</t>
+
+        <t><figure
+            title="Fig. 5 &quot;establish-subscription&quot; Positive RPC Response">
+            <artwork><![CDATA[<rpc-reply message-id="101"
+  xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <id
+   xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
+     22
+  </id>
+  <message-observation-domain-id
+   xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+     1
+  </message-observation-domain-id>
+  <message-observation-domain-id
+   xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+     2
+  </message-observation-domain-id>
+</rpc-reply>]]></artwork>
+          </figure>Then, both Publishers send notifications with the
+        corresponding piece of data to the Receiver.</t>
+
+        <t>The subscriber may invoke the "modify-subscription" RPC for a
+        subscription it previously established. The RPC has no difference to
+        the single publisher case as in [RFC8641]. Figure 6 provides an
+        example where a subscriber attempts to modify the period and datastore
+        XPath filter of a subscription using NETCONF.</t>
+
+        <t><figure title="Fig. 6 &quot;modify-subscription&quot; Request">
+            <artwork><![CDATA[     <rpc message-id="102"
+       xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+    <modify-subscription
+        xmlns=
+          "urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+        xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+      <id>22</id>
+      <yp:datastore
+          xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+        ds:operational
+      </yp:datastore>
+      <yp:datastore-xpath-filter
+          xmlns:ex="https://example.com/sample-data/1.0">
+        /ex:bar
+      </yp:datastore-xpath-filter>
+      <yp:periodic>
+        <yp:period>250</yp:period>
+      </yp:periodic>
+     </modify-subscription>
+  </rpc>]]></artwork>
+          </figure></t>
+
+        <t>If the modification is successfully accepted, the
+        "subscription-modified" subscription state notification is sent to the
+        subscriber by the Master. The notification, Figure 7 for example,
+        indicates the modified subscription is decomposed into one component
+        subscription which will be published by message Observation Domain
+        #1.</t>
+
+        <t><figure
+            title="Fig. 7 &quot;subscription-modified&quot; Subscription State Notification">
+            <artwork><![CDATA[<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+<eventTime>2007-09-01T10:00:00Z</eventTime>
+<subscription-modified
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+      xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+    <id>22</id>
+    <yp:datastore
+        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+      ds:operational
+    </yp:datastore>
+    <yp:datastore-xpath-filter
+        xmlns:ex="https://example.com/sample-data/1.0">
+      /ex:bar
+    </yp:datastore-xpath-filter>
+    <yp:periodic>
+        <yp:period>250</yp:period>
+    </yp:periodic>
+    <message-observation-domain-id
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notificationss>
+       1
+    </message-observation-domain-id>    
+  </subscription-modified>
+</notification>]]></artwork>
+          </figure></t>
+
+        <t/>
+      </section>
+
+      <section title="Configured Subscription">
+        <t>Figure 8 shows a typical configured subscription to the device with
+        distributed data export capability.</t>
+
+        <t/>
+
+        <t><figure title="Fig. 8 Call Flow for Configured Subscription">
+            <artwork><![CDATA[
++-------------+                 +-------------+ +-------------+
+| Receiver    |                 |  Publisher  | |  Publisher  |
+|             |                 |  (Master)   | |  (Agent)    |
++------+------+                 +------+------+ +------+------+
+       |                               |               |
+       | subscription-started, id#39   |               |
+       | Observation Domain ID [#1,#2] |               |
+       +<------------------------------+               |
+       |                               |               |
+       | notif-mesg, id#39             |               |
+       | Observation Domain ID #1      |               |
+       +<------------------------------+               |
+       |                               |               |
+       | notif-mesg, id#39             |               |
+       | Observation Domain ID #2      |               |
+       +<----------------------------------------------+
+       |                               |               |
+       |                               |               |
+       |                               |               |
+]]></artwork>
+          </figure></t>
+
+        <t>Before starting to push data, the "subscription-started"
+        subscription state notification is sent to the Receiver. The following
+        example assumes the NETCONF transport has already established. The
+        notification indicates that the configured subscription is decomposed
+        into two component subscriptions which will be published by two
+        message Observation Domain: #1 and #2.</t>
+
+        <t><figure
+            title="Fig. 9 &quot;subscription-started&quot; Subscription State Notification">
+            <artwork><![CDATA[
+<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+  <eventTime>2007-09-01T10:00:00Z</eventTime>
+  <subscription-started
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+      xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+    <identifier>39</identifier>
+    <yp:datastore
+        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+      ds:operational
+    </yp:datastore>
+    <yp:datastore-xpath-filter
+        xmlns:ex="https://example.com/sample-data/1.0">
+      /ex:foo
+    </yp:datastore-xpath-filter>
+    <yp:periodic>
+        <yp:period>250</yp:period>
+    </yp:periodic>
+    <message-observation-domain-id
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+       1
+    </message-observation-domain-id>
+    <message-observation-domain-id
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+       2
+    </message-observation-domain-id>
+  </subscription-started>
+</notification>]]></artwork>
+          </figure></t>
+
+        <t>Then, both Publishers send notifications with the corresponding
+        data record to the Receiver.</t>
+      </section>
+    </section>
+  </back>
+</rfc>
