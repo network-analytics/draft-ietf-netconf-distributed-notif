@@ -252,7 +252,7 @@
     </section>
 
     <section title="Solution Overview">
-      <t>Figure 2 below shows the distributed data export framework.</t>
+      <t><xref target="arch"/> below shows the distributed data export framework.</t>
 
       <t>A collector usually includes two components,</t>
 
@@ -281,7 +281,7 @@
       Subscription, add its metadata, encapsulates and pushes data to the
       Receiver where packets are reassembled and decapsulated.</t>
 
-      <t><figure title="Fig. 2 The Distributed Data Export Framework">
+      <t><figure anchor="arch" title="The Distributed Data Export Framework">
           <artwork align="center"><![CDATA[
 +-----------------------------------------+
 |        Collector        |-------------+ |
@@ -613,72 +613,32 @@ module ietf-distributed-notif {
 
   <back>
     <references title="Normative References">
-      <?rfc include="reference.RFC.2119"?>
-
-      <?rfc include='reference.RFC.5246'?>
-
-      <?rfc include='reference.RFC.3688'?>
-
-      <?rfc include='reference.RFC.6241'?>
-
-      <?rfc include='reference.RFC.8040'?>
-
-      <?rfc include='reference.RFC.8639'?>
-
-      <?rfc include='reference.RFC.8641'?>
-
-      <?rfc include='reference.RFC.6536'?>
-
-      <?rfc include='reference.RFC.6242'?>
-
-      <?rfc include='reference.RFC.7923'?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.3688.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6241.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8040.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8639.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8641.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6536.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6242.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7923.xml"?>
     </references>
 
     <references title="Informative References">
-      <?rfc include="reference.I-D.ietf-netconf-notification-messages"?>
-
-      <reference anchor="I-D.ietf-netconf-udp-notif" target="">
-        <front>
-          <title>UDP-based Transport for Configured Subscriptions</title>
-
-          <author fullname="Tianran Zhou" initials="T." surname="Zhou">
-            <organization>Huawei</organization>
-          </author>
-
-          <author fullname="Guangying Zheng" initials="G." surname="Zheng">
-            <organization>Huawei</organization>
-          </author>
-
-          <author fullname="Paolo Lucente" initials="P." surname="Lucente">
-            <organization>NTT</organization>
-          </author>
-
-          <author fullname="Thomas Graf" initials="T." surname="Graf">
-            <organization>Swisscom</organization>
-          </author>
-
-          <author fullname="Pierre Francois" initials="P." surname="Francois">
-            <organization>INSA-Lyon</organization>
-          </author>
-
-          <date month="July" year="2020"/>
-        </front>
-
-        <seriesInfo name="Internet-Draft"
-                    value="draft-ietf-netconf-udp-notif-01"/>
-      </reference>
-
-      <?rfc include='reference.I-D.ietf-netconf-https-notif'?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-notification-messages.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-udp-notif.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-https-notif.xml"?>
     </references>
 
     <section title="Examples">
       <t>This appendix is non-normative.</t>
 
       <section title="Dynamic Subscription">
-        <t>Figure 3 shows a typical dynamic subscription to the device with
+        <t><xref target="dynamic_subs"/> shows a typical dynamic subscription to the device with
         distributed data export capability.</t>
 
-        <t><figure title="Fig. 3 Call Flow for Dynamic Subscription">
+        <t><figure anchor="dynamic_subs" title="Call Flow for Dynamic Subscription">
             <artwork><![CDATA[
 +-------------+                 +-------------+ +-------------+
 | Subscriber/ |                 |  Publisher  | |  Publisher  |
@@ -723,7 +683,7 @@ module ietf-distributed-notif {
         target="RFC8641"/> is sent to the Master with a successful response.
         An example of using NETCONF:</t>
 
-        <t><figure title="Fig. 4 &quot;establish-subscription&quot; Request">
+        <t><figure anchor="stablish-subs" title="&quot;establish-subscription&quot; Request">
             <artwork><![CDATA[
 <netconf:rpc message-id="101"
    xmlns:netconf="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -744,13 +704,13 @@ module ietf-distributed-notif {
   </establish-subscription>
  </netconf:rpc>]]></artwork>
           </figure>As the device is able to fully satisfy the request, the
-        request is given a subscription ID of 22. The response as in Figure 5
+        request is given a subscription ID of 22. The response as in <xref target="positive_resp"/>
         indicates that the subscription is decomposed into two component
         subscriptions which will be published by two message Observation
         Domain ID: #1 and #2.</t>
 
-        <t><figure
-            title="Fig. 5 &quot;establish-subscription&quot; Positive RPC Response">
+        <t><figure anchor="positive_resp"
+            title="&quot;establish-subscription&quot; Positive RPC Response">
             <artwork><![CDATA[<rpc-reply message-id="101"
   xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
   <id
@@ -771,11 +731,11 @@ module ietf-distributed-notif {
 
         <t>The subscriber may invoke the "modify-subscription" RPC for a
         subscription it previously established. The RPC has no difference to
-        the single publisher case as in [RFC8641]. Figure 6 provides an
+        the single publisher case as in [RFC8641]. <xref target="modify_subs"/> provides an
         example where a subscriber attempts to modify the period and datastore
         XPath filter of a subscription using NETCONF.</t>
 
-        <t><figure title="Fig. 6 &quot;modify-subscription&quot; Request">
+        <t><figure anchor="modify_subs" title="&quot;modify-subscription&quot; Request">
             <artwork><![CDATA[     <rpc message-id="102"
        xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
     <modify-subscription
@@ -800,13 +760,13 @@ module ietf-distributed-notif {
 
         <t>If the modification is successfully accepted, the
         "subscription-modified" subscription state notification is sent to the
-        subscriber by the Master. The notification, Figure 7 for example,
+        subscriber by the Master. The notification, <xref target="modified_subs"/> for example,
         indicates the modified subscription is decomposed into one component
         subscription which will be published by message Observation Domain
         #1.</t>
 
-        <t><figure
-            title="Fig. 7 &quot;subscription-modified&quot; Subscription State Notification">
+        <t><figure anchor="modified_subs"
+            title="&quot;subscription-modified&quot; Subscription State Notification">
             <artwork><![CDATA[<notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
 <eventTime>2007-09-01T10:00:00Z</eventTime>
 <subscription-modified
@@ -836,12 +796,12 @@ module ietf-distributed-notif {
       </section>
 
       <section title="Configured Subscription">
-        <t>Figure 8 shows a typical configured subscription to the device with
+        <t><xref target="conf_subs"/> shows a typical configured subscription to the device with
         distributed data export capability.</t>
 
         <t/>
 
-        <t><figure title="Fig. 8 Call Flow for Configured Subscription">
+        <t><figure anchor="conf_subs" title="Call Flow for Configured Subscription">
             <artwork><![CDATA[
 +-------------+                 +-------------+ +-------------+
 | Receiver    |                 |  Publisher  | |  Publisher  |
@@ -872,8 +832,8 @@ module ietf-distributed-notif {
         into two component subscriptions which will be published by two
         message Observation Domain: #1 and #2.</t>
 
-        <t><figure
-            title="Fig. 9 &quot;subscription-started&quot; Subscription State Notification">
+        <t><figure anchor="state_notif"
+            title="&quot;subscription-started&quot; Subscription State Notification">
             <artwork><![CDATA[
 <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
   <eventTime>2007-09-01T10:00:00Z</eventTime>

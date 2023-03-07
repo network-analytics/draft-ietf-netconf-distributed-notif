@@ -203,7 +203,7 @@ Internet-Draft          Distributed Notifications           January 2023
 
 4.  Solution Overview
 
-   Figure 2 below shows the distributed data export framework.
+   Figure 1 below shows the distributed data export framework.
 
    A collector usually includes two components,
 
@@ -266,7 +266,7 @@ Internet-Draft          Distributed Notifications           January 2023
                 |                Device                   |
                 +-----------------------------------------+
 
-           Figure 1: Fig. 2 The Distributed Data Export Framework
+              Figure 1: The Distributed Data Export Framework
 
    Master and Agents interact with each other in several ways:
 
@@ -690,12 +690,12 @@ Internet-Draft          Distributed Notifications           January 2023
               notification-messages-08>.
 
    [I-D.ietf-netconf-udp-notif]
-              Zhou, T., Zheng, G., Lucente, P., Graf, T., and P.
-              Francois, "UDP-based Transport for Configured
+              Zheng, G., Zhou, T., Graf, T., Francois, P., Feng, A. H.,
+              and P. Lucente, "UDP-based Transport for Configured
               Subscriptions", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-udp-notif-01, July 2020,
+              ietf-netconf-udp-notif-08, 12 September 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              udp-notif-01>.
+              udp-notif-08>.
 
 Appendix A.  Examples
 
@@ -703,7 +703,7 @@ Appendix A.  Examples
 
 A.1.  Dynamic Subscription
 
-   Figure 3 shows a typical dynamic subscription to the device with
+   Figure 2 shows a typical dynamic subscription to the device with
    distributed data export capability.
 
 
@@ -767,7 +767,7 @@ Internet-Draft          Distributed Notifications           January 2023
           |                               |               |
           +                               +               +
 
-            Figure 2: Fig. 3 Call Flow for Dynamic Subscription
+                Figure 2: Call Flow for Dynamic Subscription
 
    A "establish-subscription" RPC request as per [RFC8641] is sent to
    the Master with a successful response.  An example of using NETCONF:
@@ -805,10 +805,10 @@ Internet-Draft          Distributed Notifications           January 2023
      </establish-subscription>
     </netconf:rpc>
 
-             Figure 3: Fig. 4 "establish-subscription" Request
+                 Figure 3: "establish-subscription" Request
 
    As the device is able to fully satisfy the request, the request is
-   given a subscription ID of 22.  The response as in Figure 5 indicates
+   given a subscription ID of 22.  The response as in Figure 4 indicates
    that the subscription is decomposed into two component subscriptions
    which will be published by two message Observation Domain ID: #1 and
    #2.
@@ -829,7 +829,7 @@ Internet-Draft          Distributed Notifications           January 2023
      </message-observation-domain-id>
    </rpc-reply>
 
-      Figure 4: Fig. 5 "establish-subscription" Positive RPC Response
+          Figure 4: "establish-subscription" Positive RPC Response
 
    Then, both Publishers send notifications with the corresponding piece
    of data to the Receiver.
@@ -844,7 +844,7 @@ Internet-Draft          Distributed Notifications           January 2023
 
    The subscriber may invoke the "modify-subscription" RPC for a
    subscription it previously established.  The RPC has no difference to
-   the single publisher case as in [RFC8641].  Figure 6 provides an
+   the single publisher case as in [RFC8641].  Figure 5 provides an
    example where a subscriber attempts to modify the period and
    datastore XPath filter of a subscription using NETCONF.
 
@@ -869,11 +869,11 @@ Internet-Draft          Distributed Notifications           January 2023
         </modify-subscription>
      </rpc>
 
-               Figure 5: Fig. 6 "modify-subscription" Request
+                  Figure 5: "modify-subscription" Request
 
    If the modification is successfully accepted, the "subscription-
    modified" subscription state notification is sent to the subscriber
-   by the Master.  The notification, Figure 7 for example, indicates the
+   by the Master.  The notification, Figure 6 for example, indicates the
    modified subscription is decomposed into one component subscription
    which will be published by message Observation Domain #1.
 
@@ -922,14 +922,14 @@ Internet-Draft          Distributed Notifications           January 2023
    </subscription-modified>
  </notification>
 
-      Figure 6: Fig. 7 "subscription-modified" Subscription State
-                              Notification
+   Figure 6: "subscription-modified" Subscription State Notification
 
 
 A.2.  Configured Subscription
 
-   Figure 8 shows a typical configured subscription to the device with
+   Figure 7 shows a typical configured subscription to the device with
    distributed data export capability.
+
 
 
 
@@ -974,7 +974,7 @@ Internet-Draft          Distributed Notifications           January 2023
           |                               |               |
           |                               |               |
 
-           Figure 7: Fig. 8 Call Flow for Configured Subscription
+              Figure 7: Call Flow for Configured Subscription
 
    Before starting to push data, the "subscription-started" subscription
    state notification is sent to the Receiver.  The following example
@@ -1038,8 +1038,7 @@ Internet-Draft          Distributed Notifications           January 2023
    </subscription-started>
  </notification>
 
-       Figure 8: Fig. 9 "subscription-started" Subscription State
-                              Notification
+    Figure 8: "subscription-started" Subscription State Notification
 
    Then, both Publishers send notifications with the corresponding data
    record to the Receiver.
@@ -1052,6 +1051,7 @@ Authors' Addresses
    Beijing
    China
    Email: zhoutianran@huawei.com
+
 
 
 
