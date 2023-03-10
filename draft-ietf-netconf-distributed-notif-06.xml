@@ -10,7 +10,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-netconf-distributed-notif-05"
+<rfc category="std" docName="draft-ietf-netconf-distributed-notif-06"
      ipr="trust200902">
   <front>
     <title abbrev="Distributed Notifications">Subscription to Distributed
@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="6" month="January" year="2023"/>
+    <date day="10" month="March" year="2023"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -155,10 +155,11 @@
     </abstract>
 
     <note title="Requirements Language">
-      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-      "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-      document are to be interpreted as described in <xref
-      target="RFC2119">RFC 2119</xref>.</t>
+      <t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL
+      NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED",
+      "MAY", and "OPTIONAL" in this document are to be interpreted as
+      described in BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> 
+      when, and only when, they appear in all capitals, as shown here.</t>
     </note>
   </front>
 
@@ -248,7 +249,7 @@
       Observation Domain ID in the transport message header of the YANG
       notification message is introduced. In case of UDP transport, this is
       described in Section 3.2 of <xref target="I-D.ietf-netconf-udp-notif">
-      UDP based transport</xref>.</t>
+      UDP-based transport</xref>.</t>
     </section>
 
     <section title="Solution Overview">
@@ -617,12 +618,13 @@ module ietf-distributed-notif {
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.3688.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6241.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8040.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8639.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8641.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6536.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6242.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7923.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8040.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8639.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8641.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml"?>
     </references>
 
     <references title="Informative References">
