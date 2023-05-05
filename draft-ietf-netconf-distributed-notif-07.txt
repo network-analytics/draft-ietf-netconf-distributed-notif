@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 24 October 2023                                         E. Voit
+Expires: 6 November 2023                                         E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                           22 April 2023
+                                                              5 May 2023
 
 
                Subscription to Distributed Notifications
@@ -48,14 +48,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 October 2023.
+   This Internet-Draft will expire on 6 November 2023.
 
 
 
 
-Zhou, et al.             Expires 24 October 2023                [Page 1]
+Zhou, et al.             Expires 6 November 2023                [Page 1]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
 Copyright Notice
@@ -77,7 +77,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Terminologies . . . . . . . . . . . . . . . . . . . . . . . .   3
    3.  Motivation  . . . . . . . . . . . . . . . . . . . . . . . . .   4
-   4.  Solution Overview . . . . . . . . . . . . . . . . . . . . . .   4
+   4.  Solution Overview . . . . . . . . . . . . . . . . . . . . . .   5
    5.  Subscription Decomposition  . . . . . . . . . . . . . . . . .   7
    6.  Publication Composition . . . . . . . . . . . . . . . . . . .   7
    7.  Subscription State Change Notifications . . . . . . . . . . .   8
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Zhou, et al.             Expires 24 October 2023                [Page 2]
+Zhou, et al.             Expires 6 November 2023                [Page 2]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023                [Page 3]
+Zhou, et al.             Expires 6 November 2023                [Page 3]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    Component Capability: is the subscription capability that each
@@ -186,13 +186,14 @@ Internet-Draft          Distributed Notifications             April 2023
    Domain if it is composed of several interfaces, each of which is an
    Observation Point.  In the YANG notification messages it generates,
    the Observation Domain includes its Observation Domain ID, which is
-   unique per publisher process.  That way, the collecting process can
-   identify the specific Observation Domain from the publisher that
-   sends the YANG notification messages.  Every Observation Point is
-   associated with an Observation Domain.In Section 2 of [RFC7011] the
-   same term has been used to identify the largest set of Observation
-   Points for which IPFIX Flow information can be aggregated by a
-   Metering Process which usually applies to a router line card.
+   unique for each publisher process on the network node.  That way, the
+   collecting process can identify the specific Observation Domain from
+   the publisher that sends the YANG notification messages.  Every
+   Observation Point is associated with an Observation Domain.In
+   Section 2 of [RFC7011] the same term has been used to identify the
+   largest set of Observation Points for which IPFIX Flow information
+   can be aggregated by a Metering Process which usually applies to a
+   router line card.
 
    Observation Domain ID: A 32-bit identifier of the Observation Domain
    that is locally unique to the publisher process.  The publisher
@@ -214,17 +215,20 @@ Internet-Draft          Distributed Notifications             April 2023
    is described in Section 3.2 of UDP-based transport
    [I-D.ietf-netconf-udp-notif].
 
+
+
+
+
+
+
+Zhou, et al.             Expires 6 November 2023                [Page 4]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
 4.  Solution Overview
 
    Figure 1 below shows the distributed data export framework.
-
-
-
-
-Zhou, et al.             Expires 24 October 2023                [Page 4]
-
-Internet-Draft          Distributed Notifications             April 2023
-
 
    A collector usually includes two components,
 
@@ -273,13 +277,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-
-
-
-
-Zhou, et al.             Expires 24 October 2023                [Page 5]
+Zhou, et al.             Expires 6 November 2023                [Page 5]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
                 +-----------------------------------------+
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023                [Page 6]
+Zhou, et al.             Expires 6 November 2023                [Page 6]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
 5.  Subscription Decomposition
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023                [Page 7]
+Zhou, et al.             Expires 6 November 2023                [Page 7]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
 7.  Subscription State Change Notifications
@@ -445,9 +445,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023                [Page 8]
+Zhou, et al.             Expires 6 November 2023                [Page 8]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    <CODE BEGINS> file "ietf-distributed-notif@2023-03-06.yang"
@@ -501,9 +501,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023                [Page 9]
+Zhou, et al.             Expires 6 November 2023                [Page 9]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
          "Provides a reusable list of message-observation-domain-ids.";
@@ -557,9 +557,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 10]
+Zhou, et al.             Expires 6 November 2023               [Page 10]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
 11.  IANA Considerations
@@ -613,9 +613,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 11]
+Zhou, et al.             Expires 6 November 2023               [Page 11]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
 12.4.  Huawei VRP
@@ -669,9 +669,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 12]
+Zhou, et al.             Expires 6 November 2023               [Page 12]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
 15.  Acknowledgements
@@ -725,9 +725,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 13]
+Zhou, et al.             Expires 6 November 2023               [Page 13]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
@@ -781,9 +781,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 14]
+Zhou, et al.             Expires 6 November 2023               [Page 14]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    [Paolo-Lucente-Pmacct]
@@ -837,9 +837,9 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 15]
+Zhou, et al.             Expires 6 November 2023               [Page 15]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    +-------------+                 +-------------+ +-------------+
@@ -893,9 +893,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 16]
+Zhou, et al.             Expires 6 November 2023               [Page 16]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    <netconf:rpc message-id="101"
@@ -949,9 +949,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 17]
+Zhou, et al.             Expires 6 November 2023               [Page 17]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    The subscriber may invoke the "modify-subscription" RPC for a
@@ -1005,9 +1005,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 18]
+Zhou, et al.             Expires 6 November 2023               [Page 18]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1061,9 +1061,9 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 19]
+Zhou, et al.             Expires 6 November 2023               [Page 19]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    +-------------+                 +-------------+ +-------------+
@@ -1117,9 +1117,9 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 20]
+Zhou, et al.             Expires 6 November 2023               [Page 20]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1173,9 +1173,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 21]
+Zhou, et al.             Expires 6 November 2023               [Page 21]
 
-Internet-Draft          Distributed Notifications             April 2023
+Internet-Draft          Distributed Notifications               May 2023
 
 
    Guangying Zheng
@@ -1229,4 +1229,4 @@ Internet-Draft          Distributed Notifications             April 2023
 
 
 
-Zhou, et al.             Expires 24 October 2023               [Page 22]
+Zhou, et al.             Expires 6 November 2023               [Page 22]

@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="22" month="April" year="2023"/>
+    <date day="5" month="May" year="2023"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -225,14 +225,15 @@
       process. For example, a router line card may be an Observation Domain if
       it is composed of several interfaces, each of which is an Observation
       Point. In the YANG notification messages it generates, the Observation
-      Domain includes its Observation Domain ID, which is unique per publisher
-      process. That way, the collecting process can identify the specific
-      Observation Domain from the publisher that sends the YANG notification
-      messages. Every Observation Point is associated with an Observation
-      Domain.In Section 2 of <xref target="RFC7011"/> the same term has been
-      used to identify the largest set of Observation Points for which IPFIX
-      Flow information can be aggregated by a Metering Process which usually
-      applies to a router line card.</t>
+      Domain includes its Observation Domain ID, which is unique for each
+      publisher process on the network node. That way, the collecting process
+      can identify the specific Observation Domain from the publisher that
+      sends the YANG notification messages. Every Observation Point is
+      associated with an Observation Domain.In Section 2 of <xref
+      target="RFC7011"/> the same term has been used to identify the largest
+      set of Observation Points for which IPFIX Flow information can be
+      aggregated by a Metering Process which usually applies to a router line
+      card.</t>
 
       <t>Observation Domain ID: A 32-bit identifier of the Observation Domain
       that is locally unique to the publisher process. The publisher processes
