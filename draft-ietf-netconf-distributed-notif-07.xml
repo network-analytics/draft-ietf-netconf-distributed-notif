@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="5" month="May" year="2023"/>
+    <date day="8" month="May" year="2023"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -169,7 +169,7 @@
       customized stream of updates from a YANG datastore is defined in <xref
       target="RFC8639"/> and <xref target="RFC8641"/>. Requirements for
       Subscription to YANG Datastores are defined in <xref
-      target="RFC7923"/></t>
+      target="RFC7923"/>.</t>
 
       <t>By streaming data from publishers to receivers, much better
       performance and fine-grained sampling can be achieved than with polling.
@@ -225,20 +225,19 @@
       process. For example, a router line card may be an Observation Domain if
       it is composed of several interfaces, each of which is an Observation
       Point. In the YANG notification messages it generates, the Observation
-      Domain includes its Observation Domain ID, which is unique for each
-      publisher process on the network node. That way, the collecting process
-      can identify the specific Observation Domain from the publisher that
-      sends the YANG notification messages. Every Observation Point is
-      associated with an Observation Domain.In Section 2 of <xref
-      target="RFC7011"/> the same term has been used to identify the largest
-      set of Observation Points for which IPFIX Flow information can be
-      aggregated by a Metering Process which usually applies to a router line
-      card.</t>
+      Domain includes its Observation Domain ID, which is locally unique for
+      each network node. That way, the collecting process can identify the
+      specific Observation Domain from the publisher that sends the YANG
+      notification messages. Every Observation Point is associated with an
+      Observation Domain. In Section 2 of <xref target="RFC7011"/> the same
+      term has been used to identify the largest set of Observation Points
+      for which IPFIX Flow information can be aggregated by a Metering Process
+      which usually applies to a router line card.</t>
 
       <t>Observation Domain ID: A 32-bit identifier of the Observation Domain
-      that is locally unique to the publisher process. The publisher processes
-      use the Observation Domain ID to uniquely identify the collecting
-      process of the Observation Domain that meters the metrics. Receivers
+      that is locally unique to the network node. The publisher processes
+      use the Observation Domain ID to uniquely identify the Observation Domain
+      that meters the metrics to the collecting process. Receivers
       SHOULD use the transport session and the Observation Domain ID field to
       separate different publisher streams originating from the same
       publisher.</t>
@@ -321,7 +320,7 @@
       <t>Master and Agents interact with each other in several ways: <list
           style="symbols">
           <t>Agents need to register at the Master at the beginning of their
-          process life-cycle</t>
+          process life-cycle.</t>
 
           <t>Contracts are created between the Master and each Agent on the
           Component Capability, and the format for streaming data
@@ -601,6 +600,14 @@ module ietf-distributed-notif {
       </section>
     </section>
 
+    <section anchor="Operational" title="Operational Considerations">
+      <t>The terms Observation Domain and Observation Domain ID have also been
+      used in <xref target="RFC7011">IPFIX</xref>. This document does
+      not mandate that the same Observation Domain ID value should be used
+      in both <xref target="RFC7011">IPFIX</xref> and <xref target="RFC8641">
+      YANG-push</xref> implementations.</t>
+    </section>
+
     <section anchor="Security" title="Security Considerations">
       <t>The YANG module specified in this document defines a schema for data
       that is designed to be accessed via network management protocols such as
@@ -647,8 +654,8 @@ module ietf-distributed-notif {
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>We thank Kent Watsen, Mahesh Jethanandani, Martin Bjorklund, Tim
-      Carey, Qin Wu and Robert Wilton for their constructive suggestions for
-      improving this document.</t>
+      Carey, Qin Wu, Robert Wilton, Benoit Claise and Alex Huang Feng for their
+      constructive suggestions for improving this document.</t>
     </section>
   </middle>
 
@@ -698,7 +705,7 @@ module ietf-distributed-notif {
       </reference>
 
       <reference anchor="INSA-Lyon-Receiver"
-                 target="https://github.com/insa-unyte/udp-notif-c-collector">
+                 target="https://github.com/network-analytics/udp-notif-c-collector">
         <front>
           <title>INSA Lyon, YANG Push receiver library implementation</title>
 
