@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="8" month="May" year="2023"/>
+    <date day="23" month="May" year="2023"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -221,26 +221,18 @@
       the Component Subscription and pushing the data to the Receiver.</t>
 
       <t>Observation Domain: An Observation Domain is the largest set of
-      Observation Points for which metrics can be collected by a metering
-      process. For example, a router line card may be an Observation Domain if
-      it is composed of several interfaces, each of which is an Observation
-      Point. In the YANG notification messages it generates, the Observation
-      Domain includes its Observation Domain ID, which is locally unique for
-      each network node. That way, the collecting process can identify the
-      specific Observation Domain from the publisher that sends the YANG
-      notification messages. Every Observation Point is associated with an
-      Observation Domain. In Section 2 of <xref target="RFC7011"/> the same
-      term has been used to identify the largest set of Observation Points
-      for which IPFIX Flow information can be aggregated by a Metering Process
-      which usually applies to a router line card.</t>
+      observation points for which metrics can be collected, stored and exported by an Agent.
+      For example, a router line card may be an Observation
+      Domain if it is composed of several interfaces, each of which is an
+      observation point.</t>
 
       <t>Observation Domain ID: A 32-bit identifier of the Observation Domain
-      that is locally unique to the network node. The publisher processes
-      use the Observation Domain ID to uniquely identify the Observation Domain
-      that meters the metrics to the collecting process. Receivers
-      SHOULD use the transport session and the Observation Domain ID field to
-      separate different publisher streams originating from the same
-      publisher.</t>
+      that is locally unique to the network node. In the YANG notification messages
+      it generates, the Observation Domain includes its Observation Domain ID.
+      That way, the collecting process can identify the specific Observation
+      Domain from the publisher that sends the YANG notification messages. 
+      Receivers SHOULD use the transport session and the Observation Domain ID field
+      to separate different publisher streams originating from the same publisher.</t>
     </section>
 
     <section title="Motivation">
@@ -601,11 +593,21 @@ module ietf-distributed-notif {
     </section>
 
     <section anchor="Operational" title="Operational Considerations">
-      <t>The terms Observation Domain and Observation Domain ID have also been
-      used in <xref target="RFC7011">IPFIX</xref>. This document does
-      not mandate that the same Observation Domain ID value should be used
-      in both <xref target="RFC7011">IPFIX</xref> and <xref target="RFC8641">
-      YANG-push</xref> implementations.</t>
+      <t>
+      In Section 2 of <xref target="RFC7011"/> the Observation Domain term has been
+      used to identify the largest set of Observation Points for which IPFIX
+      Flow information can be aggregated by a Metering Process which usually applies
+      to a router line card. Note that, even if the terms are similar, the concepts
+      are different: indeed, in this case, one router line card can contain multiple
+      publisher processes.
+      </t>
+      <t>
+      The Observation Domain Id term, issue from IPFIX <xref target="RFC7011"/>, has
+      been kept, as opposed to created a new term such as Publisher Id, it is expected
+      that most network node with line cards will contain just one publisher per line
+      card. In which case, the observation domain (Id) concepts in IPFIX and in this
+      draft are similar.
+      </t>
     </section>
 
     <section anchor="Security" title="Security Considerations">
