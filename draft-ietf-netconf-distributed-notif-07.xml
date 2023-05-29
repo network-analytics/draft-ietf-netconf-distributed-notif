@@ -179,7 +179,7 @@
       directly from processors on line cards to target Receivers to further
       increase efficiency on the routing system.</t>
 
-      <t>This document complement the general subscription requirements
+      <t>This document complements the general subscription requirements
       defined in section 4.2.1 of <xref target="RFC7923"/> by the paragraph: A
       Subscription Service MAY support the ability to export from multiple
       software processes on a single routing system and expose the information
@@ -256,7 +256,7 @@
 
       <t><list style="symbols">
           <t>the Subscriber generates the subscription instructions to express
-          what and how the Receiver want to receive the data;</t>
+          what and how the Receiver wants to receive the data;</t>
 
           <t>the Receiver is the target for the data publication.</t>
         </list></t>
@@ -276,7 +276,7 @@
       on route and processors on line cards.</t>
 
       <t>Publisher Agents collects metrics according to the Component
-      Subscription, add its metadata, encapsulates and pushes data to the
+      Subscription, add its metadata, encapsulates, and pushes data to the
       Receiver where packets are reassembled and decapsulated.</t>
 
       <t><figure anchor="arch" title="The Distributed Data Export Framework">
@@ -313,7 +313,7 @@
       <t>Master and Agents interact with each other in several ways: <list
           style="symbols">
           <t>Agents need to register at the Master at the beginning of their
-          process life-cycle.</t>
+          process life cycle.</t>
 
           <t>Contracts are created between the Master and each Agent on the
           Component Capability, and the format for streaming data
@@ -364,7 +364,7 @@
       defined by the YANG schema, so that the decomposition at the Receiver
       can benefit from the structured and hierarchical data records.</t>
 
-      <t>The Receiver is able to associate the YANG data records with <xref
+      <t>The Receiver can associate the YANG data records with <xref
       target="RFC8639">Subscription ID</xref> to the subscribed subscription
       and with <xref target="I-D.ietf-netconf-notification-messages">Message
       Observation Domain ID</xref> to one of the Publisher Agents software
@@ -572,7 +572,7 @@ module ietf-distributed-notif {
       </section>
 
       <section anchor="OpenSourceReceiver"
-               title="Open Source Reveiver Library">
+               title="Open Source Receiver Library">
         <t>INSA Lyon implemented this document for a YANG Push receiver on
         <xref target="I-D.ietf-netconf-udp-notif">UDP-based Transport for
         Configured Subscriptions</xref> as a library.</t>
@@ -582,7 +582,7 @@ module ietf-distributed-notif {
       </section>
 
       <section anchor="pmacct" title="Pmacct Data Collection">
-        <t>The open source YANG push reveiver library has been integrated into
+        <t>The open source YANG push receiver library has been integrated into
         the Pmacct open source Network Telemetry data collection.</t>
       </section>
 
@@ -602,7 +602,7 @@ module ietf-distributed-notif {
       router line card can contain multiple publisher processes.</t>
 
       <t>The Observation Domain ID term, issue from IPFIX <xref
-      target="RFC7011"/>, has been kept, as opposed to created a new term such
+      target="RFC7011"/>, has been kept, as opposed to create a new term such
       as Publisher ID, it is expected that most network node with line cards
       will contain just one publisher per line card. In which case, the
       observation domain (ID) concepts in IPFIX and in this draft are
@@ -620,9 +620,9 @@ module ietf-distributed-notif {
       target="RFC5246">TLS</xref>.</t>
 
       <t>The NETCONF <xref target="RFC6536">Access Control Model (NACM)</xref>
-      provides the means to restrict access for particular NETCONF or RESTCONF
-      users to a preconfigured subset of all available NETCONF or RESTCONF
-      protocol operations and content.</t>
+      provides the means to restrict access particulary for NETCONF or
+      RESTCONF users to a preconfigured subset of all available NETCONF or
+      RESTCONF protocol operations and content.</t>
 
       <t>The new data nodes introduced in this YANG module may be considered
       sensitive or vulnerable in some network environments. It is thus
