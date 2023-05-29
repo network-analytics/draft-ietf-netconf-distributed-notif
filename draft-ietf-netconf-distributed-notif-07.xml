@@ -603,7 +603,7 @@ module ietf-distributed-notif {
 
       <t>The Observation Domain ID term, issue from IPFIX <xref
       target="RFC7011"/>, has been kept, as opposed to created a new term such
-      as Publisher Id, it is expected that most network node with line cards
+      as Publisher ID, it is expected that most network node with line cards
       will contain just one publisher per line card. In which case, the
       observation domain (ID) concepts in IPFIX and in this draft are
       similar.</t>

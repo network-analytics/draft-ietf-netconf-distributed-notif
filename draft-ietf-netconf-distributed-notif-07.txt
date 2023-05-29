@@ -593,7 +593,7 @@ Internet-Draft          Distributed Notifications               May 2023
    router line card can contain multiple publisher processes.
 
    The Observation Domain ID term, issue from IPFIX [RFC7011], has been
-   kept, as opposed to created a new term such as Publisher Id, it is
+   kept, as opposed to created a new term such as Publisher ID, it is
    expected that most network node with line cards will contain just one
    publisher per line card.  In which case, the observation domain (ID)
    concepts in IPFIX and in this draft are similar.
