@@ -117,9 +117,9 @@ Internet-Draft          Distributed Notifications               May 2023
 1.  Introduction
 
    The mechanism to support a subscription of a continuous and
-   customized stream of updates from a YANG datastore is defined in
-   [RFC8639] and [RFC8641].  Requirements for Subscription to YANG
-   Datastores are defined in [RFC7923].
+   customized stream of updates from a YANG datastore [RFC8342] is
+   defined in [RFC8639] and [RFC8641].  Requirements for Subscription to
+   YANG Datastores are defined in [RFC7923].
 
    By streaming data from publishers to receivers, much better
    performance and fine-grained sampling can be achieved than with
@@ -706,6 +706,11 @@ Internet-Draft          Distributed Notifications               May 2023
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+   [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
+              and R. Wilton, "Network Management Datastore Architecture
+              (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
+              <https://www.rfc-editor.org/info/rfc8342>.
+
    [RFC8639]  Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
               E., and A. Tripathy, "Subscription to YANG Notifications",
               RFC 8639, DOI 10.17487/RFC8639, September 2019,
@@ -716,11 +721,6 @@ Internet-Draft          Distributed Notifications               May 2023
               September 2019, <https://www.rfc-editor.org/info/rfc8641>.
 
 17.2.  Informative References
-
-
-
-
-
 
 
 

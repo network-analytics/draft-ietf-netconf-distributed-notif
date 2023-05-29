@@ -166,10 +166,10 @@
   <middle>
     <section title="Introduction">
       <t>The mechanism to support a subscription of a continuous and
-      customized stream of updates from a YANG datastore is defined in <xref
-      target="RFC8639"/> and <xref target="RFC8641"/>. Requirements for
-      Subscription to YANG Datastores are defined in <xref
-      target="RFC7923"/>.</t>
+      customized stream of updates from a YANG datastore <xref
+      target="RFC8342"/> is defined in <xref target="RFC8639"/> and <xref
+      target="RFC8641"/>. Requirements for Subscription to YANG Datastores are
+      defined in <xref target="RFC7923"/>.</t>
 
       <t>By streaming data from publishers to receivers, much better
       performance and fine-grained sampling can be achieved than with polling.
@@ -677,6 +677,8 @@ module ietf-distributed-notif {
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7923.xml"?>
 
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8040.xml"?>
+
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8342.xml"?>
 
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.8639.xml"?>
 
