@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 29 November 2023                                        E. Voit
+Expires: 1 December 2023                                         E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                             28 May 2023
+                                                             30 May 2023
 
 
                Subscription to Distributed Notifications
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 November 2023.
+   This Internet-Draft will expire on 1 December 2023.
 
 
 
 
-Zhou, et al.            Expires 29 November 2023                [Page 1]
+Zhou, et al.             Expires 1 December 2023                [Page 1]
 
 Internet-Draft          Distributed Notifications               May 2023
 
@@ -79,25 +79,25 @@ Table of Contents
    3.  Motivation  . . . . . . . . . . . . . . . . . . . . . . . . .   4
    4.  Solution Overview . . . . . . . . . . . . . . . . . . . . . .   4
    5.  Subscription Decomposition  . . . . . . . . . . . . . . . . .   6
-   6.  Publication Composition . . . . . . . . . . . . . . . . . . .   6
+   6.  Publication Composition . . . . . . . . . . . . . . . . . . .   7
    7.  Subscription State Change Notifications . . . . . . . . . . .   7
    8.  Publisher Configurations  . . . . . . . . . . . . . . . . . .   7
-   9.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . . . .   7
+   9.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . . . .   8
    10. YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   8
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   12. Implementation Status . . . . . . . . . . . . . . . . . . . .  10
-     12.1.  Open Source Publisher  . . . . . . . . . . . . . . . . .  10
+   12. Implementation Status . . . . . . . . . . . . . . . . . . . .  11
+     12.1.  Open Source Publisher  . . . . . . . . . . . . . . . . .  11
      12.2.  Open Source Receiver Library . . . . . . . . . . . . . .  11
      12.3.  Pmacct Data Collection . . . . . . . . . . . . . . . . .  11
      12.4.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  11
    13. Operational Considerations  . . . . . . . . . . . . . . . . .  11
-   14. Security Considerations . . . . . . . . . . . . . . . . . . .  11
+   14. Security Considerations . . . . . . . . . . . . . . . . . . .  12
    15. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  12
    16. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  12
    17. References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
-     17.1.  Normative References . . . . . . . . . . . . . . . . . .  12
-     17.2.  Informative References . . . . . . . . . . . . . . . . .  13
-   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  14
+     17.1.  Normative References . . . . . . . . . . . . . . . . . .  13
+     17.2.  Informative References . . . . . . . . . . . . . . . . .  14
+   Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  15
      A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  15
      A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  18
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  20
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Zhou, et al.            Expires 29 November 2023                [Page 2]
+Zhou, et al.             Expires 1 December 2023                [Page 2]
 
 Internet-Draft          Distributed Notifications               May 2023
 
@@ -122,13 +122,13 @@ Internet-Draft          Distributed Notifications               May 2023
    YANG Datastores are defined in [RFC7923].
 
    By streaming data from publishers to receivers, much better
-   performance and fine-grained sampling can be achieved than with
-   polling.  In a distributed forwarding system, the packet forwarding
-   is delegated to multiple processors on line cards.  To not to
-   overwhelm the route processor resources, it is not uncommon that data
-   records are published directly from processors on line cards to
-   target Receivers to further increase efficiency on the routing
-   system.
+   performance and fine-grained sampling can be achieved than using
+   polling-based mechanishms.  In a distributed forwarding system, the
+   packet forwarding is delegated to multiple processors on line cards.
+   To not to overwhelm the route processor resources, it is not uncommon
+   that data records are published directly from processors on line
+   cards to target Receivers to further increase efficiency on the
+   routing system.
 
    This document complements the general subscription requirements
    defined in section 4.2.1 of [RFC7923] by the paragraph: A
@@ -165,7 +165,7 @@ Internet-Draft          Distributed Notifications               May 2023
 
 
 
-Zhou, et al.            Expires 29 November 2023                [Page 3]
+Zhou, et al.             Expires 1 December 2023                [Page 3]
 
 Internet-Draft          Distributed Notifications               May 2023
 
@@ -178,22 +178,26 @@ Internet-Draft          Distributed Notifications               May 2023
    to multiple Component Subscriptions and interacts with the Agents.
 
    Agent: is the Publisher that interacts with the Master to deal with
-   the Component Subscription and pushing the data to the Receiver.
+   the Component Subscription and pushes the data to the Receiver.  Each
+   Agent handles an Observation Domain.
 
    Observation Domain: An Observation Domain is the largest set of
    observation points for which metrics can be collected, stored and
-   exported by an Agent.  For example, a router line card may be an
-   Observation Domain if it is composed of several interfaces, each of
-   which is an observation point.
+   exported by a publisher.  The publisher can either be a Master or an
+   Agent.  An example of an Observation Domain is a router line card if
+   it is composed of several interfaces, each of which is an observation
+   point.
 
    Observation Domain ID: A 32-bit identifier of the Observation Domain
-   that is locally unique to the network node.  In the YANG notification
-   messages it generates, the Observation Domain includes its
-   Observation Domain ID.  That way, the collecting process can identify
-   the specific Observation Domain from the publisher that sends the
-   YANG notification messages.  Receivers SHOULD use the transport
-   session and the Observation Domain ID field to separate different
-   publisher streams originating from the same publisher.
+   that is locally unique to the network node.  It identifies the
+   Observation Domain and the publisher (Master or Agent) pushing the
+   data to the Receiver.  In the YANG notification messages it
+   generates, the Observation Domain includes its Observation Domain ID.
+   That way, the collecting process can identify the specific
+   Observation Domain from the publisher that sends the YANG
+   notification messages.  Receivers SHOULD use the transport session
+   and the Observation Domain ID field to separate different publisher
+   streams originating from the same publisher.
 
 3.  Motivation
 
@@ -213,18 +217,19 @@ Internet-Draft          Distributed Notifications               May 2023
 
    A collector usually includes two components,
 
+
+
+
+
+Zhou, et al.             Expires 1 December 2023                [Page 4]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
    *  the Subscriber generates the subscription instructions to express
       what and how the Receiver wants to receive the data;
 
    *  the Receiver is the target for the data publication.
-
-
-
-
-Zhou, et al.            Expires 29 November 2023                [Page 4]
-
-Internet-Draft          Distributed Notifications               May 2023
-
 
    For one subscription, there can be one or more Receivers.  And the
    Subscriber does not necessarily share the same IP address as the
@@ -270,17 +275,16 @@ Internet-Draft          Distributed Notifications               May 2023
                 |                Device                   |
                 +-----------------------------------------+
 
-              Figure 1: The Distributed Data Export Framework
-
-   Master and Agents interact with each other in several ways:
 
 
-
-
-Zhou, et al.            Expires 29 November 2023                [Page 5]
+Zhou, et al.             Expires 1 December 2023                [Page 5]
 
 Internet-Draft          Distributed Notifications               May 2023
 
+
+              Figure 1: The Distributed Data Export Framework
+
+   Master and Agents interact with each other in several ways:
 
    *  Agents need to register at the Master at the beginning of their
       process life cycle.
@@ -309,7 +313,7 @@ Internet-Draft          Distributed Notifications               May 2023
 
    2.  disassemble the Global Subscription to multiple Component
        Subscriptions, and distribute them to the Publisher Agents of the
-       corresponding metric sources so that they not overlap;
+       corresponding metric sources so that they do not overlap;
 
    3.  notify on changes when portions of a subscription moving between
        different Publisher Agents over time.
@@ -323,6 +327,17 @@ Internet-Draft          Distributed Notifications               May 2023
 
    *  share the same Subscription ID as the Global Subscription.
 
+
+
+
+
+
+
+Zhou, et al.             Expires 1 December 2023                [Page 6]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
 6.  Publication Composition
 
    The Publisher Agent collects data and encapsulates the packets per
@@ -331,17 +346,10 @@ Internet-Draft          Distributed Notifications               May 2023
    Receiver can benefit from the structured and hierarchical data
    records.
 
-
-
-Zhou, et al.            Expires 29 November 2023                [Page 6]
-
-Internet-Draft          Distributed Notifications               May 2023
-
-
-   The Receiver can associate the YANG data records with Subscription ID
-   [RFC8639] to the subscribed subscription and with Message Observation
-   Domain ID [I-D.ietf-netconf-notification-messages] to one of the
-   Publisher Agents software processes to enable message integrity.
+   The Receiver can associate the YANG data records to the subscription
+   using the Subscription ID [RFC8639] and use the Observation Domain ID
+   to associate the message to one of the Publisher processes (Master or
+   Agent) to enable message integrity.
 
    For the dynamic subscription, the output of the "establish-
    subscription" RPC defined in [RFC8639] MUST include a list of Message
@@ -371,6 +379,21 @@ Internet-Draft          Distributed Notifications               May 2023
    push data.  The actual working Publisher Agents are selected based on
    the subscription decomposition result.
 
+
+
+
+
+
+
+
+
+
+
+Zhou, et al.             Expires 1 December 2023                [Page 7]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
    All Publisher Agents share the same source IP address for data
    export.  For connectionless data transport such as UDP based
    transport [I-D.ietf-netconf-udp-notif] the same Layer 4 source port
@@ -384,14 +407,6 @@ Internet-Draft          Distributed Notifications               May 2023
    responsible documents.
 
 9.  YANG Tree
-
-
-
-
-
-Zhou, et al.            Expires 29 November 2023                [Page 7]
-
-Internet-Draft          Distributed Notifications               May 2023
 
 
    module: ietf-distributed-notif
@@ -427,6 +442,14 @@ Internet-Draft          Distributed Notifications               May 2023
                   <mailto:zhoutianran@huawei.com>
 
         Editor:   Guangying Zheng
+
+
+
+Zhou, et al.             Expires 1 December 2023                [Page 8]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
                   <mailto:zhengguangying@huawei.com>";
 
 
@@ -442,14 +465,6 @@ Internet-Draft          Distributed Notifications               May 2023
        the license terms contained in, the Simplified BSD License set
        forth in Section 4.c of the IETF Trust's Legal Provisions
        Relating to IETF Documents
-
-
-
-Zhou, et al.            Expires 29 November 2023                [Page 8]
-
-Internet-Draft          Distributed Notifications               May 2023
-
-
        (https://trustee.ietf.org/license-info).
 
        This version of this YANG module is part of RFC XXXX; see the
@@ -473,7 +488,7 @@ Internet-Draft          Distributed Notifications               May 2023
          description
            "Software process which created the message (e.g.,
             processor 1 on line card 1). This field is
-            used to  notify the collector the working originator.";
+            used to notify the collector the working originator.";
        }
      }
 
@@ -483,6 +498,14 @@ Internet-Draft          Distributed Notifications               May 2023
          Observation Domain ID to be exposed for a subscription.";
 
        uses message-observation-domain-ids;
+
+
+
+Zhou, et al.             Expires 1 December 2023                [Page 9]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
      }
 
      augment "/sn:subscription-started" {
@@ -497,14 +520,6 @@ Internet-Draft          Distributed Notifications               May 2023
        description
          "This augmentation allows MSO specific parameters to be
           exposed for a subscription.";
-
-
-
-
-Zhou, et al.            Expires 29 November 2023                [Page 9]
-
-Internet-Draft          Distributed Notifications               May 2023
-
 
        uses message-observation-domain-ids;
      }
@@ -539,6 +554,14 @@ Internet-Draft          Distributed Notifications               May 2023
 
       Prefix: dn
 
+
+
+
+Zhou, et al.             Expires 1 December 2023               [Page 10]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
       Reference: RFC XXXX
 
 12.  Implementation Status
@@ -552,15 +575,6 @@ Internet-Draft          Distributed Notifications               May 2023
    [I-D.ietf-netconf-udp-notif] in an example implementation.
 
    The open source code can be obtained here: [INSA-Lyon-Publisher].
-
-
-
-
-
-Zhou, et al.            Expires 29 November 2023               [Page 10]
-
-Internet-Draft          Distributed Notifications               May 2023
-
 
 12.2.  Open Source Receiver Library
 
@@ -594,7 +608,15 @@ Internet-Draft          Distributed Notifications               May 2023
    kept, as opposed to create a new term such as Publisher ID, it is
    expected that most network node with line cards will contain just one
    publisher per line card.  In which case, the observation domain (ID)
-   concepts in IPFIX and in this draft are similar.
+   concepts in IPFIX and in this document are similar.
+
+
+
+
+Zhou, et al.             Expires 1 December 2023               [Page 11]
+
+Internet-Draft          Distributed Notifications               May 2023
+
 
 14.  Security Considerations
 
@@ -610,13 +632,6 @@ Internet-Draft          Distributed Notifications               May 2023
    to restrict access particulary for NETCONF or RESTCONF users to a
    preconfigured subset of all available NETCONF or RESTCONF protocol
    operations and content.
-
-
-
-Zhou, et al.            Expires 29 November 2023               [Page 11]
-
-Internet-Draft          Distributed Notifications               May 2023
-
 
    The new data nodes introduced in this YANG module may be considered
    sensitive or vulnerable in some network environments.  It is thus
@@ -652,6 +667,13 @@ Internet-Draft          Distributed Notifications               May 2023
 
 17.  References
 
+
+
+Zhou, et al.             Expires 1 December 2023               [Page 12]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
 17.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -662,17 +684,6 @@ Internet-Draft          Distributed Notifications               May 2023
    [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
               DOI 10.17487/RFC3688, January 2004,
               <https://www.rfc-editor.org/info/rfc3688>.
-
-
-
-
-
-
-
-Zhou, et al.            Expires 29 November 2023               [Page 12]
-
-Internet-Draft          Distributed Notifications               May 2023
-
 
    [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", RFC 5246,
@@ -711,6 +722,14 @@ Internet-Draft          Distributed Notifications               May 2023
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
               <https://www.rfc-editor.org/info/rfc8342>.
 
+
+
+
+Zhou, et al.             Expires 1 December 2023               [Page 13]
+
+Internet-Draft          Distributed Notifications               May 2023
+
+
    [RFC8639]  Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
               E., and A. Tripathy, "Subscription to YANG Notifications",
               RFC 8639, DOI 10.17487/RFC8639, September 2019,
@@ -722,28 +741,12 @@ Internet-Draft          Distributed Notifications               May 2023
 
 17.2.  Informative References
 
-
-
-
-Zhou, et al.            Expires 29 November 2023               [Page 13]
-
-Internet-Draft          Distributed Notifications               May 2023
-
-
    [I-D.ietf-netconf-https-notif]
               Jethanandani, M. and K. Watsen, "An HTTPS-based Transport
               for YANG Notifications", Work in Progress, Internet-Draft,
               draft-ietf-netconf-https-notif-13, 4 November 2022,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               https-notif-13>.
-
-   [I-D.ietf-netconf-notification-messages]
-              Voit, E., Jenkins, T., Birkholz, H., Bierman, A., and A.
-              Clemm, "Notification Message Headers and Bundles", Work in
-              Progress, Internet-Draft, draft-ietf-netconf-notification-
-              messages-08, 17 November 2019,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              notification-messages-08>.
 
    [I-D.ietf-netconf-udp-notif]
               Zheng, G., Zhou, T., Graf, T., Francois, P., Feng, A. H.,
@@ -772,19 +775,20 @@ Internet-Draft          Distributed Notifications               May 2023
               RFC 7011, DOI 10.17487/RFC7011, September 2013,
               <https://www.rfc-editor.org/info/rfc7011>.
 
-Appendix A.  Examples
-
-   This appendix is non-normative.
 
 
 
 
 
 
-Zhou, et al.            Expires 29 November 2023               [Page 14]
+Zhou, et al.             Expires 1 December 2023               [Page 14]
 
 Internet-Draft          Distributed Notifications               May 2023
 
+
+Appendix A.  Examples
+
+   This appendix is non-normative.
 
 A.1.  Dynamic Subscription
 
@@ -830,17 +834,16 @@ A.1.  Dynamic Subscription
 
                 Figure 2: Call Flow for Dynamic Subscription
 
-   A "establish-subscription" RPC request as per [RFC8641] is sent to
-   the Master with a successful response.  An example of using NETCONF:
 
 
 
-
-
-Zhou, et al.            Expires 29 November 2023               [Page 15]
+Zhou, et al.             Expires 1 December 2023               [Page 15]
 
 Internet-Draft          Distributed Notifications               May 2023
 
+
+   A "establish-subscription" RPC request as per [RFC8641] is sent to
+   the Master with a successful response.  An example of using NETCONF:
 
    <netconf:rpc message-id="101"
       xmlns:netconf="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -887,16 +890,16 @@ Internet-Draft          Distributed Notifications               May 2023
 
           Figure 4: "establish-subscription" Positive RPC Response
 
-   Then, both Publishers send notifications with the corresponding piece
-   of data to the Receiver.
 
 
 
-
-Zhou, et al.            Expires 29 November 2023               [Page 16]
+Zhou, et al.             Expires 1 December 2023               [Page 16]
 
 Internet-Draft          Distributed Notifications               May 2023
 
+
+   Then, both Publishers send notifications with the corresponding piece
+   of data to the Receiver.
 
    The subscriber may invoke the "modify-subscription" RPC for a
    subscription it previously established.  The RPC has no difference to
@@ -946,10 +949,7 @@ Internet-Draft          Distributed Notifications               May 2023
 
 
 
-
-
-
-Zhou, et al.            Expires 29 November 2023               [Page 17]
+Zhou, et al.             Expires 1 December 2023               [Page 17]
 
 Internet-Draft          Distributed Notifications               May 2023
 
@@ -1005,7 +1005,7 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.            Expires 29 November 2023               [Page 18]
+Zhou, et al.             Expires 1 December 2023               [Page 18]
 
 Internet-Draft          Distributed Notifications               May 2023
 
@@ -1061,7 +1061,7 @@ Internet-Draft          Distributed Notifications               May 2023
 
 
 
-Zhou, et al.            Expires 29 November 2023               [Page 19]
+Zhou, et al.             Expires 1 December 2023               [Page 19]
 
 Internet-Draft          Distributed Notifications               May 2023
 
@@ -1117,7 +1117,7 @@ Authors' Addresses
 
 
 
-Zhou, et al.            Expires 29 November 2023               [Page 20]
+Zhou, et al.             Expires 1 December 2023               [Page 20]
 
 Internet-Draft          Distributed Notifications               May 2023
 
@@ -1173,4 +1173,4 @@ Internet-Draft          Distributed Notifications               May 2023
 
 
 
-Zhou, et al.            Expires 29 November 2023               [Page 21]
+Zhou, et al.             Expires 1 December 2023               [Page 21]
