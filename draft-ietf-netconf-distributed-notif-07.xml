@@ -172,8 +172,8 @@
       defined in <xref target="RFC7923"/>.</t>
 
       <t>By streaming data from publishers to receivers, much better
-      performance and fine-grained sampling can be achieved than using
-      polling-based mechanishms. In a distributed forwarding system, the
+      performance and fine-grained sampling can be achieved than using a
+      polling-based mechanishm. In a distributed forwarding system, the
       packet forwarding is delegated to multiple processors on line cards.
       To not to overwhelm the route processor resources, it is not uncommon that
       data records are published directly from processors on line cards to target
