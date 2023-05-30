@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="28" month="May" year="2023"/>
+    <date day="30" month="May" year="2023"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -172,12 +172,12 @@
       defined in <xref target="RFC7923"/>.</t>
 
       <t>By streaming data from publishers to receivers, much better
-      performance and fine-grained sampling can be achieved than with polling.
-      In a distributed forwarding system, the packet forwarding is delegated
-      to multiple processors on line cards. To not to overwhelm the route
-      processor resources, it is not uncommon that data records are published
-      directly from processors on line cards to target Receivers to further
-      increase efficiency on the routing system.</t>
+      performance and fine-grained sampling can be achieved than using
+      polling-based mechanishms. In a distributed forwarding system, the
+      packet forwarding is delegated to multiple processors on line cards.
+      To not to overwhelm the route processor resources, it is not uncommon that
+      data records are published directly from processors on line cards to target
+      Receivers to further increase efficiency on the routing system.</t>
 
       <t>This document complements the general subscription requirements
       defined in section 4.2.1 of <xref target="RFC7923"/> by the paragraph: A
@@ -217,19 +217,21 @@
       with the Global Subscription. It decomposes the Global Subscription to
       multiple Component Subscriptions and interacts with the Agents.</t>
 
-      <t>Agent: is the Publisher that interacts with the Master to deal with
-      the Component Subscription and pushing the data to the Receiver.</t>
+      <t>Agent: is the Publisher that interacts with the Master to deal
+      with the Component Subscription and pushes the data to the Receiver. Each
+      Agent handles an Observation Domain.</t>
 
       <t>Observation Domain: An Observation Domain is the largest set of
       observation points for which metrics can be collected, stored and
-      exported by an Agent. For example, a router line card may be an
-      Observation Domain if it is composed of several interfaces, each of
-      which is an observation point.</t>
+      exported by a publisher. The publisher can either be a Master or an Agent.
+      An example of an Observation Domain is a router line card if it is composed
+      of several interfaces, each of which is an observation point.</t>
 
       <t>Observation Domain ID: A 32-bit identifier of the Observation Domain
-      that is locally unique to the network node. In the YANG notification
-      messages it generates, the Observation Domain includes its Observation
-      Domain ID. That way, the collecting process can identify the specific
+      that is locally unique to the network node. It identifies the Observation
+      Domain and the publisher (Master or Agent) pushing the data to the Receiver.
+      In the YANG notification messages it generates, the Observation Domain includes its
+      Observation Domain ID. That way, the collecting process can identify the specific
       Observation Domain from the publisher that sends the YANG notification
       messages. Receivers SHOULD use the transport session and the Observation
       Domain ID field to separate different publisher streams originating from
@@ -340,7 +342,7 @@
 
           <t>disassemble the Global Subscription to multiple Component
           Subscriptions, and distribute them to the Publisher Agents of the
-          corresponding metric sources so that they not overlap;</t>
+          corresponding metric sources so that they do not overlap;</t>
 
           <t>notify on changes when portions of a subscription moving between
           different Publisher Agents over time.</t>
@@ -364,11 +366,10 @@
       defined by the YANG schema, so that the decomposition at the Receiver
       can benefit from the structured and hierarchical data records.</t>
 
-      <t>The Receiver can associate the YANG data records with <xref
-      target="RFC8639">Subscription ID</xref> to the subscribed subscription
-      and with <xref target="I-D.ietf-netconf-notification-messages">Message
-      Observation Domain ID</xref> to one of the Publisher Agents software
-      processes to enable message integrity.</t>
+      <t>The Receiver can associate the YANG data records to the subscription
+      using the <xref target="RFC8639">Subscription ID</xref> and use the 
+      Observation Domain ID to associate the message to one of the Publisher
+      processes (Master or Agent) to enable message integrity.</t>
 
       <t>For the dynamic subscription, the output of the
       "establish-subscription" RPC defined in <xref target="RFC8639"/> MUST
@@ -493,7 +494,7 @@ module ietf-distributed-notif {
       description
         "Software process which created the message (e.g.,
          processor 1 on line card 1). This field is
-         used to  notify the collector the working originator.";
+         used to notify the collector the working originator.";
     }
   }
 
@@ -605,7 +606,7 @@ module ietf-distributed-notif {
       target="RFC7011"/>, has been kept, as opposed to create a new term such
       as Publisher ID, it is expected that most network node with line cards
       will contain just one publisher per line card. In which case, the
-      observation domain (ID) concepts in IPFIX and in this draft are
+      observation domain (ID) concepts in IPFIX and in this document are
       similar.</t>
     </section>
 
@@ -688,8 +689,6 @@ module ietf-distributed-notif {
     </references>
 
     <references title="Informative References">
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-notification-messages.xml"?>
-
       <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-udp-notif.xml"?>
 
       <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-https-notif.xml"?>
