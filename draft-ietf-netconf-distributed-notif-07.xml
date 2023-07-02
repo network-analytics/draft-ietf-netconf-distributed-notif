@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="28" month="May" year="2023"/>
+    <date day="2" month="July" year="2023"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -366,9 +366,9 @@
 
       <t>The Receiver can associate the YANG data records with <xref
       target="RFC8639">Subscription ID</xref> to the subscribed subscription
-      and with <xref target="I-D.ietf-netconf-notification-messages">Message
-      Observation Domain ID</xref> to one of the Publisher Agents software
-      processes to enable message integrity.</t>
+      and with <xref
+      target="I-D.tgraf-netconf-notif-sequencing">publisherId</xref> to one of
+      the Publisher Agents software processes to enable message integrity.</t>
 
       <t>For the dynamic subscription, the output of the
       "establish-subscription" RPC defined in <xref target="RFC8639"/> MUST
@@ -688,7 +688,7 @@ module ietf-distributed-notif {
     </references>
 
     <references title="Informative References">
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-notification-messages.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.tgraf-netconf-notif-sequencing.xml"?>
 
       <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-udp-notif.xml"?>
 
