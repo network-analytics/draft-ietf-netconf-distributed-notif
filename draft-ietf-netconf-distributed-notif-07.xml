@@ -364,11 +364,10 @@
       defined by the YANG schema, so that the decomposition at the Receiver
       can benefit from the structured and hierarchical data records.</t>
 
-      <t>The Receiver can associate the YANG data records with <xref
+      <t>The Receiver is able to associate the YANG data records with <xref
       target="RFC8639">Subscription ID</xref> to the subscribed subscription
-      and with <xref
-      target="I-D.tgraf-netconf-notif-sequencing">publisherId</xref> to one of
-      the Publisher Agents software processes to enable message integrity.</t>
+      and with Message Observation Domain ID to one of the Publisher Agents
+      software processes to enable message integrity.</t>
 
       <t>For the dynamic subscription, the output of the
       "establish-subscription" RPC defined in <xref target="RFC8639"/> MUST
@@ -688,8 +687,6 @@ module ietf-distributed-notif {
     </references>
 
     <references title="Informative References">
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.tgraf-netconf-notif-sequencing.xml"?>
-
       <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-udp-notif.xml"?>
 
       <?rfc include="http://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-https-notif.xml"?>

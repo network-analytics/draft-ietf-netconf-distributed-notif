@@ -98,7 +98,7 @@ Table of Contents
      17.1.  Normative References . . . . . . . . . . . . . . . . . .  12
      17.2.  Informative References . . . . . . . . . . . . . . . . .  13
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  14
-     A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  15
+     A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  14
      A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  18
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  20
 
@@ -338,10 +338,10 @@ Zhou, et al.             Expires 3 January 2024                 [Page 6]
 Internet-Draft          Distributed Notifications              July 2023
 
 
-   The Receiver can associate the YANG data records with Subscription ID
-   [RFC8639] to the subscribed subscription and with publisherId
-   [I-D.tgraf-netconf-notif-sequencing] to one of the Publisher Agents
-   software processes to enable message integrity.
+   The Receiver is able to associate the YANG data records with
+   Subscription ID [RFC8639] to the subscribed subscription and with
+   Message Observation Domain ID to one of the Publisher Agents software
+   processes to enable message integrity.
 
    For the dynamic subscription, the output of the "establish-
    subscription" RPC defined in [RFC8639] MUST include a list of Message
@@ -745,14 +745,6 @@ Internet-Draft          Distributed Notifications              July 2023
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               udp-notif-09>.
 
-   [I-D.tgraf-netconf-notif-sequencing]
-              Graf, T., Quilbeuf, J., and A. H. Feng, "Support of
-              Hostname and Sequencing in YANG Notifications", Work in
-              Progress, Internet-Draft, draft-tgraf-netconf-notif-
-              sequencing-01, 25 March 2023,
-              <https://datatracker.ietf.org/doc/html/draft-tgraf-
-              netconf-notif-sequencing-01>.
-
    [INSA-Lyon-Publisher]
               "INSA Lyon, YANG Push publisher example implementation",
               <https://github.com/network-analytics/udp-notif-scapy>.
@@ -776,6 +768,14 @@ Appendix A.  Examples
 
    This appendix is non-normative.
 
+A.1.  Dynamic Subscription
+
+   Figure 2 shows a typical dynamic subscription to the device with
+   distributed data export capability.
+
+
+
+
 
 
 
@@ -785,11 +785,6 @@ Zhou, et al.             Expires 3 January 2024                [Page 14]
 
 Internet-Draft          Distributed Notifications              July 2023
 
-
-A.1.  Dynamic Subscription
-
-   Figure 2 shows a typical dynamic subscription to the device with
-   distributed data export capability.
 
    +-------------+                 +-------------+ +-------------+
    | Subscriber/ |                 |  Publisher  | |  Publisher  |
@@ -832,6 +827,11 @@ A.1.  Dynamic Subscription
 
    A "establish-subscription" RPC request as per [RFC8641] is sent to
    the Master with a successful response.  An example of using NETCONF:
+
+
+
+
+
 
 
 
