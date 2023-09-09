@@ -233,7 +233,7 @@
       the receiver to ensure data integrity even when multiple publisher
       processes publishing from the same transport session.</t>
 
-      <t>To preserve data integrity down to the publisher process, the
+      <t>To preserve data integrity down to the publisher process, the Message
       Publisher ID in the transport message header of the YANG notification
       message is introduced. In case of UDP transport, this is described in
       Section 3.2 of <xref target="I-D.ietf-netconf-udp-notif"> UDP-based
