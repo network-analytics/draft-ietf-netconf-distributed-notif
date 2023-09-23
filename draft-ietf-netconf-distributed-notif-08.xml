@@ -220,6 +220,12 @@
       <t>Agent: is the Publisher that interacts with the Master to deal with
       the Component Subscription and pushing the data to the Receiver.</t>
 
+      <t>Node: is the Publisher that obtains and pushes the data to the
+      Receiver.</t>
+
+      <t>Message Publisher: is the Publisher that pushes the message to the
+      Receiver.</t>
+
       <t>Message Publisher ID: A 32-bit identifier of the publishing process
       that is locally unique to the publisher node. With this identifier the
       publishing process from where the message was published from can be
@@ -296,7 +302,7 @@
 |   |       Publisher(Agent)       +--+   |
 |   +------------------------------+      |
 |                                         |
-|                Device                   |
+|            Network Node                 |
 +-----------------------------------------+
 
 ]]></artwork>
@@ -358,8 +364,8 @@
 
       <t>The Receiver is able to associate the YANG data records with <xref
       target="RFC8639">Subscription ID</xref> to the subscribed subscription
-      and with Message Publisher ID to one of the publisher software processes
-      to enable message integrity.</t>
+      and with Message Publisher ID to one of the publisher processes to
+      enable message integrity.</t>
 
       <t>For the dynamic subscription, the output of the
       "establish-subscription" RPC defined in <xref target="RFC8639"/> MUST
@@ -708,7 +714,7 @@ module ietf-distributed-notif {
 
       <section title="Dynamic Subscription">
         <t><xref target="dynamic_subs"/> shows a typical dynamic subscription
-        to the device with distributed data export capability.</t>
+        to the network node with distributed data export capability.</t>
 
         <t><figure anchor="dynamic_subs"
             title="Call Flow for Dynamic Subscription">
@@ -777,8 +783,8 @@ module ietf-distributed-notif {
    </yp:periodic>
   </establish-subscription>
  </netconf:rpc>]]></artwork>
-          </figure>As the device is able to fully satisfy the request, the
-        request is given a subscription ID of 22. The response as in <xref
+          </figure>As the network node is able to fully satisfy the request,
+        the request is given a subscription ID of 22. The response as in <xref
         target="positive_resp"/> indicates that the subscription is decomposed
         into two component subscriptions which will be published by two
         message Message Publisher ID: #1 and #2.</t>
@@ -873,7 +879,7 @@ module ietf-distributed-notif {
 
       <section title="Configured Subscription">
         <t><xref target="conf_subs"/> shows a typical configured subscription
-        to the device with distributed data export capability.</t>
+        to the network node with distributed data export capability.</t>
 
         <t/>
 

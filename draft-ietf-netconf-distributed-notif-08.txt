@@ -180,6 +180,12 @@ Internet-Draft          Distributed Notifications         September 2023
    Agent: is the Publisher that interacts with the Master to deal with
    the Component Subscription and pushing the data to the Receiver.
 
+   Node: is the Publisher that obtains and pushes the data to the
+   Receiver.
+
+   Message Publisher: is the Publisher that pushes the message to the
+   Receiver.
+
    Message Publisher ID: A 32-bit identifier of the publishing process
    that is locally unique to the publisher node.  With this identifier
    the publishing process from where the message was published from can
@@ -213,12 +219,6 @@ Internet-Draft          Distributed Notifications         September 2023
    Subscriber does not necessarily share the same IP address as the
    Receivers.
 
-   In this framework, the Publisher pushes data to the Receiver
-   according to the subscription.  The Publisher is either in the Master
-   or Agent role.  The Master knows all the capabilities that his Agents
-   can provide and exposes the Global Capability to the collector.  The
-   Subscriber maintains the Global Subscription at the Master and
-
 
 
 Zhou, et al.              Expires 20 March 2024                 [Page 4]
@@ -226,6 +226,11 @@ Zhou, et al.              Expires 20 March 2024                 [Page 4]
 Internet-Draft          Distributed Notifications         September 2023
 
 
+   In this framework, the Publisher pushes data to the Receiver
+   according to the subscription.  The Publisher is either in the Master
+   or Agent role.  The Master knows all the capabilities that his Agents
+   can provide and exposes the Global Capability to the collector.  The
+   Subscriber maintains the Global Subscription at the Master and
    disassembles the Global Subscription to multiple Component
    Subscriptions, depending which source data is needed.  The Component
    Subscriptions are then distributed to the corresponding Publisher
@@ -258,7 +263,7 @@ Internet-Draft          Distributed Notifications         September 2023
                 |   |       Publisher(Agent)       +--+   |
                 |   +------------------------------+      |
                 |                                         |
-                |                Device                   |
+                |            Network Node                 |
                 +-----------------------------------------+
 
               Figure 1: The Distributed Data Export Framework
@@ -268,11 +273,6 @@ Internet-Draft          Distributed Notifications         September 2023
    *  Agents need to register at the Master at the beginning of their
       process life cycle.
 
-   *  Contracts are created between the Master and each Agent on the
-      Component Capability, and the format for streaming data structure.
-
-   *  The Master relays the component subscriptions to the Agents.
-
 
 
 
@@ -281,6 +281,11 @@ Zhou, et al.              Expires 20 March 2024                 [Page 5]
 
 Internet-Draft          Distributed Notifications         September 2023
 
+
+   *  Contracts are created between the Master and each Agent on the
+      Component Capability, and the format for streaming data structure.
+
+   *  The Master relays the component subscriptions to the Agents.
 
    *  The Agents announce the status of their Component Subscriptions to
       the Master.  The status of the overall subscription is maintained
@@ -323,11 +328,6 @@ Internet-Draft          Distributed Notifications         September 2023
    Receiver can benefit from the structured and hierarchical data
    records.
 
-   The Receiver is able to associate the YANG data records with
-   Subscription ID [RFC8639] to the subscribed subscription and with
-   Message Publisher ID to one of the publisher software processes to
-   enable message integrity.
-
 
 
 
@@ -337,6 +337,11 @@ Zhou, et al.              Expires 20 March 2024                 [Page 6]
 
 Internet-Draft          Distributed Notifications         September 2023
 
+
+   The Receiver is able to associate the YANG data records with
+   Subscription ID [RFC8639] to the subscribed subscription and with
+   Message Publisher ID to one of the publisher processes to enable
+   message integrity.
 
    For the dynamic subscription, the output of the "establish-
    subscription" RPC defined in [RFC8639] MUST include a list of Message
@@ -379,11 +384,6 @@ Internet-Draft          Distributed Notifications         September 2023
    responsible documents.
 
 9.  YANG Tree
-
-
-
-
-
 
 
 
@@ -755,8 +755,8 @@ Appendix A.  Examples
 
 A.1.  Dynamic Subscription
 
-   Figure 2 shows a typical dynamic subscription to the device with
-   distributed data export capability.
+   Figure 2 shows a typical dynamic subscription to the network node
+   with distributed data export capability.
 
 
 
@@ -863,11 +863,11 @@ Internet-Draft          Distributed Notifications         September 2023
 
                  Figure 3: "establish-subscription" Request
 
-   As the device is able to fully satisfy the request, the request is
-   given a subscription ID of 22.  The response as in Figure 4 indicates
-   that the subscription is decomposed into two component subscriptions
-   which will be published by two message Message Publisher ID: #1 and
-   #2.
+   As the network node is able to fully satisfy the request, the request
+   is given a subscription ID of 22.  The response as in Figure 4
+   indicates that the subscription is decomposed into two component
+   subscriptions which will be published by two message Message
+   Publisher ID: #1 and #2.
 
    <rpc-reply message-id="101"
      xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -983,8 +983,8 @@ Internet-Draft          Distributed Notifications         September 2023
 
 A.2.  Configured Subscription
 
-   Figure 7 shows a typical configured subscription to the device with
-   distributed data export capability.
+   Figure 7 shows a typical configured subscription to the network node
+   with distributed data export capability.
 
 
 
