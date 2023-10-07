@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 20 March 2024                                           E. Voit
+Expires: 9 April 2024                                            E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                       17 September 2023
+                                                          7 October 2023
 
 
                Subscription to Distributed Notifications
@@ -48,14 +48,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 March 2024.
+   This Internet-Draft will expire on 9 April 2024.
 
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 1]
+Zhou, et al.              Expires 9 April 2024                  [Page 1]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 2]
+Zhou, et al.              Expires 9 April 2024                  [Page 2]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
 1.  Introduction
@@ -165,9 +165,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 3]
+Zhou, et al.              Expires 9 April 2024                  [Page 3]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    Component Capability: is the subscription capability that each
@@ -221,9 +221,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 4]
+Zhou, et al.              Expires 9 April 2024                  [Page 4]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    In this framework, the Publisher pushes data to the Receiver
@@ -277,9 +277,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 5]
+Zhou, et al.              Expires 9 April 2024                  [Page 5]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    *  Contracts are created between the Master and each Agent on the
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 6]
+Zhou, et al.              Expires 9 April 2024                  [Page 6]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    The Receiver is able to associate the YANG data records with
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 7]
+Zhou, et al.              Expires 9 April 2024                  [Page 7]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    module: ietf-distributed-notif
@@ -445,9 +445,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 8]
+Zhou, et al.              Expires 9 April 2024                  [Page 8]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
        (https://trustee.ietf.org/license-info).
@@ -501,9 +501,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                 [Page 9]
+Zhou, et al.              Expires 9 April 2024                  [Page 9]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
        uses message-publisher-ids;
@@ -557,9 +557,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 10]
+Zhou, et al.              Expires 9 April 2024                 [Page 10]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
 12.2.  Open Source Receiver Library
@@ -613,9 +613,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 11]
+Zhou, et al.              Expires 9 April 2024                 [Page 11]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    Other Security Considerations is the same as those discussed in
@@ -669,9 +669,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 12]
+Zhou, et al.              Expires 9 April 2024                 [Page 12]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    [RFC6536]  Bierman, A. and M. Bjorklund, "Network Configuration
@@ -725,9 +725,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 13]
+Zhou, et al.              Expires 9 April 2024                 [Page 13]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    [INSA-Lyon-Publisher]
@@ -781,9 +781,9 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 14]
+Zhou, et al.              Expires 9 April 2024                 [Page 14]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    +-------------+                 +-------------+ +-------------+
@@ -837,9 +837,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 15]
+Zhou, et al.              Expires 9 April 2024                 [Page 15]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    <netconf:rpc message-id="101"
@@ -893,9 +893,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 16]
+Zhou, et al.              Expires 9 April 2024                 [Page 16]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    The subscriber may invoke the "modify-subscription" RPC for a
@@ -949,9 +949,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 17]
+Zhou, et al.              Expires 9 April 2024                 [Page 17]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1005,9 +1005,9 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 18]
+Zhou, et al.              Expires 9 April 2024                 [Page 18]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    +-------------+                 +-------------+ +-------------+
@@ -1061,9 +1061,9 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 19]
+Zhou, et al.              Expires 9 April 2024                 [Page 19]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1117,9 +1117,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 20]
+Zhou, et al.              Expires 9 April 2024                 [Page 20]
 
-Internet-Draft          Distributed Notifications         September 2023
+Internet-Draft          Distributed Notifications           October 2023
 
 
    Guangying Zheng
@@ -1173,4 +1173,4 @@ Internet-Draft          Distributed Notifications         September 2023
 
 
 
-Zhou, et al.              Expires 20 March 2024                [Page 21]
+Zhou, et al.              Expires 9 April 2024                 [Page 21]
