@@ -73,7 +73,7 @@ module ietf-distributed-notif {
     description
       "Provides a reusable leaf-list of message-publisher-id-list.";
     
-    leaf-list message-publisher-id-list {
+    leaf-list message-publisher-ids {
       type uint32;
       config false;
       description

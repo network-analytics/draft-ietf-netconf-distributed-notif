@@ -417,13 +417,13 @@
 module: ietf-distributed-notif
 
   augment /sn:subscriptions/sn:subscription:
-    +--ro message-publisher-id-list*   uint32
+    +--ro message-publisher-ids*   uint32
   augment /sn:subscription-started:
-    +--ro message-publisher-id-list*   uint32
+    +--ro message-publisher-ids*   uint32
   augment /sn:subscription-modified:
-    +--ro message-publisher-id-list*   uint32
+    +--ro message-publisher-ids*   uint32
   augment /sn:establish-subscription/sn:output:
-    +--ro message-publisher-id-list*   uint32
+    +--ro message-publisher-ids*   uint32
   augment /yp:push-update:
     +--ro message-publisher-id?   uint32
   augment /yp:push-change-update:
@@ -513,7 +513,7 @@ module ietf-distributed-notif {
     description
       "Provides a reusable leaf-list of message-publisher-id-list.";
     
-    leaf-list message-publisher-id-list {
+    leaf-list message-publisher-ids {
       type uint32;
       config false;
       description
