@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="14" month="April" year="2024"/>
+    <date day="21" month="April" year="2024"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -417,17 +417,17 @@
 module: ietf-distributed-notif
 
   augment /sn:subscriptions/sn:subscription:
-    +--ro message-publisher-id*   uint32
+    +--ro message-publisher-id-list*   uint32
   augment /sn:subscription-started:
-    +--ro message-publisher-id*   uint32
+    +--ro message-publisher-id-list*   uint32
   augment /sn:subscription-modified:
-    +--ro message-publisher-id*   uint32
+    +--ro message-publisher-id-list*   uint32
   augment /sn:establish-subscription/sn:output:
-    +--ro message-publisher-id*   uint32
+    +--ro message-publisher-id-list*   uint32
   augment /yp:push-update:
-    +--ro message-publisher-id*   uint32
+    +--ro message-publisher-id?   uint32
   augment /yp:push-change-update:
-    +--ro message-publisher-id*   uint32
+    +--ro message-publisher-id?   uint32
 ]]></artwork>
         </figure></t>
     </section>
@@ -443,6 +443,7 @@ module ietf-distributed-notif {
   namespace 
     "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
   prefix dn;
+  
   import ietf-subscribed-notifications {
     prefix sn;
   }
@@ -466,7 +467,7 @@ module ietf-distributed-notif {
                Pierre Francois
                <mailto:pierre.francois@insa-lyon.fr>
                Eric Voit
-               <mailto:evoit@cisco.com>
+               <mailto:evoit@cisco.com>";
 
 
   description
@@ -486,25 +487,40 @@ module ietf-distributed-notif {
     This version of this YANG module is part of RFC XXXX; see the 
     RFC itself for full legal notices.";
 
-  revision 2024-04-14 {
+  revision 2024-04-21 {
     description
       "Initial version";
     reference
       "RFC XXXX: Subscription to Distributed Notifications";
   }
 
-  grouping message-publisher-ids {
+  grouping message-publisher-id {
     description
-      "Provides a reusable list of message-publisher-ids.";
+      "Provides a reusable leaf of te message-publisher-id.";
     
-    leaf-list message-publisher-id {
+    leaf message-publisher-id {
       type uint32;
       config false;
-      ordered-by user;
       description
-        "Software process which created the message (e.g.,
-         processor 1 on line card 1). This field is
-         used to  notify the collector the working originator.";
+        "Identifies the software process which publishes the
+        message (e.g., processor 1 on line card 1). This field
+        is used to notify the receiver which publisher process
+        published which message.";
+    }
+  }
+
+  grouping message-publisher-ids {
+    description
+      "Provides a reusable leaf-list of message-publisher-id-list.";
+    
+    leaf-list message-publisher-id-list {
+      type uint32;
+      config false;
+      description
+        "Identifies the software process which publishes the
+        message (e.g., processor 1 on line card 1). This field
+        is used to notify the receiver which publisher processes
+        are going to publish.";
     }
   }
 
@@ -543,14 +559,14 @@ module ietf-distributed-notif {
     description
       "This augmentation adds the Message Publisher ID in the
       push-update notification.";
-    uses message-publisher-ids;
+    uses message-publisher-id;
   }
 
   augment "/yp:push-change-update" {
     description
       "This augmentation adds the Message Publisher ID in the
       push-change-update notification.";
-      uses message-publisher-ids;
+      uses message-publisher-id;
   }
 }
 <CODE ENDS>

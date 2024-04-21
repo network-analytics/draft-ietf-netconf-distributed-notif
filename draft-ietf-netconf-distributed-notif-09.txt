@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 16 October 2024                                         E. Voit
+Expires: 23 October 2024                                         E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                           14 April 2024
+                                                           21 April 2024
 
 
                Subscription to Distributed Notifications
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 October 2024.
+   This Internet-Draft will expire on 23 October 2024.
 
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 1]
+Zhou, et al.             Expires 23 October 2024                [Page 1]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -84,23 +84,23 @@ Table of Contents
    8.  Publisher Configurations  . . . . . . . . . . . . . . . . . .   7
    9.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . . . .   8
    10. YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   8
-   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
+   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
    12. Implementation Status . . . . . . . . . . . . . . . . . . . .  11
      12.1.  Open Source Publisher  . . . . . . . . . . . . . . . . .  11
      12.2.  Open Source Receiver Library . . . . . . . . . . . . . .  11
-     12.3.  Pmacct Data Collection . . . . . . . . . . . . . . . . .  11
-     12.4.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  11
+     12.3.  Pmacct Data Collection . . . . . . . . . . . . . . . . .  12
+     12.4.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  12
      12.5.  6WIND VSR  . . . . . . . . . . . . . . . . . . . . . . .  12
    13. Security Considerations . . . . . . . . . . . . . . . . . . .  12
-   14. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  12
+   14. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  13
    15. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  13
    16. References  . . . . . . . . . . . . . . . . . . . . . . . . .  13
      16.1.  Normative References . . . . . . . . . . . . . . . . . .  13
      16.2.  Informative References . . . . . . . . . . . . . . . . .  14
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  15
      A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  15
-     A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  18
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  20
+     A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  19
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  21
 
 
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 2]
+Zhou, et al.             Expires 23 October 2024                [Page 2]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -165,7 +165,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 3]
+Zhou, et al.             Expires 23 October 2024                [Page 3]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 4]
+Zhou, et al.             Expires 23 October 2024                [Page 4]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 5]
+Zhou, et al.             Expires 23 October 2024                [Page 5]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 6]
+Zhou, et al.             Expires 23 October 2024                [Page 6]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 7]
+Zhou, et al.             Expires 23 October 2024                [Page 7]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -400,17 +400,17 @@ Internet-Draft          Distributed Notifications             April 2024
    module: ietf-distributed-notif
 
      augment /sn:subscriptions/sn:subscription:
-       +--ro message-publisher-id*   uint32
+       +--ro message-publisher-id-list*   uint32
      augment /sn:subscription-started:
-       +--ro message-publisher-id*   uint32
+       +--ro message-publisher-id-list*   uint32
      augment /sn:subscription-modified:
-       +--ro message-publisher-id*   uint32
+       +--ro message-publisher-id-list*   uint32
      augment /sn:establish-subscription/sn:output:
-       +--ro message-publisher-id*   uint32
+       +--ro message-publisher-id-list*   uint32
      augment /yp:push-update:
-       +--ro message-publisher-id*   uint32
+       +--ro message-publisher-id?   uint32
      augment /yp:push-change-update:
-       +--ro message-publisher-id*   uint32
+       +--ro message-publisher-id?   uint32
 
 10.  YANG Module
 
@@ -421,6 +421,7 @@ Internet-Draft          Distributed Notifications             April 2024
      namespace
        "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
      prefix dn;
+
      import ietf-subscribed-notifications {
        prefix sn;
      }
@@ -441,18 +442,18 @@ Internet-Draft          Distributed Notifications             April 2024
                   <mailto:zhoutianran@huawei.com>
                   Thomas Graf
                   <mailto:thomas.graf@swisscom.com>
-                  Pierre Francois
 
 
 
-Zhou, et al.             Expires 16 October 2024                [Page 8]
+Zhou, et al.             Expires 23 October 2024                [Page 8]
 
 Internet-Draft          Distributed Notifications             April 2024
 
 
+                  Pierre Francois
                   <mailto:pierre.francois@insa-lyon.fr>
                   Eric Voit
-                  <mailto:evoit@cisco.com>
+                  <mailto:evoit@cisco.com>";
 
 
      description
@@ -472,25 +473,47 @@ Internet-Draft          Distributed Notifications             April 2024
        This version of this YANG module is part of RFC XXXX; see the
        RFC itself for full legal notices.";
 
-     revision 2024-04-14 {
+     revision 2024-04-21 {
        description
          "Initial version";
        reference
          "RFC XXXX: Subscription to Distributed Notifications";
      }
 
-     grouping message-publisher-ids {
+     grouping message-publisher-id {
        description
-         "Provides a reusable list of message-publisher-ids.";
+         "Provides a reusable leaf of te message-publisher-id.";
 
-       leaf-list message-publisher-id {
+       leaf message-publisher-id {
          type uint32;
          config false;
-         ordered-by user;
          description
-           "Software process which created the message (e.g.,
-            processor 1 on line card 1). This field is
-            used to  notify the collector the working originator.";
+           "Identifies the software process which publishes the
+           message (e.g., processor 1 on line card 1). This field
+           is used to notify the receiver which publisher process
+           published which message.";
+       }
+     }
+
+     grouping message-publisher-ids {
+       description
+         "Provides a reusable leaf-list of message-publisher-id-list.";
+
+
+
+Zhou, et al.             Expires 23 October 2024                [Page 9]
+
+Internet-Draft          Distributed Notifications             April 2024
+
+
+       leaf-list message-publisher-id-list {
+         type uint32;
+         config false;
+         description
+           "Identifies the software process which publishes the
+           message (e.g., processor 1 on line card 1). This field
+           is used to notify the receiver which publisher processes
+           are going to publish.";
        }
      }
 
@@ -498,13 +521,6 @@ Internet-Draft          Distributed Notifications             April 2024
        description
          "This augmentation allows the Message
          Publisher ID to be exposed for a subscription.";
-
-
-
-Zhou, et al.             Expires 16 October 2024                [Page 9]
-
-Internet-Draft          Distributed Notifications             April 2024
-
 
        uses message-publisher-ids;
      }
@@ -536,14 +552,21 @@ Internet-Draft          Distributed Notifications             April 2024
        description
          "This augmentation adds the Message Publisher ID in the
          push-update notification.";
-       uses message-publisher-ids;
+       uses message-publisher-id;
      }
+
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 10]
+
+Internet-Draft          Distributed Notifications             April 2024
+
 
      augment "/yp:push-change-update" {
        description
          "This augmentation adds the Message Publisher ID in the
          push-change-update notification.";
-         uses message-publisher-ids;
+         uses message-publisher-id;
      }
    }
    <CODE ENDS>
@@ -554,13 +577,6 @@ Internet-Draft          Distributed Notifications             April 2024
    Registry [RFC3688]:
 
       URI: urn:ietf:params:xml:ns:yang:ietf-distributed-notif
-
-
-
-Zhou, et al.             Expires 16 October 2024               [Page 10]
-
-Internet-Draft          Distributed Notifications             April 2024
-
 
       Registrant Contact: The IESG.
 
@@ -595,6 +611,13 @@ Internet-Draft          Distributed Notifications             April 2024
    UDP-based Transport for Configured Subscriptions
    [I-D.ietf-netconf-udp-notif] as a library.
 
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 11]
+
+Internet-Draft          Distributed Notifications             April 2024
+
+
    The open source code can be obtained here: [INSA-Lyon-Receiver].
 
 12.3.  Pmacct Data Collection
@@ -607,16 +630,6 @@ Internet-Draft          Distributed Notifications             April 2024
    Huawei implemented this document for a YANG Push publisher on
    UDP-based Transport for Configured Subscriptions
    [I-D.ietf-netconf-udp-notif] in their VRP platform.
-
-
-
-
-
-
-Zhou, et al.             Expires 16 October 2024               [Page 11]
-
-Internet-Draft          Distributed Notifications             April 2024
-
 
 12.5.  6WIND VSR
 
@@ -652,6 +665,15 @@ Internet-Draft          Distributed Notifications             April 2024
    set so that only someone with proper access permissions has the
    ability to access this resource.
 
+
+
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 12]
+
+Internet-Draft          Distributed Notifications             April 2024
+
+
    Other Security Considerations is the same as those discussed in
    [RFC8639].
 
@@ -664,15 +686,6 @@ Internet-Draft          Distributed Notifications             April 2024
       California
       United States of America
       Email: ludwig@clemm.org
-
-
-
-
-
-Zhou, et al.             Expires 16 October 2024               [Page 12]
-
-Internet-Draft          Distributed Notifications             April 2024
-
 
 15.  Acknowledgements
 
@@ -707,6 +720,16 @@ Internet-Draft          Distributed Notifications             April 2024
               Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
               <https://www.rfc-editor.org/info/rfc6242>.
 
+
+
+
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 13]
+
+Internet-Draft          Distributed Notifications             April 2024
+
+
    [RFC6536]  Bierman, A. and M. Bjorklund, "Network Configuration
               Protocol (NETCONF) Access Control Model", RFC 6536,
               DOI 10.17487/RFC6536, March 2012,
@@ -720,15 +743,6 @@ Internet-Draft          Distributed Notifications             April 2024
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/info/rfc8040>.
-
-
-
-
-
-Zhou, et al.             Expires 16 October 2024               [Page 13]
-
-Internet-Draft          Distributed Notifications             April 2024
-
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -765,6 +779,13 @@ Internet-Draft          Distributed Notifications             April 2024
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               udp-notif-12>.
 
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 14]
+
+Internet-Draft          Distributed Notifications             April 2024
+
+
    [INSA-Lyon-Publisher]
               "INSA Lyon, YANG Push publisher example implementation",
               <https://github.com/network-analytics/udp-notif-scapy>.
@@ -778,14 +799,6 @@ Internet-Draft          Distributed Notifications             April 2024
               "Paolo Lucente, Pmacct open source Network Telemetry Data
               Collection", <https://github.com/pmacct/pmacct>.
 
-
-
-
-Zhou, et al.             Expires 16 October 2024               [Page 14]
-
-Internet-Draft          Distributed Notifications             April 2024
-
-
 Appendix A.  Examples
 
    This appendix is non-normative.
@@ -794,6 +807,40 @@ A.1.  Dynamic Subscription
 
    Figure 2 shows a typical dynamic subscription to the network node
    with distributed data export capability.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 15]
+
+Internet-Draft          Distributed Notifications             April 2024
+
 
    +-------------+                 +-------------+ +-------------+
    | Subscriber/ |                 |  Publisher  | |  Publisher  |
@@ -834,16 +881,22 @@ A.1.  Dynamic Subscription
 
                 Figure 2: Call Flow for Dynamic Subscription
 
+   A "establish-subscription" RPC request as per [RFC8641] is sent to
+   the Master with a successful response.  An example of using NETCONF:
 
 
 
-Zhou, et al.             Expires 16 October 2024               [Page 15]
+
+
+
+
+
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 16]
 
 Internet-Draft          Distributed Notifications             April 2024
 
-
-   A "establish-subscription" RPC request as per [RFC8641] is sent to
-   the Master with a successful response.  An example of using NETCONF:
 
    <netconf:rpc message-id="101"
       xmlns:netconf="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -890,16 +943,16 @@ Internet-Draft          Distributed Notifications             April 2024
 
           Figure 4: "establish-subscription" Positive RPC Response
 
+   Then, both Publishers send notifications with the corresponding piece
+   of data to the Receiver.
 
 
 
-Zhou, et al.             Expires 16 October 2024               [Page 16]
+
+Zhou, et al.             Expires 23 October 2024               [Page 17]
 
 Internet-Draft          Distributed Notifications             April 2024
 
-
-   Then, both Publishers send notifications with the corresponding piece
-   of data to the Receiver.
 
    The subscriber may invoke the "modify-subscription" RPC for a
    subscription it previously established.  The RPC has no difference to
@@ -949,7 +1002,10 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024               [Page 17]
+
+
+
+Zhou, et al.             Expires 23 October 2024               [Page 18]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1005,7 +1061,7 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.             Expires 16 October 2024               [Page 18]
+Zhou, et al.             Expires 23 October 2024               [Page 19]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1061,7 +1117,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024               [Page 19]
+Zhou, et al.             Expires 23 October 2024               [Page 20]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1117,7 +1173,7 @@ Authors' Addresses
 
 
 
-Zhou, et al.             Expires 16 October 2024               [Page 20]
+Zhou, et al.             Expires 23 October 2024               [Page 21]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1173,4 +1229,4 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 16 October 2024               [Page 21]
+Zhou, et al.             Expires 23 October 2024               [Page 22]
