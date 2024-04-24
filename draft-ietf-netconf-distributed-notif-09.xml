@@ -172,9 +172,9 @@
       defined in <xref target="RFC7923"/>.</t>
 
       <t>By streaming data from publishers to receivers, much better
-      performance and fine-grained sampling can be achieved than with polling.
-      In a distributed forwarding system, the packet forwarding is delegated
-      to multiple processors on line cards. To not to overwhelm the route
+      performance and fine-grained sampling can be achieved than with polling-based
+      mechanishms. In a distributed forwarding system, the packet forwarding is
+      delegated to multiple processors on line cards. To not to overwhelm the route
       processor resources, it is not uncommon that data records are published
       directly from processors on line cards to target Receivers to further
       increase efficiency on the routing system.</t>
@@ -437,13 +437,13 @@ module: ietf-distributed-notif
 
       <t><figure>
           <artwork><![CDATA[
-<CODE BEGINS> file "ietf-distributed-notif@2024-04-14.yang"
+<CODE BEGINS> file "ietf-distributed-notif@2024-04-21.yang"
 module ietf-distributed-notif {
   yang-version 1.1;
   namespace 
     "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
   prefix dn;
-  
+
   import ietf-subscribed-notifications {
     prefix sn;
   }
@@ -474,7 +474,7 @@ module ietf-distributed-notif {
     "Defines augmentation for ietf-subscribed-notifications to 
     enable the distributed publication with single subscription.
 
-    Copyright (c) 2018 IETF Trust and the persons identified as 
+    Copyright (c) 2024 IETF Trust and the persons identified as 
     authors of the code. All rights reserved.
 
     Redistribution and use in source and binary forms, with or 
@@ -496,7 +496,7 @@ module ietf-distributed-notif {
 
   grouping message-publisher-id {
     description
-      "Provides a reusable leaf of te message-publisher-id.";
+      "Provides a reusable leaf of the message-publisher-id.";
     
     leaf message-publisher-id {
       type uint32;
@@ -559,6 +559,7 @@ module ietf-distributed-notif {
     description
       "This augmentation adds the Message Publisher ID in the
       push-update notification.";
+
     uses message-publisher-id;
   }
 
@@ -566,7 +567,8 @@ module ietf-distributed-notif {
     description
       "This augmentation adds the Message Publisher ID in the
       push-change-update notification.";
-      uses message-publisher-id;
+
+    uses message-publisher-id;
   }
 }
 <CODE ENDS>

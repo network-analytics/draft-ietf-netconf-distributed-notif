@@ -87,7 +87,7 @@ Table of Contents
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
    12. Implementation Status . . . . . . . . . . . . . . . . . . . .  11
      12.1.  Open Source Publisher  . . . . . . . . . . . . . . . . .  11
-     12.2.  Open Source Receiver Library . . . . . . . . . . . . . .  11
+     12.2.  Open Source Receiver Library . . . . . . . . . . . . . .  12
      12.3.  Pmacct Data Collection . . . . . . . . . . . . . . . . .  12
      12.4.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  12
      12.5.  6WIND VSR  . . . . . . . . . . . . . . . . . . . . . . .  12
@@ -123,12 +123,12 @@ Internet-Draft          Distributed Notifications             April 2024
 
    By streaming data from publishers to receivers, much better
    performance and fine-grained sampling can be achieved than with
-   polling.  In a distributed forwarding system, the packet forwarding
-   is delegated to multiple processors on line cards.  To not to
-   overwhelm the route processor resources, it is not uncommon that data
-   records are published directly from processors on line cards to
-   target Receivers to further increase efficiency on the routing
-   system.
+   polling-based mechanishms.  In a distributed forwarding system, the
+   packet forwarding is delegated to multiple processors on line cards.
+   To not to overwhelm the route processor resources, it is not uncommon
+   that data records are published directly from processors on line
+   cards to target Receivers to further increase efficiency on the
+   routing system.
 
    This document complements the general subscription requirements
    defined in section 4.2.1 of [RFC7923] by the paragraph: A
@@ -415,7 +415,7 @@ Internet-Draft          Distributed Notifications             April 2024
 10.  YANG Module
 
 
-   <CODE BEGINS> file "ietf-distributed-notif@2024-04-14.yang"
+   <CODE BEGINS> file "ietf-distributed-notif@2024-04-21.yang"
    module ietf-distributed-notif {
      yang-version 1.1;
      namespace
@@ -460,7 +460,7 @@ Internet-Draft          Distributed Notifications             April 2024
        "Defines augmentation for ietf-subscribed-notifications to
        enable the distributed publication with single subscription.
 
-       Copyright (c) 2018 IETF Trust and the persons identified as
+       Copyright (c) 2024 IETF Trust and the persons identified as
        authors of the code. All rights reserved.
 
        Redistribution and use in source and binary forms, with or
@@ -482,7 +482,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
      grouping message-publisher-id {
        description
-         "Provides a reusable leaf of te message-publisher-id.";
+         "Provides a reusable leaf of the message-publisher-id.";
 
        leaf message-publisher-id {
          type uint32;
@@ -552,8 +552,8 @@ Internet-Draft          Distributed Notifications             April 2024
        description
          "This augmentation adds the Message Publisher ID in the
          push-update notification.";
+
        uses message-publisher-id;
-     }
 
 
 
@@ -562,11 +562,14 @@ Zhou, et al.             Expires 23 October 2024               [Page 10]
 Internet-Draft          Distributed Notifications             April 2024
 
 
+     }
+
      augment "/yp:push-change-update" {
        description
          "This augmentation adds the Message Publisher ID in the
          push-change-update notification.";
-         uses message-publisher-id;
+
+       uses message-publisher-id;
      }
    }
    <CODE ENDS>
@@ -605,11 +608,8 @@ Internet-Draft          Distributed Notifications             April 2024
 
    The open source code can be obtained here: [INSA-Lyon-Publisher].
 
-12.2.  Open Source Receiver Library
 
-   INSA Lyon implemented this document for a YANG Push receiver on
-   UDP-based Transport for Configured Subscriptions
-   [I-D.ietf-netconf-udp-notif] as a library.
+
 
 
 
@@ -617,6 +617,12 @@ Zhou, et al.             Expires 23 October 2024               [Page 11]
 
 Internet-Draft          Distributed Notifications             April 2024
 
+
+12.2.  Open Source Receiver Library
+
+   INSA Lyon implemented this document for a YANG Push receiver on
+   UDP-based Transport for Configured Subscriptions
+   [I-D.ietf-netconf-udp-notif] as a library.
 
    The open source code can be obtained here: [INSA-Lyon-Receiver].
 
@@ -660,12 +666,6 @@ Internet-Draft          Distributed Notifications             April 2024
 
    *  /subscriptions/subscription/message-publisher-ids
 
-   The entries in the two lists above will show where subscribed
-   resources might be located on the publishers.  Access control MUST be
-   set so that only someone with proper access permissions has the
-   ability to access this resource.
-
-
 
 
 
@@ -673,6 +673,11 @@ Zhou, et al.             Expires 23 October 2024               [Page 12]
 
 Internet-Draft          Distributed Notifications             April 2024
 
+
+   The entries in the two lists above will show where subscribed
+   resources might be located on the publishers.  Access control MUST be
+   set so that only someone with proper access permissions has the
+   ability to access this resource.
 
    Other Security Considerations is the same as those discussed in
    [RFC8639].
@@ -716,11 +721,6 @@ Internet-Draft          Distributed Notifications             April 2024
               (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
               <https://www.rfc-editor.org/info/rfc6241>.
 
-   [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
-              Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
-              <https://www.rfc-editor.org/info/rfc6242>.
-
-
 
 
 
@@ -729,6 +729,10 @@ Zhou, et al.             Expires 23 October 2024               [Page 13]
 
 Internet-Draft          Distributed Notifications             April 2024
 
+
+   [RFC6242]  Wasserman, M., "Using the NETCONF Protocol over Secure
+              Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
+              <https://www.rfc-editor.org/info/rfc6242>.
 
    [RFC6536]  Bierman, A. and M. Bjorklund, "Network Configuration
               Protocol (NETCONF) Access Control Model", RFC 6536,
@@ -774,10 +778,6 @@ Internet-Draft          Distributed Notifications             April 2024
    [I-D.ietf-netconf-udp-notif]
               Zheng, G., Zhou, T., Graf, T., Francois, P., Feng, A. H.,
               and P. Lucente, "UDP-based Transport for Configured
-              Subscriptions", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-udp-notif-12, 21 January 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              udp-notif-12>.
 
 
 
@@ -785,6 +785,11 @@ Zhou, et al.             Expires 23 October 2024               [Page 14]
 
 Internet-Draft          Distributed Notifications             April 2024
 
+
+              Subscriptions", Work in Progress, Internet-Draft, draft-
+              ietf-netconf-udp-notif-12, 21 January 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              udp-notif-12>.
 
    [INSA-Lyon-Publisher]
               "INSA Lyon, YANG Push publisher example implementation",
@@ -807,11 +812,6 @@ A.1.  Dynamic Subscription
 
    Figure 2 shows a typical dynamic subscription to the network node
    with distributed data export capability.
-
-
-
-
-
 
 
 
