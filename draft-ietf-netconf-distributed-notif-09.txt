@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 23 October 2024                                         E. Voit
+Expires: 30 October 2024                                         E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                           21 April 2024
+                                                           28 April 2024
 
 
                Subscription to Distributed Notifications
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 October 2024.
+   This Internet-Draft will expire on 30 October 2024.
 
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 1]
+Zhou, et al.             Expires 30 October 2024                [Page 1]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 2]
+Zhou, et al.             Expires 30 October 2024                [Page 2]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -122,13 +122,13 @@ Internet-Draft          Distributed Notifications             April 2024
    YANG Datastores are defined in [RFC7923].
 
    By streaming data from publishers to receivers, much better
-   performance and fine-grained sampling can be achieved than with
-   polling.  In a distributed forwarding system, the packet forwarding
-   is delegated to multiple processors on line cards.  To not to
-   overwhelm the route processor resources, it is not uncommon that data
-   records are published directly from processors on line cards to
-   target Receivers to further increase efficiency on the routing
-   system.
+   performance and fine-grained sampling can be achieved than with a
+   polling-based mechanism.  In a distributed forwarding system, the
+   packet forwarding is delegated to multiple processors on line cards.
+   To not to overwhelm the route processor resources, it is not uncommon
+   that data records are published directly from processors on line
+   cards to target Receivers to further increase efficiency on the
+   routing system.
 
    This document complements the general subscription requirements
    defined in section 4.2.1 of [RFC7923] by the paragraph: A
@@ -165,7 +165,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 3]
+Zhou, et al.             Expires 30 October 2024                [Page 3]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -221,7 +221,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 4]
+Zhou, et al.             Expires 30 October 2024                [Page 4]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -277,7 +277,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 5]
+Zhou, et al.             Expires 30 October 2024                [Page 5]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -333,7 +333,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 6]
+Zhou, et al.             Expires 30 October 2024                [Page 6]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -389,7 +389,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 7]
+Zhou, et al.             Expires 30 October 2024                [Page 7]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -445,7 +445,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 8]
+Zhou, et al.             Expires 30 October 2024                [Page 8]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -501,7 +501,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024                [Page 9]
+Zhou, et al.             Expires 30 October 2024                [Page 9]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -557,7 +557,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 10]
+Zhou, et al.             Expires 30 October 2024               [Page 10]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -613,7 +613,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 11]
+Zhou, et al.             Expires 30 October 2024               [Page 11]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -669,7 +669,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 12]
+Zhou, et al.             Expires 30 October 2024               [Page 12]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -725,7 +725,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 13]
+Zhou, et al.             Expires 30 October 2024               [Page 13]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -781,7 +781,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 14]
+Zhou, et al.             Expires 30 October 2024               [Page 14]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -837,7 +837,7 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 15]
+Zhou, et al.             Expires 30 October 2024               [Page 15]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -893,7 +893,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 16]
+Zhou, et al.             Expires 30 October 2024               [Page 16]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -949,7 +949,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 17]
+Zhou, et al.             Expires 30 October 2024               [Page 17]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1005,7 +1005,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 18]
+Zhou, et al.             Expires 30 October 2024               [Page 18]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1061,7 +1061,7 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 19]
+Zhou, et al.             Expires 30 October 2024               [Page 19]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1117,7 +1117,7 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 20]
+Zhou, et al.             Expires 30 October 2024               [Page 20]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1173,7 +1173,7 @@ Authors' Addresses
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 21]
+Zhou, et al.             Expires 30 October 2024               [Page 21]
 
 Internet-Draft          Distributed Notifications             April 2024
 
@@ -1229,4 +1229,4 @@ Internet-Draft          Distributed Notifications             April 2024
 
 
 
-Zhou, et al.             Expires 23 October 2024               [Page 22]
+Zhou, et al.             Expires 30 October 2024               [Page 22]

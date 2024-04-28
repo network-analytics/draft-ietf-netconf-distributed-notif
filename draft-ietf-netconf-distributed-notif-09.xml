@@ -142,7 +142,7 @@
       </address>
     </author>
 
-    <date day="21" month="April" year="2024"/>
+    <date day="28" month="April" year="2024"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -172,12 +172,12 @@
       defined in <xref target="RFC7923"/>.</t>
 
       <t>By streaming data from publishers to receivers, much better
-      performance and fine-grained sampling can be achieved than with polling.
-      In a distributed forwarding system, the packet forwarding is delegated
-      to multiple processors on line cards. To not to overwhelm the route
-      processor resources, it is not uncommon that data records are published
-      directly from processors on line cards to target Receivers to further
-      increase efficiency on the routing system.</t>
+      performance and fine-grained sampling can be achieved than with a
+      polling-based mechanism. In a distributed forwarding system, the packet
+      forwarding is delegated to multiple processors on line cards. To not to
+      overwhelm the route processor resources, it is not uncommon that data
+      records are published directly from processors on line cards to target
+      Receivers to further increase efficiency on the routing system.</t>
 
       <t>This document complements the general subscription requirements
       defined in section 4.2.1 of <xref target="RFC7923"/> by the paragraph: A
