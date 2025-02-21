@@ -85,7 +85,7 @@ Table of Contents
    9.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . . . .   8
    10. YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   8
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
-   12. Implementation Status . . . . . . . . . . . . . . . . . . . .  11
+   12. Implementation Status . . . . . . . . . . . . . . . . . . . .  12
      12.1.  Open Source Publisher  . . . . . . . . . . . . . . . . .  12
      12.2.  Open Source Receiver Library . . . . . . . . . . . . . .  12
      12.3.  Pmacct Data Collection . . . . . . . . . . . . . . . . .  12
@@ -440,8 +440,8 @@ Internet-Draft          Distributed Notifications          February 2025
      import ietf-yang-push {
        prefix yp;
        reference
-         "RFC 8641: Subscription to YANG Notifications for Datastore Updates";
-     }
+         "RFC 8641: Subscription to YANG Notifications for Datastore
+         Updates";
 
 
 
@@ -449,6 +449,8 @@ Zhou, et al.             Expires 25 August 2025                 [Page 8]
 
 Internet-Draft          Distributed Notifications          February 2025
 
+
+     }
 
      organization "IETF NETCONF (Network Configuration) Working Group";
      contact
@@ -496,8 +498,6 @@ Internet-Draft          Distributed Notifications          February 2025
          "Provides a reusable leaf of te message-publisher-id.";
 
        leaf message-publisher-id {
-         type uint32;
-         config false;
 
 
 
@@ -506,6 +506,8 @@ Zhou, et al.             Expires 25 August 2025                 [Page 9]
 Internet-Draft          Distributed Notifications          February 2025
 
 
+         type uint32;
+         config false;
          description
            "Identifies the software process which publishes the
            message (e.g., processor 1 on line card 1). This field
@@ -553,8 +555,6 @@ Internet-Draft          Distributed Notifications          February 2025
        uses message-publisher-ids;
      }
 
-     augment "/sn:establish-subscription/sn:output" {
-
 
 
 Zhou, et al.             Expires 25 August 2025                [Page 10]
@@ -562,6 +562,7 @@ Zhou, et al.             Expires 25 August 2025                [Page 10]
 Internet-Draft          Distributed Notifications          February 2025
 
 
+     augment "/sn:establish-subscription/sn:output" {
        description
          "This augmentation adds the Message Publisher ID to the
           dynamic establish-subscription output.";
@@ -606,9 +607,8 @@ Internet-Draft          Distributed Notifications          February 2025
 
       Reference: RFC XXXX
 
-12.  Implementation Status
 
-   Note to the RFC-Editor: Please remove this section before publishing.
+
 
 
 
@@ -617,6 +617,10 @@ Zhou, et al.             Expires 25 August 2025                [Page 11]
 
 Internet-Draft          Distributed Notifications          February 2025
 
+
+12.  Implementation Status
+
+   Note to the RFC-Editor: Please remove this section before publishing.
 
 12.1.  Open Source Publisher
 
@@ -639,6 +643,8 @@ Internet-Draft          Distributed Notifications          February 2025
    The open source YANG push receiver library has been integrated into
    the Pmacct open source Network Telemetry data collection.
 
+   The open source code can be obtained here: [Paolo-Lucente-Pmacct].
+
 12.4.  Huawei VRP
 
    Huawei implemented this document for a YANG Push publisher on
@@ -657,15 +663,9 @@ Internet-Draft          Distributed Notifications          February 2025
    that is designed to be accessed via network management protocols such
    as NETCONF [RFC6241] or RESTCONF [RFC8040].  The lowest NETCONF layer
    is the secure transport layer, and the mandatory-to-implement secure
-   transport is Secure Shell (SSH) [RFC6242].  The lowest RESTCONF layer
-   is HTTPS, and the mandatory-to-implement secure transport is TLS
-   [RFC5246].
-
-   The NETCONF Access Control Model (NACM) [RFC6536] provides the means
-   to restrict access particulary for NETCONF or RESTCONF users to a
-   preconfigured subset of all available NETCONF or RESTCONF protocol
-   operations and content.
-
+   transport is Secure Shell (SSH) [RFC6242].  The lowest layer is
+   HTTPS, and the mandatory-to-implement secure transport is TLS
+   [RFC8446].
 
 
 
@@ -673,6 +673,11 @@ Zhou, et al.             Expires 25 August 2025                [Page 12]
 
 Internet-Draft          Distributed Notifications          February 2025
 
+
+   The NETCONF Access Control Model (NACM) [RFC8341] provides the means
+   to restrict access particulary for NETCONF or RESTCONF users to a
+   preconfigured subset of all available NETCONF or RESTCONF protocol
+   operations and content.
 
    The new data nodes introduced in this YANG module may be considered
    sensitive or vulnerable in some network environments.  It is thus
@@ -703,8 +708,9 @@ Internet-Draft          Distributed Notifications          February 2025
 15.  Acknowledgements
 
    We thank Kent Watsen, Mahesh Jethanandani, Martin Bjorklund, Tim
-   Carey, Qin Wu, Robert Wilton, Benoit Claise and Alex Huang Feng for
-   their constructive suggestions for improving this document.
+   Carey, Qin Wu, Robert Wilton, Benoit Claise, Alex Huang Feng and
+   Camilo Cardona for their constructive suggestions for improving this
+   document.
 
 16.  References
 
@@ -715,12 +721,6 @@ Internet-Draft          Distributed Notifications          February 2025
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-   [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
-              DOI 10.17487/RFC3688, January 2004,
-              <https://www.rfc-editor.org/info/rfc3688>.
-
-
-
 
 
 
@@ -730,10 +730,9 @@ Zhou, et al.             Expires 25 August 2025                [Page 13]
 Internet-Draft          Distributed Notifications          February 2025
 
 
-   [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
-              (TLS) Protocol Version 1.2", RFC 5246,
-              DOI 10.17487/RFC5246, August 2008,
-              <https://www.rfc-editor.org/info/rfc5246>.
+   [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
+              DOI 10.17487/RFC3688, January 2004,
+              <https://www.rfc-editor.org/info/rfc3688>.
 
    [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
               and A. Bierman, Ed., "Network Configuration Protocol
@@ -744,16 +743,6 @@ Internet-Draft          Distributed Notifications          February 2025
               Shell (SSH)", RFC 6242, DOI 10.17487/RFC6242, June 2011,
               <https://www.rfc-editor.org/info/rfc6242>.
 
-   [RFC6536]  Bierman, A. and M. Bjorklund, "Network Configuration
-              Protocol (NETCONF) Access Control Model", RFC 6536,
-              DOI 10.17487/RFC6536, March 2012,
-              <https://www.rfc-editor.org/info/rfc6536>.
-
-   [RFC7923]  Voit, E., Clemm, A., and A. Gonzalez Prieto, "Requirements
-              for Subscription to YANG Datastores", RFC 7923,
-              DOI 10.17487/RFC7923, June 2016,
-              <https://www.rfc-editor.org/info/rfc7923>.
-
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
               <https://www.rfc-editor.org/info/rfc8040>.
@@ -762,10 +751,19 @@ Internet-Draft          Distributed Notifications          February 2025
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+   [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
+              Access Control Model", STD 91, RFC 8341,
+              DOI 10.17487/RFC8341, March 2018,
+              <https://www.rfc-editor.org/info/rfc8341>.
+
    [RFC8342]  Bjorklund, M., Schoenwaelder, J., Shafer, P., Watsen, K.,
               and R. Wilton, "Network Management Datastore Architecture
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
               <https://www.rfc-editor.org/info/rfc8342>.
+
+   [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
+              Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
+              <https://www.rfc-editor.org/info/rfc8446>.
 
    [RFC8639]  Voit, E., Clemm, A., Gonzalez Prieto, A., Nilsen-Nygaard,
               E., and A. Tripathy, "Subscription to YANG Notifications",
@@ -777,6 +775,8 @@ Internet-Draft          Distributed Notifications          February 2025
               September 2019, <https://www.rfc-editor.org/info/rfc8641>.
 
 16.2.  Informative References
+
+
 
 
 
@@ -814,6 +814,11 @@ Internet-Draft          Distributed Notifications          February 2025
               "Paolo Lucente, Pmacct open source Network Telemetry Data
               Collection", <https://github.com/pmacct/pmacct>.
 
+   [RFC7923]  Voit, E., Clemm, A., and A. Gonzalez Prieto, "Requirements
+              for Subscription to YANG Datastores", RFC 7923,
+              DOI 10.17487/RFC7923, June 2016,
+              <https://www.rfc-editor.org/info/rfc7923>.
+
 Appendix A.  Examples
 
    This appendix is non-normative.
@@ -822,11 +827,6 @@ A.1.  Dynamic Subscription
 
    Figure 2 shows a typical dynamic subscription to the network node
    with distributed data export capability.
-
-
-
-
-
 
 
 
@@ -932,11 +932,11 @@ Internet-Draft          Distributed Notifications          February 2025
         22
      </id>
      <message-publisher-id
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
         1
      </message-publisher-id>
      <message-publisher-id
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
         2
      </message-publisher-id>
    </rpc-reply>
@@ -1010,38 +1010,38 @@ Zhou, et al.             Expires 25 August 2025                [Page 18]
 Internet-Draft          Distributed Notifications          February 2025
 
 
- <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
- <eventTime>2007-09-01T10:00:00Z</eventTime>
- <subscription-modified
-       xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
-       xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-     <id>22</id>
-     <yp:datastore
-         xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-       ds:operational
-     </yp:datastore>
-     <yp:datastore-xpath-filter
-         xmlns:ex="https://example.com/sample-data/1.0">
-       /ex:bar
-     </yp:datastore-xpath-filter>
-     <yp:periodic>
-         <yp:period>250</yp:period>
-     </yp:periodic>
-     <message-publisher-id
-     xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications>
-        1
-     </message-publisher-id>
-   </subscription-modified>
- </notification>
+<notification
+                        xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+<eventTime>2007-09-01T10:00:00Z</eventTime>
+<subscription-modified
+      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+      xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+    <id>22</id>
+    <yp:datastore
+        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+      ds:operational
+    </yp:datastore>
+    <yp:datastore-xpath-filter
+        xmlns:ex="https://example.com/sample-data/1.0">
+      /ex:bar
+    </yp:datastore-xpath-filter>
+    <yp:periodic>
+        <yp:period>250</yp:period>
+    </yp:periodic>
+    <message-publisher-id
+    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
+       1
+    </message-publisher-id>
+  </subscription-modified>
+</notification>
 
-   Figure 6: "subscription-modified" Subscription State Notification
+  Figure 6: "subscription-modified" Subscription State Notification
 
 
 A.2.  Configured Subscription
 
    Figure 7 shows a typical configured subscription to the network node
    with distributed data export capability.
-
 
 
 
@@ -1130,7 +1130,7 @@ Internet-Draft          Distributed Notifications          February 2025
      <identifier>39</identifier>
      <yp:datastore
          xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-       ds:operational
+                 ds:operational
      </yp:datastore>
      <yp:datastore-xpath-filter
          xmlns:ex="https://example.com/sample-data/1.0">
