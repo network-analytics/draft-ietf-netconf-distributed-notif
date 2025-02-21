@@ -285,7 +285,7 @@ Internet-Draft          Distributed Notifications          February 2025
    *  Publisher Agents need to register at the Master at the beginning
       of their process life cycle.
 
-   *  Contracts are created and maintained through the subscription
+   *  Contracts are created and maintained throughout the subscription
       lifecycle between the Publisher Master and each Agent on the
       Component Capability, and the format for notification data
       structure.
