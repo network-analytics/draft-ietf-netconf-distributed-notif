@@ -141,7 +141,7 @@
       </address>
     </author>
 
-    <date day="21" month="February" year="2025"/>
+    <date day="27" month="February" year="2025"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -339,7 +339,7 @@
 		  Subscriptions.</t>
         </list>The technical mechanisms or protocols used for the
 		coordination of operational information between Publisher Master
-		and Agent is out-of-scope of this document.</t>
+		and Agent is out of scope of this document.</t>
     </section>
 
     <section title="Subscription Decomposition">
@@ -352,7 +352,8 @@
 
           <t>disassemble the Global Subscription to multiple Component
           Subscriptions, and distribute them to the Publisher Agents of
-		  the corresponding metric sources so that they not overlap;</t>
+		  the corresponding metric sources so that they do not overlap;
+		  </t>
 
           <t>notify on changes when portions of a subscription moving
 		  between different Publisher Agents over time.</t>
@@ -378,10 +379,11 @@
 	  at the Receiver can benefit from the structured and hierarchical
 	  data records.</t>
 
-      <t>The Receiver is able to associate the YANG data records with
+      <t>The Receiver can associate the YANG data records with
 	  <xref target="RFC8639">Subscription ID</xref> to the subscribed
-	  subscription and with Message Publisher ID to one of the publisher
-	  processes to enable message integrity.</t>
+	  subscription. Additionally, it can use the Message Publisher ID to
+	  determine the corresponding publisher process, ensuring message
+	  integrity.</t>
 
       <t>For the dynamic subscription, the output of the
       "establish-subscription" RPC defined in <xref target="RFC8639"/>
@@ -494,7 +496,7 @@ module ietf-distributed-notif {
     "Defines augmentation for ietf-subscribed-notifications to 
     enable the distributed publication with single subscription.
 
-    Copyright (c) 2018 IETF Trust and the persons identified as 
+    Copyright (c) 2025 IETF Trust and the persons identified as 
     authors of the code. All rights reserved.
 
     Redistribution and use in source and binary forms, with or 

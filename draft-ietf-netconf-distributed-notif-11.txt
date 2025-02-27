@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 25 August 2025                                          E. Voit
+Expires: 31 August 2025                                          E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                        21 February 2025
+                                                        27 February 2025
 
 
                Subscription to Distributed Notifications
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 August 2025.
+   This Internet-Draft will expire on 31 August 2025.
 
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 1]
+Zhou, et al.             Expires 31 August 2025                 [Page 1]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 2]
+Zhou, et al.             Expires 31 August 2025                 [Page 2]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -165,7 +165,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 3]
+Zhou, et al.             Expires 31 August 2025                 [Page 3]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -221,7 +221,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 4]
+Zhou, et al.             Expires 31 August 2025                 [Page 4]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -277,7 +277,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 5]
+Zhou, et al.             Expires 31 August 2025                 [Page 5]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -300,7 +300,7 @@ Internet-Draft          Distributed Notifications          February 2025
       problems with the Component Subscriptions.
 
    The technical mechanisms or protocols used for the coordination of
-   operational information between Publisher Master and Agent is out-of-
+   operational information between Publisher Master and Agent is out of
    scope of this document.
 
 5.  Subscription Decomposition
@@ -313,7 +313,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
    2.  disassemble the Global Subscription to multiple Component
        Subscriptions, and distribute them to the Publisher Agents of the
-       corresponding metric sources so that they not overlap;
+       corresponding metric sources so that they do not overlap;
 
    3.  notify on changes when portions of a subscription moving between
        different Publisher Agents over time.
@@ -333,7 +333,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 6]
+Zhou, et al.             Expires 31 August 2025                 [Page 6]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -346,10 +346,10 @@ Internet-Draft          Distributed Notifications          February 2025
    Receiver can benefit from the structured and hierarchical data
    records.
 
-   The Receiver is able to associate the YANG data records with
-   Subscription ID [RFC8639] to the subscribed subscription and with
-   Message Publisher ID to one of the publisher processes to enable
-   message integrity.
+   The Receiver can associate the YANG data records with Subscription ID
+   [RFC8639] to the subscribed subscription.  Additionally, it can use
+   the Message Publisher ID to determine the corresponding publisher
+   process, ensuring message integrity.
 
    For the dynamic subscription, the output of the "establish-
    subscription" RPC defined in [RFC8639] MUST include a list of Message
@@ -389,7 +389,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 7]
+Zhou, et al.             Expires 31 August 2025                 [Page 7]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -445,7 +445,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 8]
+Zhou, et al.             Expires 31 August 2025                 [Page 8]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -473,7 +473,7 @@ Internet-Draft          Distributed Notifications          February 2025
        "Defines augmentation for ietf-subscribed-notifications to
        enable the distributed publication with single subscription.
 
-       Copyright (c) 2018 IETF Trust and the persons identified as
+       Copyright (c) 2025 IETF Trust and the persons identified as
        authors of the code. All rights reserved.
 
        Redistribution and use in source and binary forms, with or
@@ -501,7 +501,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                 [Page 9]
+Zhou, et al.             Expires 31 August 2025                 [Page 9]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -557,7 +557,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 10]
+Zhou, et al.             Expires 31 August 2025                [Page 10]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -613,7 +613,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 11]
+Zhou, et al.             Expires 31 August 2025                [Page 11]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -669,7 +669,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 12]
+Zhou, et al.             Expires 31 August 2025                [Page 12]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -725,7 +725,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 13]
+Zhou, et al.             Expires 31 August 2025                [Page 13]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -781,7 +781,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 14]
+Zhou, et al.             Expires 31 August 2025                [Page 14]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -798,8 +798,8 @@ Internet-Draft          Distributed Notifications          February 2025
               and P. Lucente, "UDP-based Transport for Configured
               Subscriptions", Work in Progress, Internet-Draft, draft-
               ietf-netconf-udp-notif-19, 21 February 2025,
-              <https://datatracker.ietf.org/api/v1/doc/document/draft-
-              ietf-netconf-udp-notif/>.
+              <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
+              udp-notif-19>.
 
    [INSA-Lyon-Publisher]
               "INSA Lyon, YANG Push publisher example implementation",
@@ -837,7 +837,7 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 15]
+Zhou, et al.             Expires 31 August 2025                [Page 15]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -893,7 +893,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 16]
+Zhou, et al.             Expires 31 August 2025                [Page 16]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -949,7 +949,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 17]
+Zhou, et al.             Expires 31 August 2025                [Page 17]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -1005,7 +1005,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 18]
+Zhou, et al.             Expires 31 August 2025                [Page 18]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -1061,7 +1061,7 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 19]
+Zhou, et al.             Expires 31 August 2025                [Page 19]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -1117,7 +1117,7 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 20]
+Zhou, et al.             Expires 31 August 2025                [Page 20]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -1173,7 +1173,7 @@ Authors' Addresses
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 21]
+Zhou, et al.             Expires 31 August 2025                [Page 21]
 
 Internet-Draft          Distributed Notifications          February 2025
 
@@ -1229,4 +1229,4 @@ Internet-Draft          Distributed Notifications          February 2025
 
 
 
-Zhou, et al.             Expires 25 August 2025                [Page 22]
+Zhou, et al.             Expires 31 August 2025                [Page 22]
