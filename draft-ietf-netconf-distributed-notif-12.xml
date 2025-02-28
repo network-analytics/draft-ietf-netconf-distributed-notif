@@ -9,7 +9,7 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-netconf-distributed-notif-11"
+<rfc category="std" docName="draft-ietf-netconf-distributed-notif-12"
      ipr="trust200902">
   <front>
     <title abbrev="Distributed Notifications">Subscription to

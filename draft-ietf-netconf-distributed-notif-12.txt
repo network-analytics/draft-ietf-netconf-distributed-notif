@@ -15,7 +15,7 @@ Expires: 1 September 2025                                        E. Voit
 
 
                Subscription to Distributed Notifications
-                draft-ietf-netconf-distributed-notif-11
+                draft-ietf-netconf-distributed-notif-12
 
 Abstract
 
