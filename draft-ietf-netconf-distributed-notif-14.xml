@@ -455,8 +455,7 @@ module: ietf-distributed-notif
 
     <section title="YANG Module">
 <sourcecode name="ietf-distributed-notif@2025-04-12.yang"
-type="yang" markers="true"><![CDATA[			
-<CODE BEGINS> file "ietf-distributed-notif@2025-04-12.yang"
+type="yang" markers="true"><![CDATA[
 module ietf-distributed-notif {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";

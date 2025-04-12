@@ -429,7 +429,6 @@ Internet-Draft          Distributed Notifications             April 2025
 10.  YANG Module
 
    <CODE BEGINS> file "ietf-distributed-notif@2025-04-12.yang"
-   <CODE BEGINS> file "ietf-distributed-notif@2025-04-12.yang"
    module ietf-distributed-notif {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
@@ -442,6 +441,7 @@ Internet-Draft          Distributed Notifications             April 2025
        prefix yp;
        reference
          "RFC 8641: Subscription to YANG Notifications for Datastore Updates";
+     }
 
 
 
@@ -449,8 +449,6 @@ Zhou, et al.             Expires 14 October 2025                [Page 8]
 
 Internet-Draft          Distributed Notifications             April 2025
 
-
-     }
 
      organization
        "IETF NETCONF (Network Configuration) Working Group";
@@ -498,6 +496,8 @@ Internet-Draft          Distributed Notifications             April 2025
 
      grouping message-publisher-id {
        description
+         "Provides a reusable leaf of the message-publisher-id.";
+       leaf message-publisher-id {
 
 
 
@@ -506,8 +506,6 @@ Zhou, et al.             Expires 14 October 2025                [Page 9]
 Internet-Draft          Distributed Notifications             April 2025
 
 
-         "Provides a reusable leaf of the message-publisher-id.";
-       leaf message-publisher-id {
          type uint32;
          config false;
          description
@@ -554,6 +552,8 @@ Internet-Draft          Distributed Notifications             April 2025
      }
 
      augment "/sn:establish-subscription/sn:output" {
+       description
+         "This augmentation adds the Message Publisher ID to the
 
 
 
@@ -562,8 +562,6 @@ Zhou, et al.             Expires 14 October 2025               [Page 10]
 Internet-Draft          Distributed Notifications             April 2025
 
 
-       description
-         "This augmentation adds the Message Publisher ID to the
           dynamic establish-subscription output.";
        uses message-publisher-ids;
      }
@@ -609,6 +607,8 @@ Internet-Draft          Distributed Notifications             April 2025
 12.  Implementation Status
 
    Note to the RFC-Editor: Please remove this section before publishing.
+
+
 
 
 
