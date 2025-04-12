@@ -620,7 +620,7 @@ Internet-Draft          Distributed Notifications             April 2025
 
 12.1.  Open Source Publisher
 
-   INSA Lyon implemented this document for a YANG Push publisher on
+   INSA Lyon implemented this document for a YANG-Push publisher on
    UDP-based Transport for Configured Subscriptions
    [I-D.ietf-netconf-udp-notif] in an example implementation.
 
@@ -628,7 +628,7 @@ Internet-Draft          Distributed Notifications             April 2025
 
 12.2.  Open Source Receiver Library
 
-   INSA Lyon implemented this document for a YANG Push receiver on
+   INSA Lyon implemented this document for a YANG-Push receiver on
    UDP-based Transport for Configured Subscriptions
    [I-D.ietf-netconf-udp-notif] as a library.
 
@@ -636,22 +636,24 @@ Internet-Draft          Distributed Notifications             April 2025
 
 12.3.  Pmacct Data Collection
 
-   The open source YANG push receiver library has been integrated into
+   The open source YANG-Push receiver library has been integrated into
    the Pmacct open source Network Telemetry data collection.
 
    The open source code can be obtained here: [Paolo-Lucente-Pmacct].
 
 12.4.  Huawei VRP
 
-   Huawei implemented this document for a YANG Push publisher on
-   UDP-based Transport for Configured Subscriptions
-   [I-D.ietf-netconf-udp-notif] in their VRP platform.
+   Huawei implemented the Subscription Decomposition described in this
+   document for a YANG-Push publisher on UDP-based Transport for
+   Configured Subscriptions [I-D.ietf-netconf-udp-notif] in their VRP
+   platform.
 
 12.5.  6WIND VSR
 
-   6WIND implemented this document for a YANG Push publisher on
-   UDP-based Transport for Configured Subscriptions
-   [I-D.ietf-netconf-udp-notif] in their VSR platform.
+   6WIND implemented the Subscription Decomposition described in this
+   document for a YANG-Push publisher on UDP-based Transport for
+   Configured Subscriptions [I-D.ietf-netconf-udp-notif] in their VSR
+   platform.
 
 13.  Security Considerations
 
@@ -662,8 +664,6 @@ Internet-Draft          Distributed Notifications             April 2025
    transport is Secure Shell (SSH) [RFC6242].  The lowest layer is
    HTTPS, and the mandatory-to-implement secure transport is TLS
    [RFC8446].
-
-
 
 
 

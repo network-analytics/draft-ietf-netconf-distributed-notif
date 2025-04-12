@@ -618,7 +618,7 @@ module ietf-distributed-notif {
 
       <section anchor="OpenSourcePublisher" title="Open Source
 	  Publisher">
-        <t>INSA Lyon implemented this document for a YANG Push publisher
+        <t>INSA Lyon implemented this document for a YANG-Push publisher
 		on <xref target="I-D.ietf-netconf-udp-notif">UDP-based Transport
 		for Configured Subscriptions</xref> in an example
 		implementation.</t>
@@ -629,7 +629,7 @@ module ietf-distributed-notif {
 
       <section anchor="OpenSourceReceiver"
                title="Open Source Receiver Library">
-        <t>INSA Lyon implemented this document for a YANG Push receiver
+        <t>INSA Lyon implemented this document for a YANG-Push receiver
 		on <xref target="I-D.ietf-netconf-udp-notif">UDP-based Transport
 		for Configured Subscriptions</xref> as a library.</t>
 
@@ -638,7 +638,7 @@ module ietf-distributed-notif {
       </section>
 
       <section anchor="pmacct" title="Pmacct Data Collection">
-        <t>The open source YANG push receiver library has been
+        <t>The open source YANG-Push receiver library has been
 		integrated into the Pmacct open source Network Telemetry data
 		collection.</t>
 
@@ -647,15 +647,17 @@ module ietf-distributed-notif {
       </section>
 
       <section anchor="Huawei" title="Huawei VRP">
-        <t>Huawei implemented this document for a YANG Push publisher on
-		<xref target="I-D.ietf-netconf-udp-notif">UDP-based Transport
-		for Configured Subscriptions</xref> in their VRP platform.</t>
+        <t>Huawei implemented the Subscription Decomposition described
+				in this document for a YANG-Push publisher on <xref
+				target="I-D.ietf-netconf-udp-notif">UDP-based Transport for
+				Configured Subscriptions</xref> in their VRP platform.</t>
       </section>
 
       <section anchor="SIXWIND" title="6WIND VSR">
-        <t>6WIND implemented this document for a YANG Push publisher on
-		<xref target="I-D.ietf-netconf-udp-notif">UDP-based Transport
-		for Configured Subscriptions</xref> in their VSR platform.</t>
+        <t>6WIND implemented the Subscription Decomposition described
+				in this document for a YANG-Push publisher on <xref
+				target="I-D.ietf-netconf-udp-notif">UDP-based Transport for
+				Configured Subscriptions</xref> in their VSR platform.</t>
       </section>
     </section>
 
