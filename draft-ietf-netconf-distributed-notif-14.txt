@@ -587,7 +587,7 @@ Internet-Draft          Distributed Notifications             April 2025
    This document registers the following namespace URI in the IETF XML
    Registry [RFC3688]:
 
-      URI: urn:ietf:params:xml:ns:yang:ietf-distributed-notif
+      URI: urn:ietf:params:xml:ns:yang:ietf-telemetry-message
 
       Registrant Contact: The IESG.
 
@@ -596,9 +596,9 @@ Internet-Draft          Distributed Notifications             April 2025
    This document registers the following YANG module in the YANG Module
    Names registry [RFC3688]:
 
-      Name: ietf-distributed-notif
+      Name: ietf-telemetry-message
 
-      Namespace: urn:ietf:params:xml:ns:yang:ietf-distributed-notif
+      Namespace: urn:ietf:params:xml:ns:yang:ietf-telemetry-message
 
       Prefix: dn
 

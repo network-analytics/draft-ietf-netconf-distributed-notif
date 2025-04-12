@@ -592,19 +592,21 @@ module ietf-distributed-notif {
 	  <xref target="RFC3688">IETF XML Registry</xref>:</t>
 
       <t><list style="empty">
-          <t>URI: urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
+          <t>URI: urn:ietf:params:xml:ns:yang:ietf-telemetry-message</t>
 
           <t>Registrant Contact: The IESG.</t>
 
           <t>XML: N/A; the requested URI is an XML namespace.</t>
-        </list>This document registers the following YANG module in the
+        </list></t>
+				
+			<t>This document registers the following YANG module in the
 		<xref target="RFC3688">YANG Module Names registry</xref>:</t>
 
       <t><list style="empty">
-          <t>Name: ietf-distributed-notif</t>
+          <t>Name: ietf-telemetry-message</t>
 
           <t>Namespace:
-		  urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
+		  urn:ietf:params:xml:ns:yang:ietf-telemetry-message</t>
 
           <t>Prefix: dn</t>
 
