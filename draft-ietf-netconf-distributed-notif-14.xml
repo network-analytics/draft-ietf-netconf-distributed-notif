@@ -141,7 +141,7 @@
       </address>
     </author>
 
-    <date day="12" month="April" year="2025"/>
+    <date day="02" month="May" year="2025"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -190,7 +190,7 @@
 
     <section title="Terminologies">
       <t>The following terms are defined in <xref target="RFC8639"/> and
-	  are not redefined here:</t>
+	    are not redefined here:</t>
 
       <t>Subscriber</t>
 
@@ -199,6 +199,11 @@
       <t>Receiver</t>
 
       <t>Subscription</t>
+
+      <t>The following terms are defined in <xref target="RFC9196"/> and
+	    are not redefined here:</t>
+
+      <t>Capability</t>
 
       <t>In addition, this document defines the following terms:</t>
 
@@ -592,7 +597,7 @@ module ietf-distributed-notif {
 	  <xref target="RFC3688">IETF XML Registry</xref>:</t>
 
       <t><list style="empty">
-          <t>URI: urn:ietf:params:xml:ns:yang:ietf-telemetry-message</t>
+          <t>URI: urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
 
           <t>Registrant Contact: The IESG.</t>
 
@@ -603,10 +608,10 @@ module ietf-distributed-notif {
 		<xref target="RFC3688">YANG Module Names registry</xref>:</t>
 
       <t><list style="empty">
-          <t>Name: ietf-telemetry-message</t>
+          <t>Name: ietf-distributed-notif</t>
 
           <t>Namespace:
-		  urn:ietf:params:xml:ns:yang:ietf-telemetry-message</t>
+		  urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
 
           <t>Prefix: dn</t>
 
@@ -617,36 +622,6 @@ module ietf-distributed-notif {
     <section anchor="Implementation" title="Implementation Status">
       <t>Note to the RFC-Editor: Please remove this section before
       publishing.</t>
-
-      <section anchor="OpenSourcePublisher" title="Open Source
-	  Publisher">
-        <t>INSA Lyon implemented this document for a YANG-Push publisher
-		on <xref target="I-D.ietf-netconf-udp-notif">UDP-based Transport
-		for Configured Subscriptions</xref> in an example
-		implementation.</t>
-
-        <t>The open source code can be obtained here: <xref
-        target="INSA-Lyon-Publisher"/>.</t>
-      </section>
-
-      <section anchor="OpenSourceReceiver"
-               title="Open Source Receiver Library">
-        <t>INSA Lyon implemented this document for a YANG-Push receiver
-		on <xref target="I-D.ietf-netconf-udp-notif">UDP-based Transport
-		for Configured Subscriptions</xref> as a library.</t>
-
-        <t>The open source code can be obtained here: <xref
-        target="INSA-Lyon-Receiver"/>.</t>
-      </section>
-
-      <section anchor="pmacct" title="Pmacct Data Collection">
-        <t>The open source YANG-Push receiver library has been
-		integrated into the Pmacct open source Network Telemetry data
-		collection.</t>
-
-        <t>The open source code can be obtained here: <xref
-        target="Paolo-Lucente-Pmacct"/>.</t>
-      </section>
 
       <section anchor="Huawei" title="Huawei VRP">
         <t>Huawei implemented the Subscription Decomposition described
@@ -738,6 +713,8 @@ module ietf-distributed-notif {
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8641.xml"?>
 
       <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.8174.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml/reference.RFC.9196.xml"?>
     </references>
 
     <references title="Informative References">
@@ -746,42 +723,6 @@ module ietf-distributed-notif {
       <?rfc include="https://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-udp-notif.xml"?>
 
       <?rfc include="https://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-https-notif.xml"?>
-
-      <reference anchor="INSA-Lyon-Publisher"
-                 target="https://github.com/network-analytics/udp-notif-scapy">
-        <front>
-          <title>INSA Lyon, YANG Push publisher example
-		  implementation</title>
-
-          <author/>
-
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="INSA-Lyon-Receiver"
-                 target="https://github.com/network-analytics/udp-notif-c-collector">
-        <front>
-          <title>INSA Lyon, YANG Push receiver library
-		  implementation</title>
-
-          <author/>
-
-          <date/>
-        </front>
-      </reference>
-
-      <reference anchor="Paolo-Lucente-Pmacct"
-                 target="https://github.com/pmacct/pmacct">
-        <front>
-          <title>Paolo Lucente, Pmacct open source Network Telemetry 
-		  Data Collection</title>
-
-          <author/>
-
-          <date/>
-        </front>
-      </reference>
     </references>
 
     <section title="Examples">
