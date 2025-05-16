@@ -9,11 +9,11 @@
 <?rfc inline="yes"?>
 <?rfc compact="yes"?>
 <?rfc subcompact="no"?>
-<rfc category="std" docName="draft-ietf-netconf-distributed-notif-13"
+<rfc category="std" docName="draft-ietf-netconf-distributed-notif-14"
      ipr="trust200902">
   <front>
     <title abbrev="Distributed Notifications">Subscription to
-	Distributed Notifications</title>
+	Notifications in a Distributed Architecture</title>
 
     <author fullname="Tianran Zhou" initials="T." surname="Zhou">
       <organization>Huawei</organization>
@@ -141,7 +141,7 @@
       </address>
     </author>
 
-    <date day="02" month="May" year="2025"/>
+    <date day="16" month="May" year="2025"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -208,26 +208,33 @@
       <t>In addition, this document defines the following terms:</t>
 
       <t>Global Subscription: The Subscription requested by the
-	  subscriber. It may be decomposed into multiple Component
-	  Subscriptions.</t>
+	    subscriber. It may be decomposed into multiple Component
+	    Subscriptions.</t>
 
       <t>Component Subscription: The Subscription that defines a data
       source which is managed and controlled by a single Publisher.</t>
 
       <t>Global Capability: The overall subscription capability that the
-      group of Publishers can expose to the Subscriber.</t>
+      group of Publishers can expose to the Subscriber as defined in
+			<xref target="RFC9196"/> for the distributed system. This includes
+			which YANG nodes can be subscribed at which minimum-update-period
+			for periodical subscriptions respectively which
+			minimum-dampening-period for on-change subscriptions.</t>
 
       <t>Component Capability: The subscription capability that each
-      Publisher can expose to the Subscriber.</t>
+      Publisher exposes to the Publisher Master. This includes 
+			which YANG nodes with which minimum-update-period for periodical
+			subscriptions respectively which minimum-dampening-period for
+			on-change subscriptions can be subscribed on which Component.</t>
 
       <t>Publisher Master: The Publisher that interacts with the
-	  Subscriber to deal with the Global Subscription. It decomposes the
-	  Global Subscription to multiple Component Subscriptions and
-	  interacts with the Publisher Agents.</t>
+	    Subscriber to deal with the Global Subscription. It decomposes the
+	    Global Subscription to multiple Component Subscriptions and
+	    interacts with the Publisher Agents.</t>
 
       <t>Publisher Agent: The Publisher that interacts with the
-	  Publisher Master to deal with the Component Subscription and
-	  pushing the data to the Receiver.</t>
+	    Publisher Master to deal with the Component Subscription and
+	    pushing the data to the Receiver.</t>
 
       <t>Node: The Publisher that obtains and pushes the data to the
       Receiver.</t>
@@ -236,26 +243,29 @@
       Receiver.</t>
 
       <t>Message Publisher ID: A 32-bit identifier of the publishing
-	  process that is locally unique to the publisher node. With this
-	  identifier the publishing process from where the message was
-	  published from can be uniquely identified. Receivers SHOULD use
-	  the transport session and the Publisher ID field to separate
-	  different publisher streams originating from the same network
-	  node.</t>
+	    process that is locally unique to the publisher node. With this
+	    identifier the publishing process from where the message was
+	    published from can be uniquely identified. Receivers SHOULD use
+	    the transport session and the Publisher ID field to separate
+	    different publisher streams originating from the same network
+	    node.</t>
     </section>
 
     <section title="Motivation">
       <t>Lost and corrupt YANG notification messages need to be
-	  recognized at the receiver to ensure data integrity even when
-	  multiple publisher processes publishing from the same transport
-	  session.</t>
+	    recognized at the receiver to ensure data integrity even when
+	    multiple publisher processes publishing from the same transport
+	    session.</t>
 
       <t>To preserve data integrity down to the publisher process, the
-	  Message Publisher ID in the transport message header of the YANG
-	  notification message is introduced. In case of UDP transport,
-	  this is described in Section 3.2 of <xref
-	  target="I-D.ietf-netconf-udp-notif"> UDP-based transport</xref>.
-	  </t>
+	    Message Publisher ID in the transport message header of the YANG
+	    notification message is introduced. In case of UDP transport,
+	    this is described in Section 3.2 of <xref
+	    target="I-D.ietf-netconf-udp-notif"/>.
+		  With unique sequence-numbers per publishing process described in
+		  Section 3.4.1 of <xref target="I-D.ietf-netconf-notif-envelope"/>,
+		  each message can uniquely be identified, loss recognized and
+			related to a transport session and publishing process.</t>
     </section>
 
     <section title="Solution Overview">
@@ -723,6 +733,8 @@ module ietf-distributed-notif {
       <?rfc include="https://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-udp-notif.xml"?>
 
       <?rfc include="https://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-https-notif.xml"?>
+
+      <?rfc include="https://xml.resource.org/public/rfc/bibxml-ids/reference.I-D.ietf-netconf-notif-envelope.xml"?>
     </references>
 
     <section title="Examples">
