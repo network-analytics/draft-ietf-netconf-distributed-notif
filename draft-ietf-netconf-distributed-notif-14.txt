@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 17 November 2025                                        E. Voit
+Expires: 10 December 2025                                        E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                             16 May 2025
+                                                             8 June 2025
 
 
       Subscription to Notifications in a Distributed Architecture
@@ -48,14 +48,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 November 2025.
+   This Internet-Draft will expire on 10 December 2025.
 
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 1]
+Zhou, et al.            Expires 10 December 2025                [Page 1]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
 Copyright Notice
@@ -86,7 +86,7 @@ Table of Contents
    10. YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   8
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  11
    12. Implementation Status . . . . . . . . . . . . . . . . . . . .  11
-     12.1.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  11
+     12.1.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  12
      12.2.  6WIND VSR  . . . . . . . . . . . . . . . . . . . . . . .  12
    13. Security Considerations . . . . . . . . . . . . . . . . . . .  12
    14. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  12
@@ -96,8 +96,8 @@ Table of Contents
      16.2.  Informative References . . . . . . . . . . . . . . . . .  14
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  15
      A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  15
-     A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  18
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  20
+     A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  19
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  21
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 2]
+Zhou, et al.            Expires 10 December 2025                [Page 2]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
    By streaming YANG-Push notifications from publishers to receivers,
@@ -165,9 +165,9 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 3]
+Zhou, et al.            Expires 10 December 2025                [Page 3]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
    Component Capability: The subscription capability that each Publisher
@@ -221,9 +221,9 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 4]
+Zhou, et al.            Expires 10 December 2025                [Page 4]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
    *  the Subscriber generates the subscription instructions to express
@@ -277,9 +277,9 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 5]
+Zhou, et al.            Expires 10 December 2025                [Page 5]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
               Figure 1: The Distributed Data Export Framework
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 6]
+Zhou, et al.            Expires 10 December 2025                [Page 6]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
    *  share the same Subscription ID as the Global Subscription.
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 7]
+Zhou, et al.            Expires 10 December 2025                [Page 7]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
    such as HTTPS based transport [I-D.ietf-netconf-https-notif], each
@@ -436,20 +436,21 @@ Internet-Draft          Distributed Notifications               May 2025
      import ietf-yang-push {
        prefix yp;
        reference
-         "RFC 8641: Subscription to YANG Notifications for Datastore Updates";
+         "RFC 8641: Subscription to YANG Notifications for Datastore
+         Updates";
      }
 
      organization
        "IETF NETCONF (Network Configuration) Working Group";
-     contact
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 8]
+Zhou, et al.            Expires 10 December 2025                [Page 8]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
+     contact
        "WG Web:   <http:/tools.ietf.org/wg/netconf/>
         WG List:  <mailto:netconf@ietf.org>
 
@@ -497,15 +498,15 @@ Internet-Draft          Distributed Notifications               May 2025
        leaf message-publisher-id {
          type uint32;
          config false;
-         description
 
 
 
-Zhou, et al.            Expires 17 November 2025                [Page 9]
+Zhou, et al.            Expires 10 December 2025                [Page 9]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
+         description
            "Identifies the software process which publishes the
             message (e.g., processor 1 on line card 1). This field
             is used to notify the receiver which publisher process
@@ -553,14 +554,15 @@ Internet-Draft          Distributed Notifications               May 2025
          "This augmentation adds the Message Publisher ID to the
           dynamic establish-subscription output.";
        uses message-publisher-ids;
-     }
 
 
 
-Zhou, et al.            Expires 17 November 2025               [Page 10]
+Zhou, et al.            Expires 10 December 2025               [Page 10]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
+
+     }
 
      augment "/yp:push-update" {
        description
@@ -604,19 +606,24 @@ Internet-Draft          Distributed Notifications               May 2025
 
    Note to the RFC-Editor: Please remove this section before publishing.
 
+
+
+
+
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 11]
+
+Internet-Draft          Distributed Notifications              June 2025
+
+
 12.1.  Huawei VRP
 
    Huawei implemented the Subscription Decomposition described in this
    document for a YANG-Push publisher on UDP-based Transport for
    Configured Subscriptions [I-D.ietf-netconf-udp-notif] in their VRP
    platform.
-
-
-
-Zhou, et al.            Expires 17 November 2025               [Page 11]
-
-Internet-Draft          Distributed Notifications               May 2025
-
 
 12.2.  6WIND VSR
 
@@ -658,6 +665,15 @@ Internet-Draft          Distributed Notifications               May 2025
 
 14.  Contributors
 
+
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 12]
+
+Internet-Draft          Distributed Notifications              June 2025
+
+
       Alexander Clemm
       Futurewai
       2330 Central Expressway
@@ -665,14 +681,6 @@ Internet-Draft          Distributed Notifications               May 2025
       California
       United States of America
       Email: ludwig@clemm.org
-
-
-
-
-Zhou, et al.            Expires 17 November 2025               [Page 12]
-
-Internet-Draft          Distributed Notifications               May 2025
-
 
 15.  Acknowledgements
 
@@ -711,6 +719,17 @@ Internet-Draft          Distributed Notifications               May 2025
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/info/rfc8174>.
 
+
+
+
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 13]
+
+Internet-Draft          Distributed Notifications              June 2025
+
+
    [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
               Access Control Model", STD 91, RFC 8341,
               DOI 10.17487/RFC8341, March 2018,
@@ -720,15 +739,6 @@ Internet-Draft          Distributed Notifications               May 2025
               and R. Wilton, "Network Management Datastore Architecture
               (NMDA)", RFC 8342, DOI 10.17487/RFC8342, March 2018,
               <https://www.rfc-editor.org/info/rfc8342>.
-
-
-
-
-
-Zhou, et al.            Expires 17 November 2025               [Page 13]
-
-Internet-Draft          Distributed Notifications               May 2025
-
 
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
@@ -766,25 +776,25 @@ Internet-Draft          Distributed Notifications               May 2025
               notif-envelope-01>.
 
    [I-D.ietf-netconf-udp-notif]
-              Zheng, G., Zhou, T., Graf, T., Francois, P., Feng, A. H.,
-              and P. Lucente, "UDP-based Transport for Configured
+              Feng, A. H., Francois, P., Zhou, T., Graf, T., and P.
+              Lucente, "UDP-based Transport for Configured
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 14]
+
+Internet-Draft          Distributed Notifications              June 2025
+
+
               Subscriptions", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-udp-notif-20, 3 March 2025,
+              ietf-netconf-udp-notif-21, 14 May 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              udp-notif-20>.
+              udp-notif-21>.
 
    [RFC7923]  Voit, E., Clemm, A., and A. Gonzalez Prieto, "Requirements
               for Subscription to YANG Datastores", RFC 7923,
               DOI 10.17487/RFC7923, June 2016,
               <https://www.rfc-editor.org/info/rfc7923>.
-
-
-
-
-Zhou, et al.            Expires 17 November 2025               [Page 14]
-
-Internet-Draft          Distributed Notifications               May 2025
-
 
 Appendix A.  Examples
 
@@ -794,6 +804,43 @@ A.1.  Dynamic Subscription
 
    Figure 3 shows a typical dynamic subscription to the network node
    with distributed data export capability.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 15]
+
+Internet-Draft          Distributed Notifications              June 2025
+
 
    +-------------+                 +-------------+ +-------------+
    | Subscriber/ |                 |  Publisher  | |  Publisher  |
@@ -834,16 +881,22 @@ A.1.  Dynamic Subscription
 
                 Figure 3: Call Flow for Dynamic Subscription
 
-
-
-
-Zhou, et al.            Expires 17 November 2025               [Page 15]
-
-Internet-Draft          Distributed Notifications               May 2025
-
-
    A "establish-subscription" RPC request as per [RFC8641] is sent to
    the Master with a successful response.  An example of using NETCONF:
+
+
+
+
+
+
+
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 16]
+
+Internet-Draft          Distributed Notifications              June 2025
+
 
    <netconf:rpc message-id="101"
       xmlns:netconf="urn:ietf:params:xml:ns:netconf:base:1.0">
@@ -890,16 +943,16 @@ Internet-Draft          Distributed Notifications               May 2025
 
           Figure 5: "establish-subscription" Positive RPC Response
 
-
-
-
-Zhou, et al.            Expires 17 November 2025               [Page 16]
-
-Internet-Draft          Distributed Notifications               May 2025
-
-
    Then, both Publishers send notifications with the corresponding piece
    of data to the Receiver.
+
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 17]
+
+Internet-Draft          Distributed Notifications              June 2025
+
 
    The subscriber may invoke the "modify-subscription" RPC for a
    subscription it previously established.  The RPC has no difference to
@@ -949,37 +1002,40 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025               [Page 17]
+
+
+
+Zhou, et al.            Expires 10 December 2025               [Page 18]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
-<notification
-                        xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
-<eventTime>2007-09-01T10:00:00Z</eventTime>
-<subscription-modified
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
-      xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-    <id>22</id>
-    <yp:datastore
-        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-      ds:operational
-    </yp:datastore>
-    <yp:datastore-xpath-filter
-        xmlns:ex="https://example.com/sample-data/1.0">
-      /ex:bar
-    </yp:datastore-xpath-filter>
-    <yp:periodic>
-        <yp:period>250</yp:period>
-    </yp:periodic>
-    <message-publisher-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
-       1
-    </message-publisher-id>
-  </subscription-modified>
-</notification>
+ <notification
+       xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
+ <eventTime>2007-09-01T10:00:00Z</eventTime>
+ <subscription-modified
+       xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
+       xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
+     <id>22</id>
+     <yp:datastore
+         xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
+       ds:operational
+     </yp:datastore>
+     <yp:datastore-xpath-filter
+         xmlns:ex="https://example.com/sample-data/1.0">
+       /ex:bar
+     </yp:datastore-xpath-filter>
+     <yp:periodic>
+         <yp:period>250</yp:period>
+     </yp:periodic>
+     <message-publisher-id
+     xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
+        1
+     </message-publisher-id>
+   </subscription-modified>
+ </notification>
 
-  Figure 7: "subscription-modified" Subscription State Notification
+   Figure 7: "subscription-modified" Subscription State Notification
 
 
 A.2.  Configured Subscription
@@ -1005,9 +1061,9 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.            Expires 17 November 2025               [Page 18]
+Zhou, et al.            Expires 10 December 2025               [Page 19]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
    +-------------+                 +-------------+ +-------------+
@@ -1061,9 +1117,9 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025               [Page 19]
+Zhou, et al.            Expires 10 December 2025               [Page 20]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1074,7 +1130,7 @@ Internet-Draft          Distributed Notifications               May 2025
      <identifier>39</identifier>
      <yp:datastore
          xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-                 ds:operational
+     ds:operational
      </yp:datastore>
      <yp:datastore-xpath-filter
          xmlns:ex="https://example.com/sample-data/1.0">
@@ -1117,9 +1173,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.            Expires 17 November 2025               [Page 20]
+Zhou, et al.            Expires 10 December 2025               [Page 21]
 
-Internet-Draft          Distributed Notifications               May 2025
+Internet-Draft          Distributed Notifications              June 2025
 
 
    Guangying Zheng
@@ -1173,4 +1229,4 @@ Internet-Draft          Distributed Notifications               May 2025
 
 
 
-Zhou, et al.            Expires 17 November 2025               [Page 21]
+Zhou, et al.            Expires 10 December 2025               [Page 22]
