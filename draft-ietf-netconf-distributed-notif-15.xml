@@ -299,11 +299,11 @@
 
       <t>Publisher Agents collects metrics according to the Component
       Subscription, add its metadata, encapsulates, and pushes 
-			messages, which may require segmentation depending on the amount
-      of YANG data subscribed and maximum transmission unit of the
-			interface where the message is published from, to the Receiver
-			where packets are reassembled and notifications are decapsulated.
-			</t>
+			messages. Messages may require segmentation depending on the
+			amount of YANG data subscribed and maximum transmission unit of
+			the interface where the message is published from. The Receiver
+			then reassembles packets and decapsulates notifications
+			accordingly.</t>
 
       <t><figure anchor="arch" title="The Distributed Data Export
     Framework">
