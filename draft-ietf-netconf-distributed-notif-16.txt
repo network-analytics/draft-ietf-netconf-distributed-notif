@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 14 January 2026                                         E. Voit
+Expires: 4 March 2026                                            E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                            13 July 2025
+                                                          31 August 2025
 
 
       Subscription to Notifications in a Distributed Architecture
@@ -48,14 +48,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 January 2026.
+   This Internet-Draft will expire on 4 March 2026.
 
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 1]
+Zhou, et al.              Expires 4 March 2026                  [Page 1]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 2]
+Zhou, et al.              Expires 4 March 2026                  [Page 2]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    By streaming YANG-Push notifications from publishers to receivers,
@@ -124,7 +124,7 @@ Internet-Draft          Distributed Notifications              July 2025
    the routing system.
 
    This document complements the general subscription requirements
-   defined in section 4.2.1 of [RFC7923] by the paragraph: A
+   defined in Section 4.2.1 of [RFC7923] by the paragraph: A
    Subscription Service MAY support the ability to export from multiple
    software processes on a single routing system and expose the
    information which software process produced which message.
@@ -165,9 +165,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 3]
+Zhou, et al.              Expires 4 March 2026                  [Page 3]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    Component Capability: The subscription capability that each Publisher
@@ -176,14 +176,14 @@ Internet-Draft          Distributed Notifications              July 2025
    which minimum-dampening-period for on-change subscriptions can be
    subscribed on which Component.
 
-   Publisher Master: The Publisher that interacts with the Subscriber to
-   deal with the Global Subscription.  It decomposes the Global
-   Subscription to multiple Component Subscriptions and interacts with
-   the Publisher Agents.
+   Publisher Master: The component of a Publisher that interacts with
+   the Subscriber to deal with the Global Subscription.  It decomposes
+   the Global Subscription to multiple Component Subscriptions and
+   interacts with the Publisher Agents.
 
-   Publisher Agent: The Publisher that interacts with the Publisher
-   Master to deal with the Component Subscription and pushing the data
-   to the Receiver.
+   Publisher Agent: The component of a Publisher that interacts with the
+   Publisher Master to deal with the Component Subscription and pushing
+   the data to the Receiver.
 
    Node: Is the network node which contains one or more Publishers that
    obtains the data from the YANG datastore and pushes it to the
@@ -213,23 +213,23 @@ Internet-Draft          Distributed Notifications              July 2025
    Subscription is being published from which line card processor with
    subscription state change notifications.
 
-   To preserve notification message loss down to the publisher process
-   even though they are published from the same transport session, the
-   Message Publisher ID in the transport message header of the YANG
-   notification message is introduced.  In case of UDP transport, this
-   is described in Section 3.2 of [I-D.ietf-netconf-udp-notif].  With
+   To enable Receivers to detect notification message loss when
+   publishers share a transport session, the Message Publisher ID in the
+   transport message header of the YANG notification message is
+   introduced.  In case of UDP transport, this is described in
+   Section 3.2 of [I-D.ietf-netconf-udp-notif].  With unique sequence-
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 4]
+Zhou, et al.              Expires 4 March 2026                  [Page 4]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
-   unique sequence-numbers per publishing process described in
-   Section 3.4.1 of [I-D.ietf-netconf-notif-envelope], each message can
-   uniquely be identified, loss recognized and related to a transport
-   session and publishing process.
+   numbers per publishing process described in Section 3.4.1 of
+   [I-D.ietf-netconf-notif-envelope], each message can uniquely be
+   identified, loss recognized and related to a transport session and
+   publishing process.
 
 
 4.  Solution Detail
@@ -277,9 +277,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 5]
+Zhou, et al.              Expires 4 March 2026                  [Page 5]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
                 +-----------------------------------------+
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 6]
+Zhou, et al.              Expires 4 March 2026                  [Page 6]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    *  The Publisher Agents announce the status of their Component
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 7]
+Zhou, et al.              Expires 4 March 2026                  [Page 7]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    For the dynamic subscription, the output of the "establish-
@@ -445,9 +445,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 8]
+Zhou, et al.              Expires 4 March 2026                  [Page 8]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    module: ietf-distributed-notif
@@ -501,9 +501,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026                [Page 9]
+Zhou, et al.              Expires 4 March 2026                  [Page 9]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
                   <mailto:pierre.francois@insa-lyon.fr>
@@ -557,9 +557,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 10]
+Zhou, et al.              Expires 4 March 2026                 [Page 10]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
        leaf-list message-publisher-id {
@@ -613,9 +613,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 11]
+Zhou, et al.              Expires 4 March 2026                 [Page 11]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
          "This augmentation adds the Message Publisher ID in the
@@ -669,9 +669,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 12]
+Zhou, et al.              Expires 4 March 2026                 [Page 12]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
 13.  Security Considerations
@@ -725,9 +725,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 13]
+Zhou, et al.              Expires 4 March 2026                 [Page 13]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
 16.  References
@@ -781,9 +781,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 14]
+Zhou, et al.              Expires 4 March 2026                 [Page 14]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    [RFC8641]  Clemm, A. and E. Voit, "Subscription to YANG Notifications
@@ -837,9 +837,9 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 15]
+Zhou, et al.              Expires 4 March 2026                 [Page 15]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    +-------------+                 +-------------+ +-------------+
@@ -893,9 +893,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 16]
+Zhou, et al.              Expires 4 March 2026                 [Page 16]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    <netconf:rpc message-id="101"
@@ -949,9 +949,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 17]
+Zhou, et al.              Expires 4 March 2026                 [Page 17]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    The subscriber may invoke the "modify-subscription" RPC for a
@@ -1005,9 +1005,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 18]
+Zhou, et al.              Expires 4 March 2026                 [Page 18]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
  <notification
@@ -1061,9 +1061,9 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 19]
+Zhou, et al.              Expires 4 March 2026                 [Page 19]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    +-------------+                 +-------------+ +-------------+
@@ -1117,9 +1117,9 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 20]
+Zhou, et al.              Expires 4 March 2026                 [Page 20]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
  <notification xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
@@ -1173,9 +1173,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 21]
+Zhou, et al.              Expires 4 March 2026                 [Page 21]
 
-Internet-Draft          Distributed Notifications              July 2025
+Internet-Draft          Distributed Notifications            August 2025
 
 
    Guangying Zheng
@@ -1229,4 +1229,4 @@ Internet-Draft          Distributed Notifications              July 2025
 
 
 
-Zhou, et al.             Expires 14 January 2026               [Page 22]
+Zhou, et al.              Expires 4 March 2026                 [Page 22]

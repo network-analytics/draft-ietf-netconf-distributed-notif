@@ -141,7 +141,7 @@
       </address>
     </author>
 
-    <date day="13" month="July" year="2025"/>
+    <date day="31" month="August" year="2025"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -168,24 +168,24 @@
       <t>The mechanism to support a subscription of a continuous and
       customized stream of updates from a YANG datastore <xref
       target="RFC8342"/> is defined in <xref target="RFC8639"/> and 
-    <xref target="RFC8641"/>. Requirements for Subscription to YANG
-    Datastores are defined in <xref target="RFC7923"/>.</t>
+      <xref target="RFC8641"/>. Requirements for Subscription to YANG
+      Datastores are defined in <xref target="RFC7923"/>.</t>
 
       <t>By streaming YANG-Push notifications from publishers to
-    receivers, much better performance and fine-grained sampling can
-    be achieved than with a polling-based mechanism. In a distributed
-    forwarding system, the packet forwarding is delegated to multiple
-    processors on line cards. To not to overwhelm the route processor
-    resources, it is not uncommon that data records are published
-    directly from processors on line cards to target receivers to
-    further increase efficiency on the routing system.</t>
+      receivers, much better performance and fine-grained sampling can
+      be achieved than with a polling-based mechanism. In a distributed
+      forwarding system, the packet forwarding is delegated to multiple
+      processors on line cards. To not to overwhelm the route processor
+      resources, it is not uncommon that data records are published
+      directly from processors on line cards to target receivers to
+      further increase efficiency on the routing system.</t>
 
       <t>This document complements the general subscription requirements
-      defined in section 4.2.1 of <xref target="RFC7923"/> by the
-    paragraph: A Subscription Service MAY support the ability to
-    export from multiple software processes on a single routing system
-    and expose the information which software process produced which
-    message.</t>
+      defined in <xref section="4.2.1" sectionFormat="of"
+			target="RFC7923"/> by the paragraph: A Subscription Service MAY
+			support the ability to export from multiple software processes on
+			a single routing system and expose the information which software
+			process produced which message.</t>
     </section>
 
     <section title="Terminologies">
@@ -227,14 +227,14 @@
       subscriptions respectively which minimum-dampening-period for
       on-change subscriptions can be subscribed on which Component.</t>
 
-      <t>Publisher Master: The Publisher that interacts with the
-      Subscriber to deal with the Global Subscription. It decomposes the
-      Global Subscription to multiple Component Subscriptions and
-      interacts with the Publisher Agents.</t>
+      <t>Publisher Master: The component of a Publisher that interacts
+			with the Subscriber to deal with the Global Subscription. It
+			decomposes the Global Subscription to multiple Component
+			Subscriptions and interacts with the Publisher Agents.</t>
 
-      <t>Publisher Agent: The Publisher that interacts with the
-      Publisher Master to deal with the Component Subscription and
-      pushing the data to the Receiver.</t>
+      <t>Publisher Agent: The component of a Publisher that interacts
+			with the Publisher Master to deal with the Component Subscription
+			and pushing the data to the Receiver.</t>
 
       <t>Node: Is the network node which contains one or more Publishers
 			that obtains the data from the YANG datastore and pushes it to the
@@ -265,16 +265,17 @@
 			Receiver which Subscription is being published from which line
 			card processor with subscription state change notifications.</t>			
 
-      <t>To preserve notification message loss down to the publisher
-			process even though they are published from the same transport
-			session, the Message Publisher ID in the transport message header
-			of the YANG notification message is introduced. In case of UDP
-			transport, this is described in Section 3.2 of <xref
-      target="I-D.ietf-netconf-udp-notif"/>.
-      With unique sequence-numbers per publishing process described in
-      Section 3.4.1 of <xref target="I-D.ietf-netconf-notif-envelope"/>,
-      each message can uniquely be identified, loss recognized and
-      related to a transport session and publishing process.</t>
+      <t>To enable Receivers to detect notification message loss when
+      publishers share a transport session, the Message Publisher ID in
+      the transport message header of the YANG notification message is
+      introduced. In case of UDP transport, this is described in
+			<xref section="3.2" sectionFormat="of"
+			target="I-D.ietf-netconf-udp-notif"/>. With unique
+			sequence-numbers per publishing process described in <xref
+			section="3.4.1" sectionFormat="of"
+			target="I-D.ietf-netconf-notif-envelope"/>, each message can
+			uniquely be identified, loss recognized and related to a transport
+			session and publishing process.</t>
 
       <t></t>
     </section>
