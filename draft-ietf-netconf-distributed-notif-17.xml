@@ -175,7 +175,7 @@
       receivers, much better performance and fine-grained sampling can
       be achieved than with a polling-based mechanism. In a distributed
       forwarding system on a network node, the packet forwarding is
-			delegated to multiple processors on line cards. To not to
+			delegated to multiple processors on line cards. In order not to
 			overwhelm the route processor resources, it is not uncommon that
 			data records are published directly from processors on line cards
 			to target receivers to further increase efficiency on the routing
@@ -209,9 +209,9 @@
       <t>In addition, this document defines the below terms. Some 
 			of these terms are distinguished between global versus component
 			and parent versus agent to distinguish their role within the
-			distributed system. Where global is used to distinguish wherever
-			the system component is reachable outside the distributed system
-			and parent that it manages within the distributed system.</t>
+			distributed system. Where global and component is used to
+			distinguish wherever the system component is reachable outside the distributed system or not. Parent and agent is used to distinguish wherever it manages or is being managed within the distributed
+			system.</t>
 
       <t>Global Subscription: The Subscription requested by the
       Subscriber as described in Sections 2.4 and 2.5 of <xref
@@ -367,7 +367,7 @@
 
           <t>Contracts are created and maintained throughout the
       subscription lifecycle between the Publisher Parent and each
-      Agent and its Component Capability, and the format for
+      Agent and on its Component Capability, and the format for
       notification data structure.</t>
 
           <t>The Publisher Parent relays the component subscriptions to
