@@ -1,21 +1,24 @@
 module ietf-distributed-notif {
   yang-version 1.1;
-  namespace 
-    "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
+  namespace "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
   prefix dn;
 
   import ietf-subscribed-notifications {
     prefix sn;
+    reference
+      "RFC 8639: Subscription to YANG Notifications";
   }
   import ietf-yang-push {
     prefix yp;
     reference
-      "RFC 8641: Subscription to YANG Notifications for Datastore Updates";
+      "RFC 8641: Subscription to YANG Notifications for Datastore
+      Updates";
   }
 
-  organization "IETF NETCONF (Network Configuration) Working Group";
+  organization
+    "IETF NETCONF (Network Configuration) Working Group";
   contact
-    "WG Web:   <http:/tools.ietf.org/wg/netconf/>
+    "WG Web:   <https://datatracker.ietf.org/wg/netconf/>
      WG List:  <mailto:netconf@ietf.org>
 
      Authors:  Guangying Zheng
@@ -28,11 +31,9 @@ module ietf-distributed-notif {
                <mailto:pierre.francois@insa-lyon.fr>
                Eric Voit
                <mailto:evoit@cisco.com>";
-
-
   description
-    "Defines augmentation for ietf-subscribed-notifications to 
-    enable the distributed publication with single subscription.
+    "Defines augmentation for ietf-subscribed-notifications to
+     enable the distributed publication with single subscription.
 
      Copyright (c) 2025 IETF Trust and the persons
      identified as authors of the code.  All rights reserved.
@@ -55,52 +56,51 @@ module ietf-distributed-notif {
     description
       "Initial version";
     reference
-      "RFC XXXX: Subscription to Distributed Notifications";
+      "RFC XXXX: Subscription to Notifications in a Distributed
+       Architecture";
   }
 
   grouping message-publisher-id {
     description
       "Provides a reusable leaf of the message-publisher-id.";
-    
     leaf message-publisher-id {
       type uint32;
       config false;
       description
-        "Identifies the software process which publishes the
-        message (e.g., processor 1 on line card 1). This field
-        is used to notify the receiver which publisher process
-        published which message.";
+        "Identifies the software process which publishes notification
+         messages (e.g., processor 1 on line card 1). This field
+         is used to notify the receiver which publisher process
+         published which message. The identifier is locally unique to
+         the Network Node.";
     }
   }
 
   grouping message-publisher-ids {
     description
       "Provides a reusable leaf-list of message-publisher-id-list.";
-    
     leaf-list message-publisher-id {
       type uint32;
       config false;
       description
-        "Identifies the software process which publishes the
-        message (e.g., processor 1 on line card 1). This field
-        is used to notify the receiver which publisher processes
-        are going to publish.";
+        "Identifies the software process which publishes notification
+         messages (e.g., processor 1 on line card 1). This field
+         is used to notify the receiver which publisher processes
+         are going to publish. The identifiers are locally unique to
+         the Network Node.";
     }
   }
 
   augment "/sn:subscriptions/sn:subscription" {
     description
-      "This augmentation allows the Message 
-      Publisher ID to be exposed for a subscription.";
-
+      "This augmentation allows the Message
+       Publisher ID to be exposed for a subscription.";
     uses message-publisher-ids;
   }
- 
+
   augment "/sn:subscription-started" {
     description
       "This augmentation adds the Message Publisher ID to the
        subscription-started subscription change notifications.";
-
     uses message-publisher-ids;
   }
 
@@ -108,7 +108,6 @@ module ietf-distributed-notif {
     description
       "This augmentation adds the Message Publisher ID to the
        subscription-modified subscription change notifications.";
-
     uses message-publisher-ids;
   }
 
@@ -116,22 +115,20 @@ module ietf-distributed-notif {
     description
       "This augmentation adds the Message Publisher ID to the
        dynamic establish-subscription output.";
-    
     uses message-publisher-ids;
   }
+
   augment "/yp:push-update" {
     description
       "This augmentation adds the Message Publisher ID in the
-      push-update notification.";
-
+       push-update notification.";
     uses message-publisher-id;
   }
 
   augment "/yp:push-change-update" {
     description
       "This augmentation adds the Message Publisher ID in the
-      push-change-update notification.";
-
+       push-change-update notification.";
     uses message-publisher-id;
   }
 }
