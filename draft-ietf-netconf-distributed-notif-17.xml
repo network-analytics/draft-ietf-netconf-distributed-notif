@@ -141,7 +141,7 @@
       </address>
     </author>
 
-    <date day="02" month="February" year="2026"/>
+    <date day="05" month="February" year="2026"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -209,8 +209,7 @@
       <t>In addition, this document defines the below terms. Some 
 			of these terms are distinguished between global versus component
 			and parent versus agent to distinguish their role within the
-			distributed system. Where global and component is used to
-			distinguish wherever the system component is reachable outside the distributed system or not. Parent and agent is used to distinguish wherever it manages or is being managed within the distributed
+			distributed system. Global and component is used to distinguish wherever the system component is reachable outside the distributed system or not. Parent and agent is used to distinguish wherever it manages or is being managed within the distributed
 			system.</t>
 
       <t>Global Subscription: The Subscription requested by the
@@ -262,9 +261,7 @@
     <section title="Motivation and Solution Overview">
       <t>In distributed forwarding systems of Network Nodes much YANG
 			data is subscribed to processors on line cards but published from
-			the route processor instead. This creates an unnecessary overhead
-			at the route processor and a potential bottleneck instead of
-			publishing the YANG data from processors on line cards directly.</t>
+			the route processor instead. This creates an unnecessary overhead at the route processor and a potential bottleneck. Instead, publishing the YANG data directly from line cards avoids this inefficiency.</t>
 
       <t>This document proposes that subscribed YANG data can be
 			published from processors on line cards. The route processor is
@@ -461,13 +458,14 @@
 			selected based on the subscription decomposition result.</t>
 
       <t>From the Receivers perspective, all Publisher Agents share the
-			same source IP address for data export. Depending on distributed
-			system architecture this may implemented by using network address
-			translation within the distributed system. For connectionless data
-			transport such as <xref target="I-D.ietf-netconf-udp-notif">UDP
-			based transport</xref> the same Layer 4 source port for data
-			export can be used. For connection based data transport such as
-			<xref target="I-D.ietf-netconf-https-notif">HTTPS based
+			same source IP address for data export. Depending on the
+			distributed system architecture this may be implemented by using
+			network address translation within the distributed system. For
+			connectionless data transport such as <xref
+			target="I-D.ietf-netconf-udp-notif">UDP based transport</xref> the
+			same Layer 4 source port for data export can be used. For
+			connection based data transport such as <xref
+			target="I-D.ietf-netconf-https-notif">HTTPS based
 			transport</xref>, each Publisher Agent MUST be able to acknowledge
 			packet retrieval from Receivers, and therefore requires a
 			dedicated Layer 4 source port per software process.</t>
@@ -541,7 +539,7 @@ module ietf-distributed-notif {
     "Defines augmentation for ietf-subscribed-notifications to
      enable the distributed publication with single subscription.
 
-     Copyright (c) 2025 IETF Trust and the persons
+     Copyright (c) 2026 IETF Trust and the persons
      identified as authors of the code.  All rights reserved.
 
      Redistribution and use in source and binary forms, with or
@@ -558,7 +556,7 @@ module ietf-distributed-notif {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2025-04-12 {
+  revision 2026-02-05 {
     description
       "Initial version";
     reference
@@ -753,7 +751,7 @@ module ietf-distributed-notif {
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>We thank Kent Watsen, Mahesh Jethanandani, Martin Bjorklund, 
-    Tim Carey, Qin Wu, Robert Wilton, Benoit Claise, Alex Huang Feng
+    Tim Carey, Qin Wu, Robert Wilton, Benoit Claise, Alex Huang Feng,
     Camilo Cardona and Juergen Schoenwaelder for their constructive
 		suggestions for improving this document.</t>
     </section>
@@ -806,7 +804,7 @@ module ietf-distributed-notif {
       <section title="Dynamic Subscription">
         <t><xref target="dynamic_subs"/> shows a typical dynamic
         subscription to the Network Node with distributed data export
-        capability. The Subscriber is the NETCONF/RESTCONF client where
+        capability. The Subscriber is a NETCONF/RESTCONF client and
 				the Publisher Parent is the NETCONF/RESTCONF server.</t>
 
         <t><figure anchor="dynamic_subs"
@@ -931,8 +929,8 @@ module ietf-distributed-notif {
         ds:operational
       </yp:datastore>
       <yp:datastore-xpath-filter
-          xmlns:ex="https://example.com/sample-data/1.0">
-        /ex:bar
+          xmlns:if="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+        /if:interfaces/if:interface
       </yp:datastore-xpath-filter>
       <yp:periodic>
         <yp:period>250</yp:period>
