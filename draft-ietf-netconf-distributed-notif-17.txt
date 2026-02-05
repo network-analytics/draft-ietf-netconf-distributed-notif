@@ -15,7 +15,7 @@ Expires: 9 August 2026                                           E. Voit
 
 
       Subscription to Notifications in a Distributed Architecture
-                draft-ietf-netconf-distributed-notif-16
+                draft-ietf-netconf-distributed-notif-17
 
 Abstract
 
