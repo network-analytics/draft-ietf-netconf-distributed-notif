@@ -210,12 +210,12 @@
       of these terms are distinguished between global versus component
       and parent versus agent to distinguish their role within the
       distributed system. Global and Component is used to distinguish
-			wherever the system component is reachable outside the distributed
-			system or not. Parent and agent is used to distinguish wherever it
-			manages or is being managed within the distributed system.</t>
+      wherever the system component is reachable outside the distributed
+      system or not. Parent and agent is used to distinguish wherever it
+      manages or is being managed within the distributed system.</t>
 
       <t>Component: Refers to a component, such as a processor on a line
-			card within a distributed routing system.</t>
+      card within a distributed routing system.</t>
 
       <t>Global Subscription: The Subscription requested by the
       Subscriber as described in Sections 2.4 and 2.5 of <xref
@@ -228,10 +228,10 @@
       <t>Global Capability: The overall subscription capability that the
       group of Publishers can expose to the Subscriber as defined in
       <xref section="5.1" sectionFormat="of" target="RFC9196"/> for the
-			distributed system. This includes which YANG nodes can be
-			subscribed at which minimum-update-period for periodical
-			subscriptions respectively which minimum-dampening-period for
-			on-change subscriptions.</t>
+      distributed system. This includes which YANG nodes can be
+      subscribed at which minimum-update-period for periodical
+      subscriptions respectively which minimum-dampening-period for
+      on-change subscriptions.</t>
 
       <t>Component Capability: The subscription capability that each
       Publisher exposes to the Publisher Parent. This includes 
@@ -267,16 +267,16 @@
     <section title="Motivation and Solution Overview">
       <t>In distributed forwarding systems of Network Nodes much YANG
       data is subscribed to many Components, processors on line cards,
-			but published from a single route processor instead. This creates
-			an unnecessary overhead at the route processor and a potential
-			bottleneck. Publishing the YANG data directly from the Components
-			avoids this inefficiency.</t>
+      but published from a single route processor instead. This creates
+      an unnecessary overhead at the route processor and a potential
+      bottleneck. Publishing the YANG data directly from the Components
+      avoids this inefficiency.</t>
 
       <t>This document proposes that subscribed YANG data can be
       published from Components. The route processor is only involved
-			in maintaining and decomposing the Subscription, which includes
-			notifying the Receiver which Subscription is being published from
-			which Component with subscription state change notifications.</t>
+      in maintaining and decomposing the Subscription, which includes
+      notifying the Receiver which Subscription is being published from
+      which Component with subscription state change notifications.</t>
 
       <t>To enable Receivers to map notification messages to a
       particular Publisher, the Message Publisher ID in the transport
@@ -325,8 +325,8 @@
       messages. Messages may require segmentation depending on the
       amount of YANG data subscribed and maximum transmission unit of
       the interface where the message is published from. Implementations
-			MUST NOT rely on IP fragmentation to carry large messages. The
-			Receiver then decapsulates packets and reassembles notifications
+      MUST NOT rely on IP fragmentation to carry large messages. The
+      Receiver then decapsulates packets and reassembles notifications
       accordingly.</t>
 
       <t><figure anchor="arch" title="The Distributed Data Export
@@ -466,15 +466,15 @@
 
       <t>From the Receivers perspective, all Publisher Agents share the
       same source IP address for data export. How connectivity is
-			established within the distributed system architecture is out of
-			scope of this document. If IP connectivity is being used, this may
-			be implemented by using network address translation within the
-			distributed system. If connectivity is established other than IP,
-			the route processor needs to establish the IP connectivity to the
-			Receiver. For connectionless data transport such as <xref
-			target="I-D.ietf-netconf-udp-notif">UDP based transport</xref> the
-			same Layer 4 source port for data export can be used. For
-			connection based data transport such as <xref
+      established within the distributed system architecture is out of
+      scope of this document. If IP connectivity is being used, this may
+      be implemented by using network address translation within the
+      distributed system. If connectivity is established other than IP,
+      the route processor needs to establish the IP connectivity to the
+      Receiver. For connectionless data transport such as <xref
+      target="I-D.ietf-netconf-udp-notif">UDP based transport</xref> the
+      same Layer 4 source port for data export can be used. For
+      connection based data transport such as <xref
       target="I-D.ietf-netconf-https-notif">HTTPS based
       transport</xref>, each Publisher Agent MUST be able to acknowledge
       packet retrieval from Receivers, and therefore requires a
