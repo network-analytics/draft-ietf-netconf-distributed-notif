@@ -345,8 +345,8 @@ Internet-Draft          Distributed Notifications          February 2026
       problems with the Component Subscriptions.
 
    The technical mechanisms or protocols used for the coordination of
-   operational information between Publisher Parent and Agent and is out
-   of scope of this document.
+   operational information between Publisher Parent and Agent is out of
+   scope of this document.
 
 5.  Subscription Decomposition
 
@@ -552,8 +552,8 @@ Internet-Draft          Distributed Notifications          February 2026
          config false;
          description
            "Identifies the component software process which publishes
-                                    notification messages (e.g., processor 1 on line card 1). This
-                                    field is used to notify the receiver which publisher process
+            notification messages (e.g., processor 1 on line card 1). This
+            field is used to notify the receiver which publisher process
 
 
 
@@ -575,8 +575,8 @@ Internet-Draft          Distributed Notifications          February 2026
          config false;
          description
            "Identifies the component software process which publishes
-                                    notification messages (e.g., processor 1 on line card 1). This
-                                    field is used to notify the receiver which publisher processes
+            notification messages (e.g., processor 1 on line card 1). This
+            field is used to notify the receiver which publisher processes
             are going to publish. The identifiers are locally unique to
             the Network Node.";
        }

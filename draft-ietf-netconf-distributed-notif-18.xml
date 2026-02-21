@@ -385,7 +385,7 @@
       Subscriptions.</t>
         </list>The technical mechanisms or protocols used for the
     coordination of operational information between Publisher Parent
-    and Agent and is out of scope of this document.</t>
+    and Agent is out of scope of this document.</t>
     </section>
 
     <section title="Subscription Decomposition">
@@ -582,8 +582,8 @@ module ietf-distributed-notif {
       config false;
       description
         "Identifies the component software process which publishes
-				 notification messages (e.g., processor 1 on line card 1). This
-				 field is used to notify the receiver which publisher process
+         notification messages (e.g., processor 1 on line card 1). This
+         field is used to notify the receiver which publisher process
          published which message. The identifier is locally unique to
          the Network Node.";
     }
@@ -597,8 +597,8 @@ module ietf-distributed-notif {
       config false;
       description
         "Identifies the component software process which publishes
-				 notification messages (e.g., processor 1 on line card 1). This
-				 field is used to notify the receiver which publisher processes
+         notification messages (e.g., processor 1 on line card 1). This
+         field is used to notify the receiver which publisher processes
          are going to publish. The identifiers are locally unique to
          the Network Node.";
     }
