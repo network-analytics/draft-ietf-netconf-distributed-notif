@@ -150,17 +150,17 @@ Internet-Draft          Distributed Notifications          February 2026
    In addition, this document defines the below terms.  Some of these
    terms are distinguished between global versus component and parent
    versus agent to distinguish their role within the distributed system.
-   Global and component is used to distinguish wherever the system
+   Global and Component is used to distinguish wherever the system
    component is reachable outside the distributed system or not.  Parent
    and agent is used to distinguish wherever it manages or is being
    managed within the distributed system.
 
+   Component: Refers to a component, such as a processor on a line card
+   within a distributed routing system.
+
    Global Subscription: The Subscription requested by the Subscriber as
    described in Sections 2.4 and 2.5 of [RFC8639].  It may be decomposed
    into multiple Component Subscriptions.
-
-   Component Subscription: The Subscription that defines a data source
-   which is managed and controlled by a single Publisher.
 
 
 
@@ -170,10 +170,13 @@ Zhou, et al.              Expires 9 August 2026                 [Page 3]
 Internet-Draft          Distributed Notifications          February 2026
 
 
+   Component Subscription: The Subscription that defines a data source
+   which is managed and controlled by a single Publisher.
+
    Global Capability: The overall subscription capability that the group
-   of Publishers can expose to the Subscriber as defined in [RFC9196]
-   for the distributed system.  This includes which YANG nodes can be
-   subscribed at which minimum-update-period for periodical
+   of Publishers can expose to the Subscriber as defined in Section 5.1
+   of [RFC9196] for the distributed system.  This includes which YANG
+   nodes can be subscribed at which minimum-update-period for periodical
    subscriptions respectively which minimum-dampening-period for on-
    change subscriptions.
 
@@ -209,14 +212,11 @@ Internet-Draft          Distributed Notifications          February 2026
 3.  Motivation and Solution Overview
 
    In distributed forwarding systems of Network Nodes much YANG data is
-   subscribed to processors on line cards but published from the route
-   processor instead.  This creates an unnecessary overhead at the route
-   processor and a potential bottleneck.  Instead, publishing the YANG
-   data directly from line cards avoids this inefficiency.
-
-
-
-
+   subscribed to many Components, processors on line cards, but
+   published from a single route processor instead.  This creates an
+   unnecessary overhead at the route processor and a potential
+   bottleneck.  Publishing the YANG data directly from the Components
+   avoids this inefficiency.
 
 
 
@@ -227,11 +227,10 @@ Internet-Draft          Distributed Notifications          February 2026
 
 
    This document proposes that subscribed YANG data can be published
-   from processors on line cards.  The route processor is only involved
-   in maintaining and decomposing the Subscription, which includes
-   notifying the Receiver which Subscription is being published from
-   which line card processor with subscription state change
-   notifications.
+   from Components.  The route processor is only involved in maintaining
+   and decomposing the Subscription, which includes notifying the
+   Receiver which Subscription is being published from which Component
+   with subscription state change notifications.
 
    To enable Receivers to map notification messages to a particular
    Publisher, the Message Publisher ID in the transport message header
@@ -242,7 +241,6 @@ Internet-Draft          Distributed Notifications          February 2026
    [I-D.ietf-netconf-notif-envelope], each message can uniquely be
    identified, loss recognized and related to a transport session and
    publishing process.
-
 
 4.  Solution Detail
 
@@ -269,11 +267,13 @@ Internet-Draft          Distributed Notifications          February 2026
    The Component Subscriptions are then distributed to the corresponding
    Publisher Agents on route and processors on line cards.
 
-
-
-
-
-
+   Publisher Agents collects metrics according to the Component
+   Subscription, add its metadata, encapsulates, and pushes messages.
+   Messages may require segmentation depending on the amount of YANG
+   data subscribed and maximum transmission unit of the interface where
+   the message is published from.  Implementations MUST NOT rely on IP
+   fragmentation to carry large messages.  The Receiver then
+   decapsulates packets and reassembles notifications accordingly.
 
 
 
@@ -281,13 +281,6 @@ Zhou, et al.              Expires 9 August 2026                 [Page 5]
 
 Internet-Draft          Distributed Notifications          February 2026
 
-
-   Publisher Agents collects metrics according to the Component
-   Subscription, add its metadata, encapsulates, and pushes messages.
-   Messages may require segmentation depending on the amount of YANG
-   data subscribed and maximum transmission unit of the interface where
-   the message is published from.  The Receiver then decapsulates
-   packets and reassembles notifications accordingly.
 
                 +-----------------------------------------+
                 |        Collector        |-------------+ |
@@ -331,15 +324,19 @@ Internet-Draft          Distributed Notifications          February 2026
       Component Capability, and the format for notification data
       structure.
 
+   *  The Publisher Parent relays the component subscriptions to the
+      Publisher Agents.
+
+
+
+
+
 
 
 Zhou, et al.              Expires 9 August 2026                 [Page 6]
 
 Internet-Draft          Distributed Notifications          February 2026
 
-
-   *  The Publisher Parent relays the component subscriptions to the
-      Publisher Agents.
 
    *  The Publisher Agents announce the status of their Component
       Subscriptions to the Publisher Parent.  The status of the overall
@@ -348,8 +345,8 @@ Internet-Draft          Distributed Notifications          February 2026
       problems with the Component Subscriptions.
 
    The technical mechanisms or protocols used for the coordination of
-   operational information between Publisher Parent and Agent is out of
-   scope of this document.
+   operational information between Publisher Parent and Agent and is out
+   of scope of this document.
 
 5.  Subscription Decomposition
 
@@ -385,7 +382,10 @@ Internet-Draft          Distributed Notifications          February 2026
    Receiver can benefit from the structured and hierarchical data
    records.
 
-
+   The Receiver can associate the YANG data records with Subscription ID
+   [RFC8639] to the subscribed subscription.  Additionally, it can use
+   the Message Publisher ID to determine the corresponding publisher
+   process.
 
 
 
@@ -393,11 +393,6 @@ Zhou, et al.              Expires 9 August 2026                 [Page 7]
 
 Internet-Draft          Distributed Notifications          February 2026
 
-
-   The Receiver can associate the YANG data records with Subscription ID
-   [RFC8639] to the subscribed subscription.  Additionally, it can use
-   the Message Publisher ID to determine the corresponding publisher
-   process.
 
    For the dynamic subscription, the output of the "establish-
    subscription" RPC defined in [RFC8639] MUST include a list of Message
@@ -429,18 +424,23 @@ Internet-Draft          Distributed Notifications          February 2026
    subscription decomposition result.
 
    From the Receivers perspective, all Publisher Agents share the same
-   source IP address for data export.  Depending on the distributed
-   system architecture this may be implemented by using network address
-   translation within the distributed system.  For connectionless data
-   transport such as UDP based transport [I-D.ietf-netconf-udp-notif]
-   the same Layer 4 source port for data export can be used.  For
-   connection based data transport such as HTTPS based transport
-   [I-D.ietf-netconf-https-notif], each Publisher Agent MUST be able to
-   acknowledge packet retrieval from Receivers, and therefore requires a
-   dedicated Layer 4 source port per software process.
+   source IP address for data export.  How connectivity is established
+   within the distributed system architecture is out of scope of this
+   document.  If IP connectivity is being used, this may be implemented
+   by using network address translation within the distributed system.
+   If connectivity is established other than IP, the route processor
+   needs to establish the IP connectivity to the Receiver.  For
+   connectionless data transport such as UDP based transport
+   [I-D.ietf-netconf-udp-notif] the same Layer 4 source port for data
+   export can be used.  For connection based data transport such as
+   HTTPS based transport [I-D.ietf-netconf-https-notif], each Publisher
+   Agent MUST be able to acknowledge packet retrieval from Receivers,
+   and therefore requires a dedicated Layer 4 source port per software
+   process.
 
    The specific configuration on transports is described in the
    respective documents.
+
 
 
 
@@ -473,7 +473,7 @@ Internet-Draft          Distributed Notifications          February 2026
 
    This YANG module imports definitions from [RFC8639] and [RFC8641].
 
-   <CODE BEGINS> file "ietf-distributed-notif@2026-02-05.yang"
+   <CODE BEGINS> file "ietf-distributed-notif@2026-02-21.yang"
    module ietf-distributed-notif {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
@@ -536,7 +536,7 @@ Internet-Draft          Distributed Notifications          February 2026
         This version of this YANG module is part of RFC XXXX; see
         the RFC itself for full legal notices.";
 
-     revision 2026-02-05 {
+     revision 2026-02-21 {
        description
          "Initial version";
        reference
@@ -551,9 +551,9 @@ Internet-Draft          Distributed Notifications          February 2026
          type uint32;
          config false;
          description
-           "Identifies the software process which publishes notification
-            messages (e.g., processor 1 on line card 1). This field
-            is used to notify the receiver which publisher process
+           "Identifies the component software process which publishes
+                                    notification messages (e.g., processor 1 on line card 1). This
+                                    field is used to notify the receiver which publisher process
 
 
 
@@ -574,9 +574,9 @@ Internet-Draft          Distributed Notifications          February 2026
          type uint32;
          config false;
          description
-           "Identifies the software process which publishes notification
-            messages (e.g., processor 1 on line card 1). This field
-            is used to notify the receiver which publisher processes
+           "Identifies the component software process which publishes
+                                    notification messages (e.g., processor 1 on line card 1). This
+                                    field is used to notify the receiver which publisher processes
             are going to publish. The identifiers are locally unique to
             the Network Node.";
        }
@@ -826,9 +826,9 @@ Internet-Draft          Distributed Notifications          February 2026
               Feng, A. H., Francois, P., Graf, T., and B. Claise,
               "Extensible YANG Model for YANG-Push Notifications", Work
               in Progress, Internet-Draft, draft-ietf-netconf-notif-
-              envelope-03, 20 October 2025,
+              envelope-04, 6 February 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              notif-envelope-03>.
+              notif-envelope-04>.
 
    [I-D.ietf-netconf-udp-notif]
               Feng, A. H., Francois, P., Zhou, T., Graf, T., and P.

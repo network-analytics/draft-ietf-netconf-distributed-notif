@@ -175,18 +175,18 @@
       receivers, much better performance and fine-grained sampling can
       be achieved than with a polling-based mechanism. In a distributed
       forwarding system on a network node, the packet forwarding is
-			delegated to multiple processors on line cards. In order not to
-			overwhelm the route processor resources, it is not uncommon that
-			data records are published directly from processors on line cards
-			to target receivers to further increase efficiency on the routing
-			system.</t>
+      delegated to multiple processors on line cards. In order not to
+      overwhelm the route processor resources, it is not uncommon that
+      data records are published directly from processors on line cards
+      to target receivers to further increase efficiency on the routing
+      system.</t>
 
       <t>This document complements the general subscription requirements
       defined in <xref section="4.2.1" sectionFormat="of"
-			target="RFC7923"/> by the paragraph: A Subscription Service MAY
-			support the ability to export from multiple software processes on
-			a single routing system and expose the information which software
-			process produced which message.</t>
+      target="RFC7923"/> by the paragraph: A Subscription Service MAY
+      support the ability to export from multiple software processes on
+      a single routing system and expose the information which software
+      process produced which message.</t>
     </section>
 
     <section title="Terminologies">
@@ -207,14 +207,19 @@
       <t>Capability</t>
 
       <t>In addition, this document defines the below terms. Some 
-			of these terms are distinguished between global versus component
-			and parent versus agent to distinguish their role within the
-			distributed system. Global and component is used to distinguish wherever the system component is reachable outside the distributed system or not. Parent and agent is used to distinguish wherever it manages or is being managed within the distributed
-			system.</t>
+      of these terms are distinguished between global versus component
+      and parent versus agent to distinguish their role within the
+      distributed system. Global and Component is used to distinguish
+			wherever the system component is reachable outside the distributed
+			system or not. Parent and agent is used to distinguish wherever it
+			manages or is being managed within the distributed system.</t>
+
+      <t>Component: Refers to a component, such as a processor on a line
+			card within a distributed routing system.</t>
 
       <t>Global Subscription: The Subscription requested by the
       Subscriber as described in Sections 2.4 and 2.5 of <xref
-			target="RFC8639"/>. It may be decomposed into multiple Component
+      target="RFC8639"/>. It may be decomposed into multiple Component
       Subscriptions.</t>
 
       <t>Component Subscription: The Subscription that defines a data
@@ -222,10 +227,11 @@
 
       <t>Global Capability: The overall subscription capability that the
       group of Publishers can expose to the Subscriber as defined in
-      <xref target="RFC9196"/> for the distributed system. This includes
-      which YANG nodes can be subscribed at which minimum-update-period
-      for periodical subscriptions respectively which
-      minimum-dampening-period for on-change subscriptions.</t>
+      <xref section="5.1" sectionFormat="of" target="RFC9196"/> for the
+			distributed system. This includes which YANG nodes can be
+			subscribed at which minimum-update-period for periodical
+			subscriptions respectively which minimum-dampening-period for
+			on-change subscriptions.</t>
 
       <t>Component Capability: The subscription capability that each
       Publisher exposes to the Publisher Parent. This includes 
@@ -234,17 +240,17 @@
       on-change subscriptions can be subscribed on which Component.</t>
 
       <t>Publisher Parent: The component of a Publisher that interacts
-			with the Subscriber to deal with the Global Subscription. It
-			decomposes the Global Subscription to multiple Component
-			Subscriptions and interacts with the Publisher Agents.</t>
+      with the Subscriber to deal with the Global Subscription. It
+      decomposes the Global Subscription to multiple Component
+      Subscriptions and interacts with the Publisher Agents.</t>
 
       <t>Publisher Agent: The component of a Publisher that interacts
-			with the Publisher Parent to deal with the Component Subscription
-			and pushing the data to the Receiver.</t>
+      with the Publisher Parent to deal with the Component Subscription
+      and pushing the data to the Receiver.</t>
 
       <t>Network Node: Is the network node of a distributed system which
-			contains one or more Publishers that obtains the data from the
-			YANG datastore and pushes it to the Receiver.</t>
+      contains one or more Publishers that obtains the data from the
+      YANG datastore and pushes it to the Receiver.</t>
 
       <t>Message Publisher: The Publisher that pushes the message to the
       Receiver.</t>
@@ -260,29 +266,29 @@
 
     <section title="Motivation and Solution Overview">
       <t>In distributed forwarding systems of Network Nodes much YANG
-			data is subscribed to processors on line cards but published from
-			the route processor instead. This creates an unnecessary overhead at the route processor and a potential bottleneck. Instead, publishing the YANG data directly from line cards avoids this inefficiency.</t>
+      data is subscribed to many Components, processors on line cards,
+			but published from a single route processor instead. This creates
+			an unnecessary overhead at the route processor and a potential
+			bottleneck. Publishing the YANG data directly from the Components
+			avoids this inefficiency.</t>
 
       <t>This document proposes that subscribed YANG data can be
-			published from processors on line cards. The route processor is
-			only involved in maintaining and decomposing the Subscription,
-			which includes notifying the Receiver which Subscription is being
-			published from which line card processor with subscription state
-			change notifications.</t>
+      published from Components. The route processor is only involved
+			in maintaining and decomposing the Subscription, which includes
+			notifying the Receiver which Subscription is being published from
+			which Component with subscription state change notifications.</t>
 
       <t>To enable Receivers to map notification messages to a
-			particular Publisher, the Message Publisher ID in the transport
-			message header of the YANG notification message is introduced. In
-			case of UDP transport, this is described in <xref
-			section="3.2" sectionFormat="of"
-			target="I-D.ietf-netconf-udp-notif"/>. With unique
-			sequence-numbers per publishing process described in <xref
-			section="3.4.1" sectionFormat="of"
-			target="I-D.ietf-netconf-notif-envelope"/>, each message can
-			uniquely be identified, loss recognized and related to a transport
-			session and publishing process.</t>
-
-      <t></t>
+      particular Publisher, the Message Publisher ID in the transport
+      message header of the YANG notification message is introduced. In
+      case of UDP transport, this is described in <xref
+      section="3.2" sectionFormat="of"
+      target="I-D.ietf-netconf-udp-notif"/>. With unique
+      sequence-numbers per publishing process described in <xref
+      section="3.4.1" sectionFormat="of"
+      target="I-D.ietf-netconf-notif-envelope"/>, each message can
+      uniquely be identified, loss recognized and related to a transport
+      session and publishing process.</t>
     </section>
 
     <section title="Solution Detail">
@@ -304,23 +310,24 @@
       the Receivers.</t>
 
       <t>In this framework, the Publisher pushes messages to the
-			Receiver according to the subscription. The Publisher is either in
-			the Parent or Agent role. The Publisher Parent knows all the
+      Receiver according to the subscription. The Publisher is either in
+      the Parent or Agent role. The Publisher Parent knows all the
       capabilities that his Agents can provide and exposes the Global
       Capability to the collector. The Subscriber maintains the Global
       Subscription at the Publisher Parent and disassembles the Global
       Subscription to multiple Component Subscriptions, depending upon
-			which source data is needed. The Component Subscriptions are then
+      which source data is needed. The Component Subscriptions are then
       distributed to the corresponding Publisher Agents on route and
       processors on line cards.</t>
 
       <t>Publisher Agents collects metrics according to the Component
       Subscription, add its metadata, encapsulates, and pushes 
-			messages. Messages may require segmentation depending on the
-			amount of YANG data subscribed and maximum transmission unit of
-			the interface where the message is published from. The Receiver
-			then decapsulates packets and reassembles notifications
-			accordingly.</t>
+      messages. Messages may require segmentation depending on the
+      amount of YANG data subscribed and maximum transmission unit of
+      the interface where the message is published from. Implementations
+			MUST NOT rely on IP fragmentation to carry large messages. The
+			Receiver then decapsulates packets and reassembles notifications
+      accordingly.</t>
 
       <t><figure anchor="arch" title="The Distributed Data Export
     Framework">
@@ -378,12 +385,12 @@
       Subscriptions.</t>
         </list>The technical mechanisms or protocols used for the
     coordination of operational information between Publisher Parent
-    and Agent is out of scope of this document.</t>
+    and Agent and is out of scope of this document.</t>
     </section>
 
     <section title="Subscription Decomposition">
       <t>The Collector can send subscription requests only to the
-			Parent. This requires the Publisher Parent to:</t>
+      Parent. This requires the Publisher Parent to:</t>
 
       <t><list style="numbers">
           <t>expose the Global Capability that can be served by multiple
@@ -392,9 +399,9 @@
           <t>disassemble the Global Subscription to multiple Component
           Subscriptions, and distribute them to the Publisher Agents of
           the corresponding metric sources from the YANG schema tree so
-					that they do not overlap; How the subscription is being
-					distributed is implementation specific and not part of this
-					document.
+          that they do not overlap; How the subscription is being
+          distributed is implementation specific and not part of this
+          document.
       </t>
 
           <t>notify changes related to the existing subscriptions to the
@@ -455,20 +462,23 @@
     <section title="Publisher Configurations">
       <t>This document assumes that all Publisher Agents are
       preconfigured to push data. Publisher Agents that send data are
-			selected based on the subscription decomposition result.</t>
+      selected based on the subscription decomposition result.</t>
 
       <t>From the Receivers perspective, all Publisher Agents share the
-			same source IP address for data export. Depending on the
-			distributed system architecture this may be implemented by using
-			network address translation within the distributed system. For
-			connectionless data transport such as <xref
+      same source IP address for data export. How connectivity is
+			established within the distributed system architecture is out of
+			scope of this document. If IP connectivity is being used, this may
+			be implemented by using network address translation within the
+			distributed system. If connectivity is established other than IP,
+			the route processor needs to establish the IP connectivity to the
+			Receiver. For connectionless data transport such as <xref
 			target="I-D.ietf-netconf-udp-notif">UDP based transport</xref> the
 			same Layer 4 source port for data export can be used. For
 			connection based data transport such as <xref
-			target="I-D.ietf-netconf-https-notif">HTTPS based
-			transport</xref>, each Publisher Agent MUST be able to acknowledge
-			packet retrieval from Receivers, and therefore requires a
-			dedicated Layer 4 source port per software process.</t>
+      target="I-D.ietf-netconf-https-notif">HTTPS based
+      transport</xref>, each Publisher Agent MUST be able to acknowledge
+      packet retrieval from Receivers, and therefore requires a
+      dedicated Layer 4 source port per software process.</t>
 
       <t>The specific configuration on transports is described in the
       respective documents.</t>
@@ -497,10 +507,10 @@ module: ietf-distributed-notif
     </section>
 
     <section title="YANG Module">
-		<t>This YANG module imports definitions from <xref
-		target="RFC8639"/> and <xref target="RFC8641"/>.</t>
-		
-<sourcecode name="ietf-distributed-notif@2026-02-05.yang"
+    <t>This YANG module imports definitions from <xref
+    target="RFC8639"/> and <xref target="RFC8641"/>.</t>
+    
+<sourcecode name="ietf-distributed-notif@2026-02-21.yang"
 type="yang" markers="true"><![CDATA[
 module ietf-distributed-notif {
   yang-version 1.1;
@@ -556,7 +566,7 @@ module ietf-distributed-notif {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2026-02-05 {
+  revision 2026-02-21 {
     description
       "Initial version";
     reference
@@ -571,9 +581,9 @@ module ietf-distributed-notif {
       type uint32;
       config false;
       description
-        "Identifies the software process which publishes notification
-         messages (e.g., processor 1 on line card 1). This field
-         is used to notify the receiver which publisher process
+        "Identifies the component software process which publishes
+				 notification messages (e.g., processor 1 on line card 1). This
+				 field is used to notify the receiver which publisher process
          published which message. The identifier is locally unique to
          the Network Node.";
     }
@@ -586,9 +596,9 @@ module ietf-distributed-notif {
       type uint32;
       config false;
       description
-        "Identifies the software process which publishes notification
-         messages (e.g., processor 1 on line card 1). This field
-         is used to notify the receiver which publisher processes
+        "Identifies the component software process which publishes
+				 notification messages (e.g., processor 1 on line card 1). This
+				 field is used to notify the receiver which publisher processes
          are going to publish. The identifiers are locally unique to
          the Network Node.";
     }
@@ -645,9 +655,9 @@ module ietf-distributed-notif {
 
       <t><list style="empty">
           <t>URI: urn:ietf:params:xml:ns:yang:ietf-distributed-notif</t>
-					
+          
           <t>Maintained by IANA? N</t>
-					
+          
           <t>Registrant Contact: The IESG.</t>
 
           <t>XML: N/A; the requested URI is an XML namespace.</t>
@@ -695,12 +705,12 @@ module ietf-distributed-notif {
       <xref target="I-D.ietf-netmod-rfc8407bis" section="3.7"/>.</t>
 
       <t>The 'ietf-distributed-notif' YANG module defines a data model
-			that is designed to be accessed via YANG-based management
-			protocols, such as NETCONF <xref target="RFC6241"/> and RESTCONF
-			<xref target="RFC8040"/>. These YANG-based management protocols
-			(1) have to use a secure transport layer (e.g., SSH <xref
-			target="RFC6242"/>, TLS <xref target="RFC8446"/>, and QUIC <xref
-			target="RFC9000"/>) and (2) have to use mutual authentication.</t>
+      that is designed to be accessed via YANG-based management
+      protocols, such as NETCONF <xref target="RFC6241"/> and RESTCONF
+      <xref target="RFC8040"/>. These YANG-based management protocols
+      (1) have to use a secure transport layer (e.g., SSH <xref
+      target="RFC6242"/>, TLS <xref target="RFC8446"/>, and QUIC <xref
+      target="RFC9000"/>) and (2) have to use mutual authentication.</t>
 
       <t>The Network Configuration Access Control Model (NACM) <xref
       target="RFC8341"/> provides the means to restrict access for
@@ -728,13 +738,13 @@ module ietf-distributed-notif {
 
       <t>The entries in the list above will show the identity of the
       originating Publisher process. Exposure of this information may
-			assist an attacker in mapping the distributed system or in
-			injecting spoofed Notifications. Implementations SHOULD ensure
-			that access to this data is restricted and that Notifications are
-			sent over secure and authenticated channels.</t>
+      assist an attacker in mapping the distributed system or in
+      injecting spoofed Notifications. Implementations SHOULD ensure
+      that access to this data is restricted and that Notifications are
+      sent over secure and authenticated channels.</t>
 
       <t>Security Considerations defined in <xref target="RFC8639"/>
-			do also apply for this document.</t>
+      do also apply for this document.</t>
     </section>
 
     <section title="Contributors">
@@ -753,7 +763,7 @@ module ietf-distributed-notif {
       <t>We thank Kent Watsen, Mahesh Jethanandani, Martin Bjorklund, 
     Tim Carey, Qin Wu, Robert Wilton, Benoit Claise, Alex Huang Feng,
     Camilo Cardona and Juergen Schoenwaelder for their constructive
-		suggestions for improving this document.</t>
+    suggestions for improving this document.</t>
     </section>
   </middle>
 
@@ -805,7 +815,7 @@ module ietf-distributed-notif {
         <t><xref target="dynamic_subs"/> shows a typical dynamic
         subscription to the Network Node with distributed data export
         capability. The Subscriber is a NETCONF/RESTCONF client and
-				the Publisher Parent is the NETCONF/RESTCONF server.</t>
+        the Publisher Parent is the NETCONF/RESTCONF server.</t>
 
         <t><figure anchor="dynamic_subs"
             title="Call Flow for Dynamic Subscription">
@@ -982,7 +992,7 @@ module ietf-distributed-notif {
         <t><xref target="conf_subs"/> shows a typical configured
         subscription to the Network Node with distributed data export
         capability. Subscripton request has been removed for brevity.
-				</t>
+        </t>
 
         <t/>
 
