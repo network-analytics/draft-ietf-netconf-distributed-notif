@@ -141,7 +141,7 @@
       </address>
     </author>
 
-    <date day="21" month="February" year="2026"/>
+    <date day="23" month="February" year="2026"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -214,8 +214,8 @@
       system or not. Parent and agent is used to distinguish wherever it
       manages or is being managed within the distributed system.</t>
 
-      <t>Component: Refers to a component, such as a processor on a line
-      card within a distributed routing system.</t>
+      <t>Component: Refers to a network device component, such as a
+			processor on a line card within a distributed routing system.</t>
 
       <t>Global Subscription: The Subscription requested by the
       Subscriber as described in Sections 2.4 and 2.5 of <xref
@@ -467,14 +467,10 @@
       <t>From the Receivers perspective, all Publisher Agents share the
       same source IP address for data export. How connectivity is
       established within the distributed system architecture is out of
-      scope of this document. If IP connectivity is being used, this may
-      be implemented by using network address translation within the
-      distributed system. If connectivity is established other than IP,
-      the route processor needs to establish the IP connectivity to the
-      Receiver. For connectionless data transport such as <xref
-      target="I-D.ietf-netconf-udp-notif">UDP based transport</xref> the
-      same Layer 4 source port for data export can be used. For
-      connection based data transport such as <xref
+      scope of this document. For connectionless data transport
+			such as <xref target="I-D.ietf-netconf-udp-notif">UDP based
+			transport</xref> the same Layer 4 source port for data export can
+			be used. For connection based data transport such as <xref
       target="I-D.ietf-netconf-https-notif">HTTPS based
       transport</xref>, each Publisher Agent MUST be able to acknowledge
       packet retrieval from Receivers, and therefore requires a
