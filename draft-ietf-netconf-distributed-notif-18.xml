@@ -201,10 +201,12 @@
 
       <t>Subscription</t>
 
-      <t>The following terms are defined in <xref target="RFC9196"/> and
-      are not redefined here:</t>
+      <t>The following terms are used with
+			"ietf-notification-capabilities" in <xref section="3"
+			sectionFormat="of" target="RFC9196"/> and are not redefined
+			here:</t>
 
-      <t>Capability</t>
+      <t>Notification Capabilities</t>
 
       <t>In addition, this document defines the below terms. Some 
       of these terms are distinguished between global versus component
@@ -225,19 +227,20 @@
       <t>Component Subscription: The Subscription that defines a data
       source which is managed and controlled by a single Publisher.</t>
 
-      <t>Global Capability: The overall subscription capability that the
-      group of Publishers can expose to the Subscriber as defined in
-      <xref section="5.1" sectionFormat="of" target="RFC9196"/> for the
-      distributed system. This includes which YANG nodes can be
-      subscribed at which minimum-update-period for periodical
-      subscriptions respectively which minimum-dampening-period for
-      on-change subscriptions.</t>
+      <t>Global Notification Capabilities: The overall notification
+			capabilities that the group of Publishers can expose to the
+			Subscriber as defined in <xref section="5.1" sectionFormat="of"
+			target="RFC9196"/> for the distributed system. This includes which
+			YANG nodes can be subscribed at which minimum-update-period for
+			periodical subscriptions respectively which
+			minimum-dampening-period for on-change subscriptions.</t>
 
-      <t>Component Capability: The subscription capability that each
-      Publisher exposes to the Publisher Parent. This includes 
-      which YANG nodes with which minimum-update-period for periodical
-      subscriptions respectively which minimum-dampening-period for
-      on-change subscriptions can be subscribed on which Component.</t>
+      <t>Component Notification Capabilities: The notification
+			capabilities that each Publisher exposes to the Publisher Parent.
+			This includes which YANG nodes with which minimum-update-period
+			for periodical subscriptions respectively which
+			minimum-dampening-period for on-change subscriptions can be
+			subscribed on which Component.</t>
 
       <t>Publisher Parent: The component of a Publisher that interacts
       with the Subscriber to deal with the Global Subscription. It
@@ -313,12 +316,12 @@
       Receiver according to the subscription. The Publisher is either in
       the Parent or Agent role. The Publisher Parent knows all the
       capabilities that his Agents can provide and exposes the Global
-      Capability to the collector. The Subscriber maintains the Global
-      Subscription at the Publisher Parent and disassembles the Global
-      Subscription to multiple Component Subscriptions, depending upon
-      which source data is needed. The Component Subscriptions are then
-      distributed to the corresponding Publisher Agents on route and
-      processors on line cards.</t>
+      Notification Capabilities to the collector. The Subscriber
+			maintains the Global Subscription at the Publisher Parent and
+			disassembles the Global Subscription to multiple Component
+			Subscriptions, depending upon which source data is needed. The
+			Component Subscriptions are then distributed to the corresponding
+			Publisher Agents on route and processors on line cards.</t>
 
       <t>Publisher Agents collects metrics according to the Component
       Subscription, add its metadata, encapsulates, and pushes 
@@ -340,8 +343,9 @@
 |      +-----^-+----+    +------^-----^   |
 |            | |                |     |   |
 +-----------------------------------------+
-   Global    | | Global         |     |
-   Capability| | Subscription   |     |
+ Global      | |                |     |
+ Notification| | Global         |     |
+ Capabilities| | Subscription   |     |
 +-----------------------------------------+
 |            | |                |     |   |
 |            | |   Subscription |     |   |
@@ -352,8 +356,9 @@
 |   +--------^-+-------------------+  |   |
 |            | |                      |   |
 |            | |                      |   |
-|  Component | | Component       Push |   |
-|  Capability| | Subscription         |   |
+|Component   | |                 Push |   |
+|Notification| | Component            |   |
+|Capabilities| | Subscription         |   |
 |   +--------+-v-------------------+  |   |
 |   |       Publisher(Agent)       +--+   |
 |   +------------------------------+      |
@@ -364,28 +369,27 @@
         </figure></t>
 
       <t>Publisher Parent and Publisher Agents interact with each other 
-    in several ways: <list
-          style="symbols">
+      in several ways: <list style="symbols">
           <t>Publisher Agents need to register with the Parent at the
-      beginning of their process life cycle.</t>
+          beginning of their process life cycle.</t>
 
           <t>Contracts are created and maintained throughout the
-      subscription lifecycle between the Publisher Parent and each
-      Agent and on its Component Capability, and the format for
-      notification data structure.</t>
+          subscription lifecycle between the Publisher Parent and each
+          Agent and on its Component Notification Capabilities, and the
+			    format for notification data structure.</t>
 
           <t>The Publisher Parent relays the component subscriptions to
-      the Publisher Agents.</t>
+          the Publisher Agents.</t>
 
           <t>The Publisher Agents announce the status of their Component
-      Subscriptions to the Publisher Parent. The status of the
-      overall subscription is maintained by the Publisher Parent.
-      The Publisher Parent is responsible for notifying the
+          Subscriptions to the Publisher Parent. The status of the
+          overall subscription is maintained by the Publisher Parent.
+          The Publisher Parent is responsible for notifying the
           subscriber in case of problems with the Component
-      Subscriptions.</t>
-        </list>The technical mechanisms or protocols used for the
-    coordination of operational information between Publisher Parent
-    and Agent is out of scope of this document.</t>
+          Subscriptions.</t>
+      </list>The technical mechanisms or protocols used for the
+      coordination of operational information between Publisher Parent
+      and Agent is out of scope of this document.</t>
     </section>
 
     <section title="Subscription Decomposition">
@@ -393,8 +397,8 @@
       Parent. This requires the Publisher Parent to:</t>
 
       <t><list style="numbers">
-          <t>expose the Global Capability that can be served by multiple
-          Publisher Agents;</t>
+          <t>expose the Global Notification Capabilities that can be
+					served by multiple Publisher Agents;</t>
 
           <t>disassemble the Global Subscription to multiple Component
           Subscriptions, and distribute them to the Publisher Agents of

@@ -79,13 +79,13 @@ Table of Contents
    3.  Motivation and Solution Overview  . . . . . . . . . . . . . .   4
    4.  Solution Detail . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  Subscription Decomposition  . . . . . . . . . . . . . . . . .   7
-   6.  Publication Composition . . . . . . . . . . . . . . . . . . .   7
+   6.  Publication Composition . . . . . . . . . . . . . . . . . . .   8
    7.  Subscription State Change Notifications . . . . . . . . . . .   8
    8.  Publisher Configurations  . . . . . . . . . . . . . . . . . .   8
-   9.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . . . .   8
+   9.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . . . .   9
    10. YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   9
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
-   12. Implementation Status . . . . . . . . . . . . . . . . . . . .  12
+   12. Implementation Status . . . . . . . . . . . . . . . . . . . .  13
      12.1.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  13
      12.2.  6WIND VSR  . . . . . . . . . . . . . . . . . . . . . . .  13
    13. Security Considerations . . . . . . . . . . . . . . . . . . .  13
@@ -95,9 +95,9 @@ Table of Contents
      16.1.  Normative References . . . . . . . . . . . . . . . . . .  14
      16.2.  Informative References . . . . . . . . . . . . . . . . .  15
    Appendix A.  Examples . . . . . . . . . . . . . . . . . . . . . .  16
-     A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  16
-     A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  20
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  22
+     A.1.  Dynamic Subscription  . . . . . . . . . . . . . . . . . .  17
+     A.2.  Configured Subscription . . . . . . . . . . . . . . . . .  21
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  23
 
 1.  Introduction
 
@@ -142,10 +142,10 @@ Internet-Draft          Distributed Notifications          February 2026
 
    Subscription
 
-   The following terms are defined in [RFC9196] and are not redefined
-   here:
+   The following terms are used with "ietf-notification-capabilities" in
+   Section 3 of [RFC9196] and are not redefined here:
 
-   Capability
+   Notification Capabilities
 
    In addition, this document defines the below terms.  Some of these
    terms are distinguished between global versus component and parent
@@ -173,18 +173,18 @@ Internet-Draft          Distributed Notifications          February 2026
    Component Subscription: The Subscription that defines a data source
    which is managed and controlled by a single Publisher.
 
-   Global Capability: The overall subscription capability that the group
-   of Publishers can expose to the Subscriber as defined in Section 5.1
-   of [RFC9196] for the distributed system.  This includes which YANG
-   nodes can be subscribed at which minimum-update-period for periodical
-   subscriptions respectively which minimum-dampening-period for on-
-   change subscriptions.
+   Global Notification Capabilities: The overall notification
+   capabilities that the group of Publishers can expose to the
+   Subscriber as defined in Section 5.1 of [RFC9196] for the distributed
+   system.  This includes which YANG nodes can be subscribed at which
+   minimum-update-period for periodical subscriptions respectively which
+   minimum-dampening-period for on-change subscriptions.
 
-   Component Capability: The subscription capability that each Publisher
-   exposes to the Publisher Parent.  This includes which YANG nodes with
-   which minimum-update-period for periodical subscriptions respectively
-   which minimum-dampening-period for on-change subscriptions can be
-   subscribed on which Component.
+   Component Notification Capabilities: The notification capabilities
+   that each Publisher exposes to the Publisher Parent.  This includes
+   which YANG nodes with which minimum-update-period for periodical
+   subscriptions respectively which minimum-dampening-period for on-
+   change subscriptions can be subscribed on which Component.
 
    Publisher Parent: The component of a Publisher that interacts with
    the Subscriber to deal with the Global Subscription.  It decomposes
@@ -260,12 +260,27 @@ Internet-Draft          Distributed Notifications          February 2026
    In this framework, the Publisher pushes messages to the Receiver
    according to the subscription.  The Publisher is either in the Parent
    or Agent role.  The Publisher Parent knows all the capabilities that
-   his Agents can provide and exposes the Global Capability to the
-   collector.  The Subscriber maintains the Global Subscription at the
-   Publisher Parent and disassembles the Global Subscription to multiple
-   Component Subscriptions, depending upon which source data is needed.
-   The Component Subscriptions are then distributed to the corresponding
-   Publisher Agents on route and processors on line cards.
+   his Agents can provide and exposes the Global Notification
+   Capabilities to the collector.  The Subscriber maintains the Global
+   Subscription at the Publisher Parent and disassembles the Global
+   Subscription to multiple Component Subscriptions, depending upon
+   which source data is needed.  The Component Subscriptions are then
+   distributed to the corresponding Publisher Agents on route and
+   processors on line cards.
+
+
+
+
+
+
+
+
+
+
+Zhou, et al.             Expires 27 August 2026                 [Page 5]
+
+Internet-Draft          Distributed Notifications          February 2026
+
 
    Publisher Agents collects metrics according to the Component
    Subscription, add its metadata, encapsulates, and pushes messages.
@@ -275,13 +290,6 @@ Internet-Draft          Distributed Notifications          February 2026
    fragmentation to carry large messages.  The Receiver then
    decapsulates packets and reassembles notifications accordingly.
 
-
-
-Zhou, et al.             Expires 27 August 2026                 [Page 5]
-
-Internet-Draft          Distributed Notifications          February 2026
-
-
                 +-----------------------------------------+
                 |        Collector        |-------------+ |
                 |                        +------------+ | |
@@ -290,8 +298,9 @@ Internet-Draft          Distributed Notifications          February 2026
                 |      +-----^-+----+    +------^-----^   |
                 |            | |                |     |   |
                 +-----------------------------------------+
-                   Global    | | Global         |     |
-                   Capability| | Subscription   |     |
+                 Global      | |                |     |
+                 Notification| | Global         |     |
+                 Capabilities| | Subscription   |     |
                 +-----------------------------------------+
                 |            | |                |     |   |
                 |            | |   Subscription |     |   |
@@ -302,8 +311,9 @@ Internet-Draft          Distributed Notifications          February 2026
                 |   +--------^-+-------------------+  |   |
                 |            | |                      |   |
                 |            | |                      |   |
-                |  Component | | Component       Push |   |
-                |  Capability| | Subscription         |   |
+                |Component   | |                 Push |   |
+                |Notification| | Component            |   |
+                |Capabilities| | Subscription         |   |
                 |   +--------+-v-------------------+  |   |
                 |   |       Publisher(Agent)       +--+   |
                 |   +------------------------------+      |
@@ -319,16 +329,6 @@ Internet-Draft          Distributed Notifications          February 2026
    *  Publisher Agents need to register with the Parent at the beginning
       of their process life cycle.
 
-   *  Contracts are created and maintained throughout the subscription
-      lifecycle between the Publisher Parent and each Agent and on its
-      Component Capability, and the format for notification data
-      structure.
-
-   *  The Publisher Parent relays the component subscriptions to the
-      Publisher Agents.
-
-
-
 
 
 
@@ -337,6 +337,14 @@ Zhou, et al.             Expires 27 August 2026                 [Page 6]
 
 Internet-Draft          Distributed Notifications          February 2026
 
+
+   *  Contracts are created and maintained throughout the subscription
+      lifecycle between the Publisher Parent and each Agent and on its
+      Component Notification Capabilities, and the format for
+      notification data structure.
+
+   *  The Publisher Parent relays the component subscriptions to the
+      Publisher Agents.
 
    *  The Publisher Agents announce the status of their Component
       Subscriptions to the Publisher Parent.  The status of the overall
@@ -353,8 +361,8 @@ Internet-Draft          Distributed Notifications          February 2026
    The Collector can send subscription requests only to the Parent.
    This requires the Publisher Parent to:
 
-   1.  expose the Global Capability that can be served by multiple
-       Publisher Agents;
+   1.  expose the Global Notification Capabilities that can be served by
+       multiple Publisher Agents;
 
    2.  disassemble the Global Subscription to multiple Component
        Subscriptions, and distribute them to the Publisher Agents of the
@@ -374,6 +382,18 @@ Internet-Draft          Distributed Notifications          February 2026
 
    *  share the same Subscription ID as the Global Subscription.
 
+
+
+
+
+
+
+
+Zhou, et al.             Expires 27 August 2026                 [Page 7]
+
+Internet-Draft          Distributed Notifications          February 2026
+
+
 6.  Publication Composition
 
    The Publisher Agent collects data and encapsulates the packets per
@@ -386,13 +406,6 @@ Internet-Draft          Distributed Notifications          February 2026
    [RFC8639] to the subscribed subscription.  Additionally, it can use
    the Message Publisher ID to determine the corresponding publisher
    process.
-
-
-
-Zhou, et al.             Expires 27 August 2026                 [Page 7]
-
-Internet-Draft          Distributed Notifications          February 2026
-
 
    For the dynamic subscription, the output of the "establish-
    subscription" RPC defined in [RFC8639] MUST include a list of Message
@@ -429,6 +442,14 @@ Internet-Draft          Distributed Notifications          February 2026
    document.  For connectionless data transport such as UDP based
    transport [I-D.ietf-netconf-udp-notif] the same Layer 4 source port
    for data export can be used.  For connection based data transport
+
+
+
+Zhou, et al.             Expires 27 August 2026                 [Page 8]
+
+Internet-Draft          Distributed Notifications          February 2026
+
+
    such as HTTPS based transport [I-D.ietf-netconf-https-notif], each
    Publisher Agent MUST be able to acknowledge packet retrieval from
    Receivers, and therefore requires a dedicated Layer 4 source port per
@@ -438,17 +459,6 @@ Internet-Draft          Distributed Notifications          February 2026
    respective documents.
 
 9.  YANG Tree
-
-
-
-
-
-
-
-Zhou, et al.             Expires 27 August 2026                 [Page 8]
-
-Internet-Draft          Distributed Notifications          February 2026
-
 
    module: ietf-distributed-notif
 
@@ -489,6 +499,13 @@ Internet-Draft          Distributed Notifications          February 2026
          Updates";
      }
 
+
+
+Zhou, et al.             Expires 27 August 2026                 [Page 9]
+
+Internet-Draft          Distributed Notifications          February 2026
+
+
      organization
        "IETF NETCONF (Network Configuration) Working Group";
      contact
@@ -498,14 +515,6 @@ Internet-Draft          Distributed Notifications          February 2026
         Authors:  Guangying Zheng
                   <mailto:zhengguangying@huawei.com>
                   Tianran Zhou
-
-
-
-Zhou, et al.             Expires 27 August 2026                 [Page 9]
-
-Internet-Draft          Distributed Notifications          February 2026
-
-
                   <mailto:zhoutianran@huawei.com>
                   Thomas Graf
                   <mailto:thomas.graf@swisscom.com>
@@ -545,6 +554,14 @@ Internet-Draft          Distributed Notifications          February 2026
      grouping message-publisher-id {
        description
          "Provides a reusable leaf of the message-publisher-id.";
+
+
+
+Zhou, et al.             Expires 27 August 2026                [Page 10]
+
+Internet-Draft          Distributed Notifications          February 2026
+
+
        leaf message-publisher-id {
          type uint32;
          config false;
@@ -554,14 +571,6 @@ Internet-Draft          Distributed Notifications          February 2026
             field is used to notify the receiver which publisher process
             published which message. The identifier is locally unique to
             the Network Node.";
-
-
-
-Zhou, et al.             Expires 27 August 2026                [Page 10]
-
-Internet-Draft          Distributed Notifications          February 2026
-
-
        }
      }
 
@@ -601,6 +610,14 @@ Internet-Draft          Distributed Notifications          February 2026
        uses message-publisher-ids;
      }
 
+
+
+
+Zhou, et al.             Expires 27 August 2026                [Page 11]
+
+Internet-Draft          Distributed Notifications          February 2026
+
+
      augment "/sn:establish-subscription/sn:output" {
        description
          "This augmentation adds the Message Publisher ID to the
@@ -610,14 +627,6 @@ Internet-Draft          Distributed Notifications          February 2026
 
      augment "/yp:push-update" {
        description
-
-
-
-Zhou, et al.             Expires 27 August 2026                [Page 11]
-
-Internet-Draft          Distributed Notifications          February 2026
-
-
          "This augmentation adds the Message Publisher ID in the
           push-update notification.";
        uses message-publisher-id;
@@ -658,21 +667,16 @@ Internet-Draft          Distributed Notifications          February 2026
 
       Reference: RFC XXXX
 
-12.  Implementation Status
-
-   Note to the RFC-Editor: Please remove this section before publishing.
-
-
-
-
-
-
 
 
 Zhou, et al.             Expires 27 August 2026                [Page 12]
 
 Internet-Draft          Distributed Notifications          February 2026
 
+
+12.  Implementation Status
+
+   Note to the RFC-Editor: Please remove this section before publishing.
 
 12.1.  Huawei VRP
 
@@ -718,10 +722,6 @@ Internet-Draft          Distributed Notifications          February 2026
 
    *  /sn:subscriptions/sn:subscription/dn:message-publisher-id
 
-   *  /sn:subscription-started/dn:message-publisher-id
-
-   *  /sn:subscription-modified/dn:message-publisher-id
-
 
 
 
@@ -729,6 +729,10 @@ Zhou, et al.             Expires 27 August 2026                [Page 13]
 
 Internet-Draft          Distributed Notifications          February 2026
 
+
+   *  /sn:subscription-started/dn:message-publisher-id
+
+   *  /sn:subscription-modified/dn:message-publisher-id
 
    *  /sn:establish-subscription/dn:message-publisher-id
 
@@ -772,10 +776,6 @@ Internet-Draft          Distributed Notifications          February 2026
               DOI 10.17487/RFC3688, January 2004,
               <https://www.rfc-editor.org/info/rfc3688>.
 
-   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
-              and A. Bierman, Ed., "Network Configuration Protocol
-              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
-              <https://www.rfc-editor.org/info/rfc6241>.
 
 
 
@@ -785,6 +785,11 @@ Zhou, et al.             Expires 27 August 2026                [Page 14]
 
 Internet-Draft          Distributed Notifications          February 2026
 
+
+   [RFC6241]  Enns, R., Ed., Bjorklund, M., Ed., Schoenwaelder, J., Ed.,
+              and A. Bierman, Ed., "Network Configuration Protocol
+              (NETCONF)", RFC 6241, DOI 10.17487/RFC6241, June 2011,
+              <https://www.rfc-editor.org/info/rfc6241>.
 
    [RFC8040]  Bierman, A., Bjorklund, M., and K. Watsen, "RESTCONF
               Protocol", RFC 8040, DOI 10.17487/RFC8040, January 2017,
@@ -830,11 +835,6 @@ Internet-Draft          Distributed Notifications          February 2026
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               notif-envelope-04>.
 
-   [I-D.ietf-netconf-udp-notif]
-              Feng, A. H., Francois, P., Zhou, T., Graf, T., and P.
-              Lucente, "UDP-based Transport for Configured
-              Subscriptions", Work in Progress, Internet-Draft, draft-
-
 
 
 Zhou, et al.             Expires 27 August 2026                [Page 15]
@@ -842,6 +842,10 @@ Zhou, et al.             Expires 27 August 2026                [Page 15]
 Internet-Draft          Distributed Notifications          February 2026
 
 
+   [I-D.ietf-netconf-udp-notif]
+              Feng, A. H., Francois, P., Zhou, T., Graf, T., and P.
+              Lucente, "UDP-based Transport for Configured
+              Subscriptions", Work in Progress, Internet-Draft, draft-
               ietf-netconf-udp-notif-25, 28 January 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               udp-notif-25>.
@@ -881,6 +885,19 @@ Appendix A.  Examples
 
    This appendix is non-normative.
 
+
+
+
+
+
+
+
+
+Zhou, et al.             Expires 27 August 2026                [Page 16]
+
+Internet-Draft          Distributed Notifications          February 2026
+
+
 A.1.  Dynamic Subscription
 
    Figure 3 shows a typical dynamic subscription to the Network Node
@@ -893,7 +910,46 @@ A.1.  Dynamic Subscription
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 16]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Zhou, et al.             Expires 27 August 2026                [Page 17]
 
 Internet-Draft          Distributed Notifications          February 2026
 
@@ -949,7 +1005,7 @@ Internet-Draft          Distributed Notifications          February 2026
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 17]
+Zhou, et al.             Expires 27 August 2026                [Page 18]
 
 Internet-Draft          Distributed Notifications          February 2026
 
@@ -1005,7 +1061,7 @@ Internet-Draft          Distributed Notifications          February 2026
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 18]
+Zhou, et al.             Expires 27 August 2026                [Page 19]
 
 Internet-Draft          Distributed Notifications          February 2026
 
@@ -1061,7 +1117,7 @@ Internet-Draft          Distributed Notifications          February 2026
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 19]
+Zhou, et al.             Expires 27 August 2026                [Page 20]
 
 Internet-Draft          Distributed Notifications          February 2026
 
@@ -1117,7 +1173,7 @@ A.2.  Configured Subscription
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 20]
+Zhou, et al.             Expires 27 August 2026                [Page 21]
 
 Internet-Draft          Distributed Notifications          February 2026
 
@@ -1173,7 +1229,7 @@ Internet-Draft          Distributed Notifications          February 2026
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 21]
+Zhou, et al.             Expires 27 August 2026                [Page 22]
 
 Internet-Draft          Distributed Notifications          February 2026
 
@@ -1229,7 +1285,7 @@ Authors' Addresses
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 22]
+Zhou, et al.             Expires 27 August 2026                [Page 23]
 
 Internet-Draft          Distributed Notifications          February 2026
 
@@ -1285,4 +1341,4 @@ Internet-Draft          Distributed Notifications          February 2026
 
 
 
-Zhou, et al.             Expires 27 August 2026                [Page 23]
+Zhou, et al.             Expires 27 August 2026                [Page 24]
