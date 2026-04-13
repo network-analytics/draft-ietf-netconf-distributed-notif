@@ -290,7 +290,7 @@
       section="3.2" sectionFormat="of"
       target="I-D.ietf-netconf-udp-notif"/>. With unique
       sequence-numbers per publishing process described in <xref
-      section="3.4.1" sectionFormat="of"
+      section="3.2.1" sectionFormat="of"
       target="I-D.ietf-netconf-notif-envelope"/>, each message can
       uniquely be identified, loss recognized and related to a transport
       session and publishing process.</t>
@@ -325,7 +325,7 @@
 			Component Subscriptions are then distributed to the corresponding
 			Publisher Agents on route and processors on line cards.</t>
 
-      <t>Publisher Agents collects metrics according to the Component
+      <t>Publisher Agents collect metrics according to the Component
       Subscription, add its metadata, encapsulates, and pushes 
       messages. Messages may require segmentation depending on the
       amount of YANG data subscribed and maximum transmission unit of
@@ -500,7 +500,7 @@ module: ietf-distributed-notif
 ]]></sourcecode></figure>
     </section>
 
-    <section title="YANG Module">
+    <section anchor="YANG_Module" title="YANG Module">
     <t>This YANG module imports definitions from <xref
     target="RFC8639"/> and <xref target="RFC8641"/>.</t>
     
@@ -570,7 +570,7 @@ module ietf-distributed-notif {
 
   grouping message-publisher-id {
     description
-      "Provides a reusable leaf of the message-publisher-id.";
+      "Provides a reusable message-publisher-id leaf.";
     leaf message-publisher-id {
       type uint32;
       config false;
@@ -585,7 +585,7 @@ module ietf-distributed-notif {
 
   grouping message-publisher-ids {
     description
-      "Provides a reusable leaf-list of message-publisher-id-list.";
+      "Provides a reusable message-publisher-id-list leaf-list.";
     leaf-list message-publisher-id {
       type uint32;
       config false;
@@ -686,6 +686,29 @@ module ietf-distributed-notif {
       </section>
     </section>
 
+    <section anchor="Operational" title="Operational Considerations">
+
+      <t>This document enables that subscriptions can be distributed
+			among multiple Component subscriptions. The <xref
+      target="YANG_Module">ietf-distributed-notif YANG Module</xref>
+		  extends the Subscription state change, push-update and
+			push-change-update notifications. In Subscription state change
+			notifications it describes from which YANG-Push Publisher IDs
+			notifications are going to be published from. In push-update and
+			push-change-update notifications it describes from which YANG-Push
+			Publisher ID the notification was published from.</t>
+
+      <t>Both is important for operations to monitor at the YANG-Push
+			Receiver wherever all Components are publishing notifications and
+			thanks to unique sequence-numbers per publishing process <xref
+			section="3.2.1" sectionFormat="of"
+			target="I-D.ietf-netconf-notif-envelope"/> and timestamp per
+			message <xref section="3.3.1"
+			sectionFormat="of" target="I-D.ietf-netconf-notif-envelope"/>
+			delay and loss per message and publishing process can be
+			calculated.</t>
+    </section>
+
     <section anchor="Security" title="Security Considerations">
 
       <t>This section uses the template described in
@@ -749,8 +772,8 @@ module ietf-distributed-notif {
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>We thank Kent Watsen, Mahesh Jethanandani, Martin Bjorklund, 
     Tim Carey, Qin Wu, Robert Wilton, Benoit Claise, Alex Huang Feng,
-    Camilo Cardona, Juergen Schoenwaelder and Joel Halpern for their
-		constructive suggestions for improving this document.</t>
+    Camilo Cardona, Juergen Schoenwaelder, Joel Halpern and Yingzhen Qu
+		for their constructive suggestions for improving this document.</t>
     </section>
   </middle>
 
