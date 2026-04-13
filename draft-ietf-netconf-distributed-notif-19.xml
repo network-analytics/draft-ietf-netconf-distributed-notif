@@ -141,7 +141,7 @@
       </address>
     </author>
 
-    <date day="31" month="March"/>
+    <date day="13" month="April"/>
 
     <workgroup>NETCONF</workgroup>
 
@@ -276,8 +276,10 @@
       avoids this inefficiency.</t>
 
       <t>This document proposes that subscribed YANG data can be
-      published from Components. The route processor is only involved
-      in maintaining and decomposing the Subscription, which includes
+      published from Components for <xref section="2.5"
+			sectionFormat="of" target="RFC8639">YANG-Push configured
+			subscriptions</xref>. The route processor is only involved in
+			maintaining and decomposing the Subscription, which includes
       notifying the Receiver which Subscription is being published from
       which Component with subscription state change notifications.</t>
 
@@ -437,12 +439,6 @@
     subscription. Additionally, it can use the Message Publisher ID to
     determine the corresponding publisher process.</t>
 
-      <t>For the dynamic subscription, the output of the
-      "establish-subscription" RPC defined in <xref target="RFC8639"/>
-    MUST include a list of Message Publisher IDs to indicate how the
-    Global Subscription is decomposed into several Component
-    Subscriptions.</t>
-
       <t>The "subscription-started" and "subscription-modified"
     notification defined in <xref target="RFC8639"/> and "push-update"
     and "push-change-update" notification defined in <xref
@@ -497,8 +493,6 @@ module: ietf-distributed-notif
     +--ro message-publisher-id*   uint32
   augment /sn:subscription-modified:
     +--ro message-publisher-id*   uint32
-  augment /sn:establish-subscription/sn:output:
-    +--ro message-publisher-id*   uint32
   augment /yp:push-update:
     +--ro message-publisher-id?   uint32
   augment /yp:push-change-update:
@@ -510,7 +504,7 @@ module: ietf-distributed-notif
     <t>This YANG module imports definitions from <xref
     target="RFC8639"/> and <xref target="RFC8641"/>.</t>
     
-<sourcecode name="ietf-distributed-notif@2026-02-21.yang"
+<sourcecode name="ietf-distributed-notif@2026-04-13.yang"
 type="yang" markers="true"><![CDATA[
 module ietf-distributed-notif {
   yang-version 1.1;
@@ -566,7 +560,7 @@ module ietf-distributed-notif {
      This version of this YANG module is part of RFC XXXX; see
      the RFC itself for full legal notices.";
 
-  revision 2026-02-21 {
+  revision 2026-04-13 {
     description
       "Initial version";
     reference
@@ -622,13 +616,6 @@ module ietf-distributed-notif {
     description
       "This augmentation adds the Message Publisher ID to the
        subscription-modified subscription change notifications.";
-    uses message-publisher-ids;
-  }
-
-  augment "/sn:establish-subscription/sn:output" {
-    description
-      "This augmentation adds the Message Publisher ID to the
-       dynamic establish-subscription output.";
     uses message-publisher-ids;
   }
 
@@ -811,184 +798,6 @@ module ietf-distributed-notif {
     <section title="Examples">
       <t>This appendix is non-normative.</t>
 
-      <section title="Dynamic Subscription">
-        <t><xref target="dynamic_subs"/> shows a typical dynamic
-        subscription to the Network Node with distributed data export
-        capability. The Subscriber is a NETCONF/RESTCONF client and
-        the Publisher Parent is the NETCONF/RESTCONF server.</t>
-
-        <t><figure anchor="dynamic_subs"
-            title="Call Flow for Dynamic Subscription">
-            <artwork><![CDATA[
-+-------------+                 +-------------+ +-------------+
-| Subscriber/ |                 |  Publisher  | |  Publisher  |
-| Receiver    |                 |  (Parent)   | |  (Agent)    |
-+-------------+                 +------+------+ +------+------+
-       |                               |               |
-       | establish-subscription        |               |
-       +------------------------------>+ component     |
-       |                               | subscription  |
-       |                               +-------------->+
-       |                               |               |
-       |                               |  Acknowledged | 
-       | RPC Reply: OK, id #22         |<--------------|
-       | Message Publisher ID [#1,#2]  |               |
-       +<------------------------------+               |
-       |                               |               |
-       | notif-mesg, id #22            |               |
-       | Message Publisher ID #1       |               |
-       +<------------------------------+               |
-       |                               |               |
-       | notif-mesg, id#22             |               |
-       | Message Publisher ID #2       |               |
-       +<----------------------------------------------+
-       |                               |               |
-       | modify-subscription (id#22)   |               |
-       +------------------------------>+ component     |
-       |                               | subscription  |
-       | RPC Reply: OK, id #22         +-------------->+
-       |                               |               |
-       |                               |  Acknowledged |
-       |                               |<--------------|
-       +<------------------------------+               |
-       |                               |               |
-       | subscription-modified, id#22  |               |
-       | Message Publisher ID [#1]     |               |
-       +<------------------------------+               |
-       |                               |               |
-       | notif-mesg, id #22            |               |
-       | Message Publisher ID  #1      |               |
-       +<------------------------------+               |
-       |                               |               |
-       |                               |               |
-       +                               +               +
-]]></artwork>
-          </figure></t>
-
-        <t>A "establish-subscription" RPC request as per <xref
-        target="RFC8641"/> is sent to the Parent with a successful
-        response. An example of using NETCONF:</t>
-
-        <t><figure anchor="stablish-subs"
-            title="&quot;establish-subscription&quot; Request">
-            <artwork><![CDATA[
-<netconf:rpc message-id="101"
-   xmlns:netconf="urn:ietf:params:xml:ns:netconf:base:1.0">
- <establish-subscription
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
-    xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-   <yp:datastore
-        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-     ds:operational
-   </yp:datastore>
-   <yp:datastore-xpath-filter
-       xmlns:ex="https://example.com/sample-data/1.0">
-     /ex:foo
-   </yp:datastore-xpath-filter>
-   <yp:periodic>
-     <yp:period>500</yp:period>
-   </yp:periodic>
-  </establish-subscription>
- </netconf:rpc>]]></artwork>
-          </figure>As the Network Node is able to fully satisfy the
-      request, the request is given a subscription ID of 22. The
-      response as in <xref target="positive_resp"/> indicates that
-      the subscription is decomposed into two component
-      subscriptions which will be published by two message
-      Message Publisher ID: #1 and #2.</t>
-
-        <t><figure anchor="positive_resp"
-            title="&quot;establish-subscription&quot; Positive RPC
-      Response">
-            <artwork><![CDATA[<rpc-reply message-id="101"
-  xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-  <id
-   xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications">
-     22
-  </id>
-  <message-publisher-id
-   xmlns="urn:ietf:params:xml:ns:yang:ietf-distributed-notif">
-     1
-  </message-publisher-id>
-  <message-publisher-id
-   xmlns="urn:ietf:params:xml:ns:yang:ietf-distributed-notif">
-     2
-  </message-publisher-id>
-</rpc-reply>]]></artwork>
-          </figure>Then, both Publishers send notifications with the
-        corresponding piece of data to the Receiver.</t>
-
-        <t>The subscriber may invoke the "modify-subscription" RPC for a
-        subscription it previously established. The RPC has no
-    difference to the single publisher case as in [RFC8641]. 
-    <xref target="modify_subs"/> provides an example where a
-    subscriber attempts to modify the period and datastore XPath
-    filter of a subscription using NETCONF.</t>
-
-        <t><figure anchor="modify_subs"
-            title="&quot;modify-subscription&quot; Request">
-            <artwork><![CDATA[     <rpc message-id="102"
-       xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
-    <modify-subscription
-        xmlns=
-          "urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
-        xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-      <id>22</id>
-      <yp:datastore
-          xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-        ds:operational
-      </yp:datastore>
-      <yp:datastore-xpath-filter
-          xmlns:if="urn:ietf:params:xml:ns:yang:ietf-interfaces">
-        /if:interfaces/if:interface
-      </yp:datastore-xpath-filter>
-      <yp:periodic>
-        <yp:period>250</yp:period>
-      </yp:periodic>
-     </modify-subscription>
-  </rpc>]]></artwork>
-          </figure></t>
-
-        <t>If the modification is successfully accepted, the
-        "subscription-modified" subscription state notification is sent
-    to the subscriber by the Parent. The notification, <xref
-        target="modified_subs"/> for example, indicates the modified
-        subscription is decomposed into one component subscription which
-    will be published by message Message Publisher ID #1.</t>
-
-        <t><figure anchor="modified_subs"
-            title="&quot;subscription-modified&quot; Subscription State
-      Notification">
-            <artwork><![CDATA[<notification
-      xmlns="urn:ietf:params:xml:ns:netconf:notification:1.0">
-<eventTime>2007-09-01T10:00:00Z</eventTime>
-<subscription-modified
-      xmlns="urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications"
-      xmlns:yp="urn:ietf:params:xml:ns:yang:ietf-yang-push">
-    <id>22</id>
-    <yp:datastore
-        xmlns:ds="urn:ietf:params:xml:ns:yang:ietf-datastores">
-      ds:operational
-    </yp:datastore>
-    <yp:datastore-xpath-filter
-        xmlns:ex="https://example.com/sample-data/1.0">
-      /ex:bar
-    </yp:datastore-xpath-filter>
-    <yp:periodic>
-        <yp:period>250</yp:period>
-    </yp:periodic>
-    <message-publisher-id
-    xmlns="urn:ietf:params:xml:ns:yang:ietf-distributed-notif">
-       1
-    </message-publisher-id>    
-  </subscription-modified>
-</notification>]]></artwork>
-          </figure></t>
-
-        <t/>
-      </section>
-
-      <section title="Configured Subscription">
         <t><xref target="conf_subs"/> shows a typical configured
         subscription to the Network Node with distributed data export
         capability. Subscripton request has been removed for brevity.
@@ -1064,7 +873,6 @@ module ietf-distributed-notif {
 
         <t>Then, both Publishers send notifications with the
         corresponding data record to the Receiver.</t>
-      </section>
     </section>
   </back>
 </rfc>
