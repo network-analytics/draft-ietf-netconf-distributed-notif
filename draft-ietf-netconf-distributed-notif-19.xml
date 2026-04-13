@@ -209,17 +209,18 @@
       <t>Notification Capabilities</t>
 
       <t>In addition, this document defines the below terms. Some 
-      of these terms are distinguished between Global versus Component
-      and Parent versus Agent to distinguish their role within the
-      distributed system. Global and Component is used to distinguish
-      wherever the system component is reachable outside the distributed
-      system or not. Parent and Agent is used to distinguish wherever it
-      manages or is being managed within the distributed system.</t>
+      of these terms are distinguished between Network Node versus
+			Component and Parent versus Agent to distinguish their role within
+			the distributed system. Network Node and Component is used to
+			distinguish wherever the system component is reachable outside the
+			distributed system or not. Parent and Agent is used to distinguish
+			wherever it manages or is being managed within the distributed
+			system.</t>
 
       <t>Component: Refers to a network device component, such as a
 			processor on a line card within a distributed routing system.</t>
 
-      <t>Global Subscription: The Subscription requested by the
+      <t>Network Node Subscription: The Subscription requested by the
       Subscriber as described in Sections 2.4 and 2.5 of <xref
       target="RFC8639"/>. It may be decomposed into multiple Component
       Subscriptions.</t>
@@ -227,13 +228,13 @@
       <t>Component Subscription: The Subscription that defines a data
       source which is managed and controlled by a single Publisher.</t>
 
-      <t>Global Notification Capabilities: The overall notification
-			capabilities that the group of Publishers can expose to the
-			Subscriber as defined in <xref section="5.1" sectionFormat="of"
-			target="RFC9196"/> for the distributed system. This includes which
-			YANG nodes can be subscribed at which minimum-update-period for
-			periodical subscriptions respectively which
-			minimum-dampening-period for on-change subscriptions.</t>
+      <t>Network Node Notification Capabilities: The overall
+			notification capabilities that the group of Publishers can expose
+			to the Subscriber as defined in <xref section="5.1"
+			sectionFormat="of" target="RFC9196"/> for the distributed system.
+			This includes which YANG nodes can be subscribed at which
+			minimum-update-period for periodical subscriptions respectively
+			which minimum-dampening-period for on-change subscriptions.</t>
 
       <t>Component Notification Capabilities: The notification
 			capabilities that each Publisher exposes to the Publisher Parent.
@@ -243,8 +244,8 @@
 			subscribed on which Component.</t>
 
       <t>Publisher Parent: The component of a Publisher that interacts
-      with the Subscriber to deal with the Global Subscription. It
-      decomposes the Global Subscription to multiple Component
+      with the Subscriber to deal with the Network Node Subscription. It
+      decomposes the Network Node Subscription to multiple Component
       Subscriptions and interacts with the Publisher Agents.</t>
 
       <t>Publisher Agent: The component of a Publisher that interacts
@@ -317,13 +318,14 @@
       <t>In this framework, the Publisher pushes messages to the
       Receiver according to the subscription. The Publisher is either in
       the Parent or Agent role. The Publisher Parent knows all the
-      capabilities that his Agents can provide and exposes the Global
-      Notification Capabilities to the collector. The Subscriber
-			maintains the Global Subscription at the Publisher Parent and
-			disassembles the Global Subscription to multiple Component
-			Subscriptions, depending upon which source data is needed. The
-			Component Subscriptions are then distributed to the corresponding
-			Publisher Agents on route and processors on line cards.</t>
+      capabilities that his Agents can provide and exposes the
+			Network Node Notification Capabilities to the collector. The
+			Subscriber maintains the Network Node Subscription at the
+			Publisher Parent and disassembles the Network Node Subscription to
+			multiple Component Subscriptions, depending upon which source data
+			is needed. The Component Subscriptions are then distributed to the
+			corresponding Publisher Agents on route and processors on line
+			cards.</t>
 
       <t>Publisher Agents collect metrics according to the Component
       Subscription, add its metadata, encapsulates, and pushes 
@@ -345,8 +347,8 @@
 |      +-----^-+----+    +------^-----^   |
 |            | |                |     |   |
 +-----------------------------------------+
- Global      | |                |     |
- Notification| | Global         |     |
+ Network Node| |                |     |
+ Notification| | Network Node   |     |
  Capabilities| | Subscription   |     |
 +-----------------------------------------+
 |            | |                |     |   |
@@ -399,15 +401,15 @@
       Parent. This requires the Publisher Parent to:</t>
 
       <t><list style="numbers">
-          <t>expose the Global Notification Capabilities that can be
-					served by multiple Publisher Agents;</t>
+          <t>expose the Network Node Notification Capabilities that can
+					be served by multiple Publisher Agents;</t>
 
-          <t>disassemble the Global Subscription to multiple Component
-          Subscriptions, and distribute them to the Publisher Agents of
-          the corresponding metric sources from the YANG schema tree so
-          that they do not overlap; How the subscription is being
-          distributed is implementation specific and not part of this
-          document.
+          <t>disassemble the Network Node Subscription to multiple
+					Component Subscriptions, and distribute them to the Publisher
+					Agents of the corresponding metric sources from the YANG
+					schema tree so that they do not overlap; How the subscription
+					is being distributed is implementation specific and not part
+					of this document.
       </t>
 
           <t>notify changes related to the existing subscriptions to the
@@ -417,13 +419,14 @@
       <t>And the Publisher Agent to:</t>
 
       <t><list style="symbols">
-          <t>Inherit the Global Subscription properties from Publisher
-      Parent for its Component Subscription;</t>
+          <t>Inherit the Network Node Subscription properties from
+					Publisher Parent for its Component Subscription;</t>
 
-          <t>share the same life-cycle as the Global Subscription;</t>
+          <t>share the same life-cycle as the Network Node Subscription;
+					</t>
 
-          <t>share the same Subscription ID as the Global Subscription.
-      </t>
+          <t>share the same Subscription ID as the Network Node
+					Subscription.</t>
         </list></t>
     </section>
 
@@ -443,8 +446,8 @@
     notification defined in <xref target="RFC8639"/> and "push-update"
     and "push-change-update" notification defined in <xref
     target="RFC8641"/> MUST also include a list of Message Publisher
-    IDs to notify the current Publishers for the corresponding Global
-    Subscription.</t>
+    IDs to notify the current Publishers for the corresponding
+		Network Node Subscription.</t>
     </section>
 
     <section title="Subscription State Change Notifications">
