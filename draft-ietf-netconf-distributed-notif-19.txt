@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 15 October 2026                                         E. Voit
+Expires: 16 October 2026                                         E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                           13 April 2026
+                                                           14 April 2026
 
 
       Subscription to Notifications in a Distributed Architecture
@@ -48,12 +48,12 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 October 2026.
+   This Internet-Draft will expire on 16 October 2026.
 
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 1]
+Zhou, et al.             Expires 16 October 2026                [Page 1]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 2]
+Zhou, et al.             Expires 16 October 2026                [Page 2]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -165,7 +165,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 3]
+Zhou, et al.             Expires 16 October 2026                [Page 3]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -221,7 +221,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 4]
+Zhou, et al.             Expires 16 October 2026                [Page 4]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -277,7 +277,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 5]
+Zhou, et al.             Expires 16 October 2026                [Page 5]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -333,7 +333,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 6]
+Zhou, et al.             Expires 16 October 2026                [Page 6]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -389,7 +389,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 7]
+Zhou, et al.             Expires 16 October 2026                [Page 7]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -445,7 +445,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 8]
+Zhou, et al.             Expires 16 October 2026                [Page 8]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -501,7 +501,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026                [Page 9]
+Zhou, et al.             Expires 16 October 2026                [Page 9]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -557,7 +557,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 10]
+Zhou, et al.             Expires 16 October 2026               [Page 10]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -613,7 +613,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 11]
+Zhou, et al.             Expires 16 October 2026               [Page 11]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -669,7 +669,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 12]
+Zhou, et al.             Expires 16 October 2026               [Page 12]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -725,7 +725,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 13]
+Zhou, et al.             Expires 16 October 2026               [Page 13]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -781,7 +781,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 14]
+Zhou, et al.             Expires 16 October 2026               [Page 14]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -837,7 +837,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 15]
+Zhou, et al.             Expires 16 October 2026               [Page 15]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -893,7 +893,7 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 16]
+Zhou, et al.             Expires 16 October 2026               [Page 16]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -949,7 +949,7 @@ Appendix A.  Examples
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 17]
+Zhou, et al.             Expires 16 October 2026               [Page 17]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -1005,7 +1005,7 @@ Authors' Addresses
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 18]
+Zhou, et al.             Expires 16 October 2026               [Page 18]
 
 Internet-Draft          Distributed Notifications             April 2026
 
@@ -1061,4 +1061,4 @@ Internet-Draft          Distributed Notifications             April 2026
 
 
 
-Zhou, et al.             Expires 15 October 2026               [Page 19]
+Zhou, et al.             Expires 16 October 2026               [Page 19]
