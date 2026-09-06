@@ -33,8 +33,6 @@
 
         <phone/>
 
-        <facsimile/>
-
         <email>zhoutianran@huawei.com</email>
 
         <uri/>
@@ -59,8 +57,6 @@
 
         <phone/>
 
-        <facsimile/>
-
         <email>zhengguangying@huawei.com</email>
       </address>
     </author>
@@ -83,8 +79,6 @@
 
         <phone/>
 
-        <facsimile/>
-
         <email>evoit@cisco.com</email>
       </address>
     </author>
@@ -106,8 +100,6 @@
         </postal>
 
         <phone/>
-
-        <facsimile/>
 
         <email>thomas.graf@swisscom.com</email>
 
@@ -132,8 +124,6 @@
         </postal>
 
         <phone/>
-
-        <facsimile/>
 
         <email>pierre.francois@insa-lyon.fr</email>
 
