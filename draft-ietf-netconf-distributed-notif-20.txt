@@ -5,13 +5,13 @@
 NETCONF                                                          T. Zhou
 Internet-Draft                                                  G. Zheng
 Intended status: Standards Track                                  Huawei
-Expires: 14 December 2026                                        E. Voit
+Expires: 25 February 2027                                        E. Voit
                                                            Cisco Systems
                                                                  T. Graf
                                                                 Swisscom
                                                              P. Francois
                                                                INSA-Lyon
-                                                            12 June 2026
+                                                          24 August 2026
 
 
       Subscription to Notifications in a Distributed Architecture
@@ -48,14 +48,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 December 2026.
+   This Internet-Draft will expire on 25 February 2027.
 
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 1]
+Zhou, et al.            Expires 25 February 2027                [Page 1]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
 Copyright Notice
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 2]
+Zhou, et al.            Expires 25 February 2027                [Page 2]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    By streaming YANG-Push notifications from publishers to receivers,
@@ -165,9 +165,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 3]
+Zhou, et al.            Expires 25 February 2027                [Page 3]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    Component Subscription: The Subscription that defines a data source
@@ -221,9 +221,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 4]
+Zhou, et al.            Expires 25 February 2027                [Page 4]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    This document proposes that subscribed YANG data can be published
@@ -277,9 +277,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 5]
+Zhou, et al.            Expires 25 February 2027                [Page 5]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    Publisher Agents collect metrics according to the Component
@@ -333,9 +333,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 6]
+Zhou, et al.            Expires 25 February 2027                [Page 6]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    *  Contracts are created and maintained throughout the subscription
@@ -389,9 +389,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 7]
+Zhou, et al.            Expires 25 February 2027                [Page 7]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
 6.  Publication Composition
@@ -445,9 +445,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 8]
+Zhou, et al.            Expires 25 February 2027                [Page 8]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    The specific configuration on transports is described in the
@@ -501,9 +501,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026                [Page 9]
+Zhou, et al.            Expires 25 February 2027                [Page 9]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
         Authors:  Guangying Zheng
@@ -557,9 +557,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 10]
+Zhou, et al.            Expires 25 February 2027               [Page 10]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
             field is used to notify the receiver which publisher process
@@ -613,9 +613,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 11]
+Zhou, et al.            Expires 25 February 2027               [Page 11]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
      augment "/yp:push-change-update" {
@@ -669,9 +669,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 12]
+Zhou, et al.            Expires 25 February 2027               [Page 12]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
 12.2.  6WIND VSR
@@ -725,9 +725,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 13]
+Zhou, et al.            Expires 25 February 2027               [Page 13]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    Some of the readable data nodes in this YANG module may be considered
@@ -781,9 +781,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 14]
+Zhou, et al.            Expires 25 February 2027               [Page 14]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
 16.  Acknowledgements
@@ -837,9 +837,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 15]
+Zhou, et al.            Expires 25 February 2027               [Page 15]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    [RFC9196]  Lengyel, B., Clemm, A., and B. Claise, "YANG Modules
@@ -852,9 +852,9 @@ Internet-Draft          Distributed Notifications              June 2026
    [I-D.ietf-netconf-https-notif]
               Jethanandani, M. and K. Watsen, "An HTTPS-based Transport
               for YANG Notifications", Work in Progress, Internet-Draft,
-              draft-ietf-netconf-https-notif-15, 1 February 2024,
+              draft-ietf-netconf-https-notif-16, 30 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              https-notif-15>.
+              https-notif-16>.
 
    [I-D.ietf-netconf-notif-envelope]
               Feng, A. H., Francois, P., Graf, T., and B. Claise,
@@ -868,9 +868,9 @@ Internet-Draft          Distributed Notifications              June 2026
               Feng, A. H., Francois, P., Zhou, T., Graf, T., and P.
               Lucente, "UDP-based Transport for Configured
               Subscriptions", Work in Progress, Internet-Draft, draft-
-              ietf-netconf-udp-notif-25, 28 January 2026,
+              ietf-netconf-udp-notif-26, 29 July 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
-              udp-notif-25>.
+              udp-notif-26>.
 
    [I-D.ietf-netmod-rfc8407bis]
               Bierman, A., Boucadair, M., and Q. Wu, "Guidelines for
@@ -893,9 +893,9 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 16]
+Zhou, et al.            Expires 25 February 2027               [Page 16]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    [RFC8341]  Bierman, A. and M. Bjorklund, "Network Configuration
@@ -949,9 +949,9 @@ Appendix A.  Examples
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 17]
+Zhou, et al.            Expires 25 February 2027               [Page 17]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    notification indicates that the configured subscription is decomposed
@@ -1005,9 +1005,9 @@ Authors' Addresses
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 18]
+Zhou, et al.            Expires 25 February 2027               [Page 18]
 
-Internet-Draft          Distributed Notifications              June 2026
+Internet-Draft          Distributed Notifications            August 2026
 
 
    Guangying Zheng
@@ -1061,4 +1061,4 @@ Internet-Draft          Distributed Notifications              June 2026
 
 
 
-Zhou, et al.            Expires 14 December 2026               [Page 19]
+Zhou, et al.            Expires 25 February 2027               [Page 19]
