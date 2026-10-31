@@ -710,10 +710,10 @@ module ietf-distributed-notif {
 			delay and loss per message and publishing process can be
 			calculated.</t>
 
-      <t>If used with <xref target="I-D.ietf-netconf-udp-notif">
-			UDP-based Transport for Configured Subscriptions</xref>, <xref 
-			section="5" sectionFormat="of"
-			target="I-D.ietf-netconf-udp-notif"/> applies.</t>
+      <t>If used with UDP-based Transport for Configured Subscriptions,
+			<xref section="5" sectionFormat="of"
+			target="I-D.ietf-netconf-udp-notif"/>applicability applies with
+			distributed multiple Component subscriptions as well.</t>
     </section>
 
     <section anchor="Security" title="Security Considerations">

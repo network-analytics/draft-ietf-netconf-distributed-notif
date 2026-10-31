@@ -718,9 +718,9 @@ Internet-Draft          Distributed Notifications           October 2026
    message Section 3.3.1 of [I-D.ietf-netconf-notif-envelope] delay and
    loss per message and publishing process can be calculated.
 
-   If used with UDP-based Transport for Configured Subscriptions
-   [I-D.ietf-netconf-udp-notif], Section 5 of
-   [I-D.ietf-netconf-udp-notif] applies.
+   If used with UDP-based Transport for Configured Subscriptions,
+   Section 5 of [I-D.ietf-netconf-udp-notif]applicability applies with
+   distributed multiple Component subscriptions as well.
 
 
 
