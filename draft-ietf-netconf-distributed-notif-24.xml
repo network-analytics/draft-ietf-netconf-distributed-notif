@@ -431,7 +431,7 @@
 
       <t>The Receiver associates the YANG data records with
     <xref target="RFC8639">Subscription ID</xref> to the subscribed
-    subscription and with the Message Publisher ID toi the corresponding
+    subscription and with the Message Publisher ID to the corresponding
 		publisher process.</t>
 
       <t>When a Network Node Subscription is decomposed, the
@@ -440,9 +440,7 @@
 		Publisher IDs of the Publishers serving that subscription, and each
 		"push-update" and "push-change-update" notification defined in
 		<xref target="RFC8641"/> MUST include the Message Publisher ID of
-		the Publisher that sent it. "subscription-modified" with an updated
-		list of Message Publisher IDs is sent after a Publisher Agent
-		terminated.</t>
+		the Publisher that sends it.</t>
     </section>
 
     <section title="Subscription State Change Notifications">
@@ -531,7 +529,7 @@ module ietf-distributed-notif {
 
      Authors:  Tianran Zhou
                <mailto:zhoutianran@huawei.com>
-							 Guangying Zheng
+               Guangying Zheng
                <mailto:zhengguangying@huawei.com>
                Eric Voit
                <mailto:evoit@cisco.com>
@@ -770,8 +768,8 @@ module ietf-distributed-notif {
 			security can't be enforced centrally at the route processor
 			anymore. Therefore between YANG-Push Publisher and Receiver,
 			multiple trust, authentication and authorization, with multiple
-			entities for each established secure transport layer needs to be
-			managed for each Parent and Agent.</t>
+			entities for each Parent and Agent established secure transport
+			layer, needs to be managed.</t>
     </section>
 
     <section title="Contributors">

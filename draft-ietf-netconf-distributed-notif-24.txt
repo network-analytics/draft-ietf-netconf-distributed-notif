@@ -81,7 +81,7 @@ Table of Contents
    5.  Subscription Decomposition  . . . . . . . . . . . . . . . . .   7
    6.  Publication Composition . . . . . . . . . . . . . . . . . . .   8
    7.  Subscription State Change Notifications . . . . . . . . . . .   8
-   8.  Publisher Configurations  . . . . . . . . . . . . . . . . . .   9
+   8.  Publisher Configurations  . . . . . . . . . . . . . . . . . .   8
    9.  YANG Tree . . . . . . . . . . . . . . . . . . . . . . . . . .   9
    10. YANG Module . . . . . . . . . . . . . . . . . . . . . . . . .   9
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  12
@@ -89,7 +89,7 @@ Table of Contents
      12.1.  Huawei VRP . . . . . . . . . . . . . . . . . . . . . . .  13
      12.2.  6WIND VSR  . . . . . . . . . . . . . . . . . . . . . . .  13
    13. Operational Considerations  . . . . . . . . . . . . . . . . .  13
-   14. Security Considerations . . . . . . . . . . . . . . . . . . .  14
+   14. Security Considerations . . . . . . . . . . . . . . . . . . .  13
    15. Contributors  . . . . . . . . . . . . . . . . . . . . . . . .  15
    16. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  15
    17. References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
@@ -416,16 +416,14 @@ Internet-Draft          Distributed Notifications           October 2026
 
    The Receiver associates the YANG data records with Subscription ID
    [RFC8639] to the subscribed subscription and with the Message
-   Publisher ID toi the corresponding publisher process.
+   Publisher ID to the corresponding publisher process.
 
    When a Network Node Subscription is decomposed, the "subscription-
    started" and "subscription-modified" notifications defined in
    [RFC8639] MUST include the list of Message Publisher IDs of the
    Publishers serving that subscription, and each "push-update" and
    "push-change-update" notification defined in [RFC8641] MUST include
-   the Message Publisher ID of the Publisher that sent it.
-   "subscription-modified" with an updated list of Message Publisher IDs
-   is sent after a Publisher Agent terminated.
+   the Message Publisher ID of the Publisher that sends it.
 
 7.  Subscription State Change Notifications
 
@@ -438,9 +436,11 @@ Internet-Draft          Distributed Notifications           October 2026
    "subscription-modified" notification that lists its Message Publisher
    ID.
 
+8.  Publisher Configurations
 
-
-
+   This document assumes that all Publisher Agents are preconfigured to
+   push data.  Publisher Agents that send data are selected based on the
+   subscription decomposition result.
 
 
 
@@ -449,12 +449,6 @@ Zhou, et al.               Expires 4 May 2027                   [Page 8]
 
 Internet-Draft          Distributed Notifications           October 2026
 
-
-8.  Publisher Configurations
-
-   This document assumes that all Publisher Agents are preconfigured to
-   push data.  Publisher Agents that send data are selected based on the
-   subscription decomposition result.
 
    From the Receivers perspective, all Publisher Agents can share the
    same or have each a different source IP address for data export.  How
@@ -498,6 +492,12 @@ Internet-Draft          Distributed Notifications           October 2026
      namespace "urn:ietf:params:xml:ns:yang:ietf-distributed-notif";
      prefix dn;
 
+     import ietf-subscribed-notifications {
+       prefix sn;
+       reference
+         "RFC 8639: Subscription to YANG Notifications";
+     }
+     import ietf-yang-push {
 
 
 
@@ -506,12 +506,6 @@ Zhou, et al.               Expires 4 May 2027                   [Page 9]
 Internet-Draft          Distributed Notifications           October 2026
 
 
-     import ietf-subscribed-notifications {
-       prefix sn;
-       reference
-         "RFC 8639: Subscription to YANG Notifications";
-     }
-     import ietf-yang-push {
        prefix yp;
        reference
          "RFC 8641: Subscription to YANG Notifications for Datastore
@@ -526,7 +520,7 @@ Internet-Draft          Distributed Notifications           October 2026
 
         Authors:  Tianran Zhou
                   <mailto:zhoutianran@huawei.com>
-                                                            Guangying Zheng
+                  Guangying Zheng
                   <mailto:zhengguangying@huawei.com>
                   Eric Voit
                   <mailto:evoit@cisco.com>
@@ -554,6 +548,12 @@ Internet-Draft          Distributed Notifications           October 2026
         (https://www.iana.org/assignments/yang-parameters).
 
         This version of this YANG module is part of RFC XXXX; see
+        the RFC itself for full legal notices.";
+
+     revision 2026-10-04 {
+       description
+         "Initial version";
+       reference
 
 
 
@@ -562,12 +562,6 @@ Zhou, et al.               Expires 4 May 2027                  [Page 10]
 Internet-Draft          Distributed Notifications           October 2026
 
 
-        the RFC itself for full legal notices.";
-
-     revision 2026-10-04 {
-       description
-         "Initial version";
-       reference
          "RFC XXXX: Subscription to Notifications in a Distributed
           Architecture";
      }
@@ -610,6 +604,12 @@ Internet-Draft          Distributed Notifications           October 2026
      }
 
      augment "/sn:subscription-started" {
+       description
+         "This augmentation adds the Message Publisher ID to the
+          subscription-started subscription change notifications.";
+       uses message-publisher-ids;
+     }
+
 
 
 
@@ -617,12 +617,6 @@ Zhou, et al.               Expires 4 May 2027                  [Page 11]
 
 Internet-Draft          Distributed Notifications           October 2026
 
-
-       description
-         "This augmentation adds the Message Publisher ID to the
-          subscription-started subscription change notifications.";
-       uses message-publisher-ids;
-     }
 
      augment "/sn:subscription-modified" {
        description
@@ -666,6 +660,12 @@ Internet-Draft          Distributed Notifications           October 2026
 
       Name: ietf-distributed-notif
 
+      Maintained by IANA?  N
+
+      Namespace: urn:ietf:params:xml:ns:yang:ietf-distributed-notif
+
+      Prefix: dn
+
 
 
 
@@ -673,12 +673,6 @@ Zhou, et al.               Expires 4 May 2027                  [Page 12]
 
 Internet-Draft          Distributed Notifications           October 2026
 
-
-      Maintained by IANA?  N
-
-      Namespace: urn:ietf:params:xml:ns:yang:ietf-distributed-notif
-
-      Prefix: dn
 
       Reference: RFC XXXX
 
@@ -722,6 +716,12 @@ Internet-Draft          Distributed Notifications           October 2026
    Section 5 of [I-D.ietf-netconf-udp-notif]applicability applies with
    distributed multiple Component subscriptions as well.
 
+14.  Security Considerations
+
+   This section uses the template described in Section 3.7 of [RFC9907].
+
+
+
 
 
 
@@ -729,10 +729,6 @@ Zhou, et al.               Expires 4 May 2027                  [Page 13]
 
 Internet-Draft          Distributed Notifications           October 2026
 
-
-14.  Security Considerations
-
-   This section uses the template described in Section 3.7 of [RFC9907].
 
    The 'ietf-distributed-notif' YANG module defines a data model that is
    designed to be accessed via YANG-based management protocols, such as
@@ -774,10 +770,14 @@ Internet-Draft          Distributed Notifications           October 2026
    sensitive data is restricted and that Notifications are sent over
    secure and authenticated channels.
 
-   Security Considerations defined in [RFC8639] do also apply for this
-   document.  Since this document enables the capability to publish from
-   network processors to YANG-Push receivers without the involvement of
-   a route processor, it has several security implications.  Since
+
+
+
+
+
+
+
+
 
 
 
@@ -786,12 +786,16 @@ Zhou, et al.               Expires 4 May 2027                  [Page 14]
 Internet-Draft          Distributed Notifications           October 2026
 
 
+   Security Considerations defined in [RFC8639] do also apply for this
+   document.  Since this document enables the capability to publish from
+   network processors to YANG-Push receivers without the involvement of
+   a route processor, it has several security implications.  Since
    network processors as Publisher Agents are exposed directly to YANG-
    Push receivers, security can't be enforced centrally at the route
    processor anymore.  Therefore between YANG-Push Publisher and
    Receiver, multiple trust, authentication and authorization, with
-   multiple entities for each established secure transport layer needs
-   to be managed for each Parent and Agent.
+   multiple entities for each Parent and Agent established secure
+   transport layer, needs to be managed.
 
 15.  Contributors
 
@@ -830,10 +834,6 @@ Internet-Draft          Distributed Notifications           October 2026
               DOI 10.17487/RFC6020, October 2010,
               <https://www.rfc-editor.org/info/rfc6020>.
 
-   [RFC7923]  Voit, E., Clemm, A., and A. Gonzalez Prieto, "Requirements
-              for Subscription to YANG Datastores", RFC 7923,
-              DOI 10.17487/RFC7923, June 2016,
-              <https://www.rfc-editor.org/info/rfc7923>.
 
 
 
@@ -841,6 +841,11 @@ Zhou, et al.               Expires 4 May 2027                  [Page 15]
 
 Internet-Draft          Distributed Notifications           October 2026
 
+
+   [RFC7923]  Voit, E., Clemm, A., and A. Gonzalez Prieto, "Requirements
+              for Subscription to YANG Datastores", RFC 7923,
+              DOI 10.17487/RFC7923, June 2016,
+              <https://www.rfc-editor.org/info/rfc7923>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
@@ -883,11 +888,6 @@ Internet-Draft          Distributed Notifications           October 2026
               draft-ietf-netconf-https-notif-16, 30 June 2026,
               <https://datatracker.ietf.org/doc/html/draft-ietf-netconf-
               https-notif-16>.
-
-
-
-
-
 
 
 
